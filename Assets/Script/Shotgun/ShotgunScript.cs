@@ -11,7 +11,8 @@ public class ShotgunScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shotgun_shell = Resources.Load("Prefab/shotgun_shell") as GameObject;
+        shotgun_shell = Resources.Load("Prefabs/shotgun_shell") as GameObject;
+        //fixedJoystick 을 실시간으로 찾아오는 스크립트 작성
     }
 
     // Update is called once per frame

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotGun : MonoBehaviour
+public class GenerateShotGun : MonoBehaviour
 {
    private AudioSource audioSource;
    public AudioClip gunshotSound;
