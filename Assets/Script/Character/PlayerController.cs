@@ -5,20 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Cursor cursor;
-    private GenerateShotGun shotGun;
+    private ShotgunController shotGun;
 
     
     void Start()
     {
-      //cursor = GetComponentInChildren<Cursor>();
-      shotGun = GetComponentInChildren<GenerateShotGun>();
+      cursor = GetComponentInChildren<Cursor>();
+      shotGun = GetComponentInChildren<ShotgunController>();
     }
 
     
     void Update()
     {
         //주인공(커서) 움직이기
-        //MovePlayerWithCursor();
+        MovePlayerWithCursor();
 
         //총 발사
         if(Input.GetKeyDown(KeyCode.Space)){ //스페이스바를 누르면 발사
