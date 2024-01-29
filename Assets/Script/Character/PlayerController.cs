@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //주인공(커서) 움직이기
-        //MovePlayerWithCursor();
+        MovePlayerWithCursor();
 
         //임시로 주인공 자이로 직접 움직이기
         tempMovePlayerByGyro();
