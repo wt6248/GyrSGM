@@ -17,7 +17,7 @@ public class GyroGameObj : MonoBehaviour
         // TODO: modify these values properly
         public const float acc = 9.8f;
         public const float deadZoneRadious = 0.05f;
-        public const float maxSpeedRadious = 0.1f;
+        public const float maxSpeedRadious = 10.1f;
         // to calculate average of frameCount-many rotation
         public const int frameCount = 15;
     }

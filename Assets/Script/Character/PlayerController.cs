@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         MovePlayerWithCursor();
 
         //임시로 주인공 자이로 직접 움직이기
-        tempMovePlayerByGyro();
+        //tempMovePlayerByGyro();
 
         //총 발사
         if(Input.GetKeyDown(KeyCode.Space)){ //스페이스바를 누르면 발사
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 a = GyroControl.GetGyroValue();
         //Debug.Log(a);
-        Vector3 b = new Vector3(a.y, -a.x,0f) * Time.deltaTime;
+        Vector3 b = new Vector3(a.x, a.y,0f) * Time.deltaTime * 20;
         //Debug.Log(b);
         transform.Translate(b); 
     }
