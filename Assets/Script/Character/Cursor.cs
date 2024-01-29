@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Cursor : MonoBehaviour
 {
+    private GameObject cursorObject;
+
     private void Start()
     {
-       //CreateCursor();
+       if(cursorObject== null)
+       {
+            CreateCursor();
+       }
     }
 
     private void Update(){
@@ -16,9 +21,18 @@ public class Cursor : MonoBehaviour
     //커서가 커서를 생성하는 스택 오버플로우가 발생함. 수정 바람.
     private void CreateCursor()
     {
-        GameObject cursorPrefab = Resources.Load<GameObject>("Prefabs/CursorPrefab");
-        GameObject cursorObject = Instantiate(cursorPrefab, Vector3.zero, Quaternion.identity);
-        cursorObject.transform.parent = transform;
+        Debug.Log("CreateCursor() 메서드 호출됨");
+        if(cursorObject == null)
+        {
+            GameObject cursorPrefab = Resources.Load<GameObject>("Prefabs/CursorPrefab");
+            cursorObject = Instantiate(cursorPrefab, Vector3.zero, Quaternion.identity);
+            cursorObject.transform.parent = transform;
+            Debug.Log("커서 생성");
+        }
+        else
+        {
+
+        }
     }
 
     // 커서 위치 반환 함수
