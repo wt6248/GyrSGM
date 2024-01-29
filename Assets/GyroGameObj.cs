@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GyroGameObj : MonoBehaviour
 {
@@ -15,10 +16,10 @@ public class GyroGameObj : MonoBehaviour
     {
         // TODO: modify these values properly
         public const float acc = 9.8f;
-        public const float deadZoneRadious = 0.02f;
-        public const float maxSpeedRadious = 2f;
+        public const float deadZoneRadious = 0.05f;
+        public const float maxSpeedRadious = 0.1f;
         // to calculate average of frameCount-many rotation
-        public const int frameCount = 4;
+        public const int frameCount = 15;
     }
 
     // Start is called before the first frame update
@@ -31,18 +32,21 @@ public class GyroGameObj : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rotList.Count < gyroConst.frameCount)
+        rotList.Clear();
+        for (int i = 0; i < gyroConst.frameCount; i++)
         {
             rotList.Add(gyroController.rotationRateUnbiased);
         }
-        else
-        {
-            rotList.Add(gyroController.rotationRateUnbiased);
-            rotList.RemoveAt(0); // front pop
-        }
-        v = GyroSpeedCorrection();
-        // send v to character
-        // Character.move(v);
+        v = gyroMove();
+        // For test
+        transform.Translate(v.x,v.y,v.z);
+    }
+
+    // return gyro-based velocity vector
+    public Vector3 gyroMove()
+    {
+        // For LandscapeLeft/Right, rotate vector -90 degree along z-axis
+        return Quaternion.Euler(0,0,-90) * GyroSpeedCorrection();
     }
 
     // Implement dead zone & max speed
@@ -62,19 +66,23 @@ public class GyroGameObj : MonoBehaviour
     {
         // TODO: check on andriod
         Vector3 dir = new Vector3(0,0,0);
-        switch (Screen.orientation)
+        switch (Input.deviceOrientation)
         {
-            case ScreenOrientation.Portrait:
+            case DeviceOrientation.Portrait:
                 dir = new Vector3(0,-1,0);
+                // print("P");
                 break;
-            case ScreenOrientation.PortraitUpsideDown:
+            case DeviceOrientation.PortraitUpsideDown:
                 dir = new Vector3(0,1,0);
+                // print("PU");
                 break;
-            case ScreenOrientation.LandscapeLeft:
+            case DeviceOrientation.LandscapeLeft:
                 dir = new Vector3(-1,0,0);
+                // print("LL");
                 break;
-            case ScreenOrientation.LandscapeRight:
+            case DeviceOrientation.LandscapeRight:
                 dir = new Vector3(1,0,0);
+                // print("LR");
                 break;
             default:
                 break;
