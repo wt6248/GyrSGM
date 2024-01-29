@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Cursor : MonoBehaviour
 {
+    private static Cursor instance;
     private GameObject cursorObject;
+
 
     private void Start()
     {
-       if(cursorObject== null)
+       if(instance == null)
        {
+            instance = this;
             CreateCursor();
+       }
+       else{
+            Debug.Log("커서 이미 생성됨");
        }
     }
 
