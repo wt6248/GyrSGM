@@ -81,4 +81,9 @@ public class GyroGameObj : MonoBehaviour
         }
         return dir;
     }
+
+    public Vector3 GetGyroValue()
+    {
+        return v;
+    }
 }

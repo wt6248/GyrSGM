@@ -63,7 +63,7 @@ public class ShotgunScript : MonoBehaviour
     //Handle the onClick event
     void CustomButton_onClick()
     {
-        Debug.Log("testtttt");
+        //Debug.Log("testtttt");
         generate_shotgun_shell();
         makeFireSound();
     }
