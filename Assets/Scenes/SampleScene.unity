@@ -455,6 +455,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fixedJoystick: {fileID: 520828417}
   shotgun_shell: {fileID: 0}
+  FireButton: {fileID: 0}
+  gunshotSound: {fileID: 0}
 --- !u!1 &480319035
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +733,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 334343374}
+      - m_Target: {fileID: 5938178957451612430, guid: 67a92578d1d1eaf4ca1a5f84356ee848, type: 3}
         m_TargetAssemblyTypeName: ShotgunScript, Assembly-CSharp
         m_MethodName: generate_shotgun_shell
         m_Mode: 1
@@ -858,7 +860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b679440dbc26cae40ae218d76a2438b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunshotSound: {fileID: 0}
+  gunshotSound: {fileID: 8300000, guid: fe063f215b4bf14459f1c8322b2e7d11, type: 3}
 --- !u!114 &1310912402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,7 +1063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shell generate
+  m_text: nothing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1334,6 +1336,10 @@ PrefabInstance:
     - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_Name
       value: Fixed Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_TagString
+      value: GameController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
