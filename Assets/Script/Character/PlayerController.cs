@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 a = GyroControl.GetGyroValue();
         //Debug.Log(a);
-        Vector3 b = new Vector3(a.y, -a.x,0f) * Time.deltaTime;
+        Vector3 b = new Vector3(a.x, a.y,0f) * Time.deltaTime * 20;
         //Debug.Log(b);
         transform.Translate(b); 
     }
