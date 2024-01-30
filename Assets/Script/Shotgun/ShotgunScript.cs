@@ -11,8 +11,23 @@ public class ShotgunScript : MonoBehaviour
     
     private AudioSource audioSource;
     public AudioClip gunshotSound;
-    
+
     Vector3 shell_drop_position = new Vector3(4.81f, 0.88f, 0f);
+
+    /*
+        산탄총 발사 관련 변수
+    */    
+    // 총구 위치
+    public Transform firePoint; 
+    // 적 캐릭터가 있는 레이어
+    public LayerMask targetLayer; 
+    // 산탄총 발사 각도
+    public float shotgunAngle = 7.5f; 
+    // 총알 개수
+    public int pelletsCount = 8; 
+    // 산탄 투사체 속도 계수
+    public float pelletSpeedMultiplier = 50f; 
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +53,14 @@ public class ShotgunScript : MonoBehaviour
         float rotZ = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);        
         // transform.LookAt(angle);
+
+        /*
+        산탄총 발사
+        */
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            FindEnemiesAndShoot();
+        }
     }
 
     public void generate_shotgun_shell()
@@ -66,5 +89,66 @@ public class ShotgunScript : MonoBehaviour
         //Debug.Log("testtttt");
         generate_shotgun_shell();
         makeFireSound();
+    }
+
+
+    /*
+        산탄총을 발사하는 데 필요한 함수들
+    */
+    // 가까운 적을 찾는 함수
+    Transform FindNearestEnemy(Collider2D[] hitEnemies)
+    {
+        Transform nearestEnemy = null;
+        float nearestDistance = Mathf.Infinity;
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < nearestDistance)
+            {
+                nearestEnemy = enemy.transform;
+                nearestDistance = distanceToEnemy;
+            }
+        }
+        return nearestEnemy;
+    }
+
+    // 산탄총 발사 함수
+    void ShootShotgun(Transform target)
+    {
+        Vector2 directionToEnemy = (target.position - firePoint.position).normalized;
+        for (int i = 0; i < pelletsCount; i++)
+        {
+            float randomAngle = Random.Range(-shotgunAngle, shotgunAngle);
+            Quaternion randomRotation = Quaternion.AngleAxis(randomAngle, Vector3.forward);
+            Vector2 shootDirection = randomRotation * directionToEnemy;
+
+            GameObject pellet = Instantiate(shotgun_shell, firePoint.position, Quaternion.identity);
+            Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
+
+            if (rb != null)
+            {
+                rb.velocity = shootDirection * pelletSpeedMultiplier;
+            }
+        }
+    }
+
+    // 적을 찾아 산탄총을 발사하는 함수
+    void FindEnemiesAndShoot()
+    {
+        // 주변의 적을 찾아 산탄총 발사
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
+
+        // 적이 없으면 발사하지 않음
+        if (hitEnemies.Length == 0)
+        {
+            Debug.Log("적이 없음");
+        }
+
+        // 가장 가까운 적을 찾아 발사
+        else{
+            Transform nearestEnemy = FindNearestEnemy(hitEnemies);
+            ShootShotgun(nearestEnemy);
+            Debug.Log("적을 제거함");
+        }
     }
 }

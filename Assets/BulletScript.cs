@@ -9,8 +9,8 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         speed = 10f;
-        directionX = 0.3;
-        directionY = 0.7;
+        directionX = 0.3f;
+        directionY = 0.7f;
         Destroy(gameObject, 10);
         
     }
