@@ -71,7 +71,7 @@ public class Cursor : MonoBehaviour
     }
 
     // 커서 위치 리셋 함수
-    public void RestCursorPosition()
+    public void ResetCursorPosition()
     {
         transform.position = Vector3.zero;
     }
