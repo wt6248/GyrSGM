@@ -19,8 +19,8 @@ public class ShotgunScript : MonoBehaviour
     */    
     // 총구 위치
     public Transform firePoint; 
-    // 적 캐릭터가 있는 레이어
-    public LayerMask targetLayer; 
+    // 적 게임오브젝트
+    public GameObject enemyObject;
     // 산탄총 발사 각도
     public float shotgunAngle = 7.5f; 
     // 총알 개수
@@ -53,6 +53,7 @@ public class ShotgunScript : MonoBehaviour
         float rotZ = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);        
         // transform.LookAt(angle);
+
 
         /*
         산탄총 발사
@@ -96,26 +97,29 @@ public class ShotgunScript : MonoBehaviour
         산탄총을 발사하는 데 필요한 함수들
     */
     // 가까운 적을 찾는 함수
-    Transform FindNearestEnemy(Collider2D[] hitEnemies)
-    {
-        Transform nearestEnemy = null;
+    GameObject FindNearestEnemy()
+    {        
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
+
+        GameObject nearestEnemy = null;
         float nearestDistance = Mathf.Infinity;
         foreach (Collider2D enemy in hitEnemies)
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < nearestDistance)
             {
-                nearestEnemy = enemy.transform;
+                nearestEnemy = enemy.gameObject;
                 nearestDistance = distanceToEnemy;
             }
         }
+
         return nearestEnemy;
     }
 
     // 산탄총 발사 함수
-    void ShootShotgun(Transform target)
+    void ShootShotgun(GameObject nearestEnemy)
     {
-        Vector2 directionToEnemy = (target.position - firePoint.position).normalized;
+        Vector2 directionToEnemy = (nearestEnemy.transform.position - firePoint.position).normalized;
         for (int i = 0; i < pelletsCount; i++)
         {
             float randomAngle = Random.Range(-shotgunAngle, shotgunAngle);
@@ -135,18 +139,17 @@ public class ShotgunScript : MonoBehaviour
     // 적을 찾아 산탄총을 발사하는 함수
     void FindEnemiesAndShoot()
     {
-        // 주변의 적을 찾아 산탄총 발사
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
+        // 적을 찾기
+        GameObject nearestEnemy = FindNearestEnemy();
 
+        // 산탄총 발사
         // 적이 없으면 발사하지 않음
-        if (hitEnemies.Length == 0)
+        if (nearestEnemy == null)
         {
             Debug.Log("적이 없음");
         }
-
         // 가장 가까운 적을 찾아 발사
         else{
-            Transform nearestEnemy = FindNearestEnemy(hitEnemies);
             ShootShotgun(nearestEnemy);
             Debug.Log("적을 제거함");
         }
