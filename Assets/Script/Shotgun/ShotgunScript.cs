@@ -7,6 +7,7 @@ public class ShotgunScript : MonoBehaviour
 {
     public FixedJoystick fixedJoystick;
     public GameObject shotgun_shell;
+    public GameObject Bullet;
     public Button FireButton;
     
     private AudioSource audioSource;
@@ -33,6 +34,7 @@ public class ShotgunScript : MonoBehaviour
     void Start()
     {
         shotgun_shell = Resources.Load("Prefabs/shotgun_shell") as GameObject;
+        Bullet = Resources.Load("Prefabs/bullet") as GameObject;
         //fixedJoystick 을 실시간으로 찾아오는 스크립트 작성
         fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
 
@@ -88,7 +90,7 @@ public class ShotgunScript : MonoBehaviour
     void CustomButton_onClick()
     {
         //Debug.Log("testtttt");
-        FindEnemiesAndShoot();
+        ShootShotgun_manually();
         generate_shotgun_shell();
         makeFireSound();
     }
@@ -141,14 +143,16 @@ public class ShotgunScript : MonoBehaviour
 
     void ShootShotgun_manually()
     {
+        Vector3 temp_firept = new Vector3( 1.0f, 1.0f , 0);
         Vector2 directionToEnemy = new Vector2(transform.rotation.eulerAngles.x , transform.rotation.eulerAngles.y);
         for (int i = 0; i < pelletsCount; i++)
         {
+            Debug.Log(i);
             float randomAngle = Random.Range(-shotgunAngle, shotgunAngle);
             Quaternion randomRotation = Quaternion.AngleAxis(randomAngle, Vector3.forward);
             Vector2 shootDirection = randomRotation * directionToEnemy;
 
-            GameObject pellet = Instantiate(shotgun_shell, firePoint.position, Quaternion.identity);
+            GameObject pellet = Instantiate(Bullet, temp_firept, Quaternion.identity);
             Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
 
             if (rb != null)

@@ -7,7 +7,7 @@ public class CameraShake : MonoBehaviour
     public float amount = 0.5f;
     float time;
     Vector3 dir;
-    Vector3 initialPos;
+    Vector3 initialPos = new Vector3(0, 0, -10);
     Camera cam;
 
 
@@ -15,7 +15,7 @@ public class CameraShake : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        dir = new Vector3(0.3f, 0.4f, 0);
+        dir = new Vector3(0.3f, 0.4f, -10);
     }
 
     // Update is called once per frame
@@ -35,6 +35,7 @@ public class CameraShake : MonoBehaviour
 
     public void Shake(float timeInSec = 0)
     {
+        Debug.Log("shake!!!!!");
         if(timeInSec == 0)
         {
             time = 0.05f;

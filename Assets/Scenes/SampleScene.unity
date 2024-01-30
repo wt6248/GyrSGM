@@ -835,10 +835,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5938178957451612430, guid: 67a92578d1d1eaf4ca1a5f84356ee848, type: 3}
-        m_TargetAssemblyTypeName: ShotgunScript, Assembly-CSharp
-        m_MethodName: generate_shotgun_shell
-        m_Mode: 1
+      - m_Target: {fileID: 1202679114}
+        m_TargetAssemblyTypeName: CameraShake, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -885,6 +885,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161391811}
   m_CullTransparentMesh: 1
+--- !u!1 &1202679113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1202679115}
+  - component: {fileID: 1202679114}
+  m_Layer: 0
+  m_Name: cameraShakeTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1202679114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202679113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e27bbe4515d8546c97ee55bfd564fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0.5
+--- !u!4 &1202679115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202679113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6363165, y: -0.19229454, z: -0.064073935}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1217631335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,7 +1225,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: nothing
+  m_text: shake btn
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1754,3 +1799,4 @@ SceneRoots:
   - {fileID: 1217631336}
   - {fileID: 2002664771}
   - {fileID: 480319037}
+  - {fileID: 1202679115}
