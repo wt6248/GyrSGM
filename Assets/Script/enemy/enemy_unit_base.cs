@@ -18,23 +18,16 @@ namespace GyrSGM.Assets.Script.enemy
         void Update()
         {
             Debug.Log("enemy: (" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + ")\n");
-            // move to character
             Move();
         }
 
         private void Move()
         {
-            // 적 유닛을 전진 방향으로 이동
             Vector3 player_pos = get_player_pos(); 
             
-            if (is_move) {
+            if ((transform.position - player_pos).magnitude > 0.1) {
                 transform.Translate((player_pos - transform.position).normalized * 0.005f);
             }
-
-            if ((transform.position - player_pos).magnitude < 0.1) {
-                is_move = false;
-            }
-            
         }
         public void DecreaseHp() {
             hp--;
@@ -46,7 +39,7 @@ namespace GyrSGM.Assets.Script.enemy
         private Vector3 get_player_pos() {
             Transform player_info = GameObject.Find("Main Character").GetComponent<Transform>();
             Vector3 player_pos = player_info.position;
-            Debug.Log("player_pos: (" + player_pos.x + ", " + player_pos.y + ", " + player_pos.z + ")\n");
+            //Debug.Log("player_pos: (" + player_pos.x + ", " + player_pos.y + ", " + player_pos.z + ")\n");
             return player_pos;
         }
     }
