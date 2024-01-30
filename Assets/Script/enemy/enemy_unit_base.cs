@@ -17,7 +17,7 @@ namespace GyrSGM.Assets.Script.enemy
         } 
         void Update()
         {
-            Debug.Log("enemy: (" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + ")\n");
+            //Debug.Log("enemy: (" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + ")\n");
             Move();
         }
 
