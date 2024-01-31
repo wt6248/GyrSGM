@@ -1035,7 +1035,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2889927a4a5ee1e499e0f67aba6b7dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
   GyroControl: {fileID: 271827748}
 --- !u!114 &1310912403
 MonoBehaviour:
@@ -1044,7 +1043,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310912399}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81851e439ab92904999cf0e3b709e8a5, type: 3}
   m_Name: 
