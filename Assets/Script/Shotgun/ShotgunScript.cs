@@ -51,9 +51,11 @@ public class ShotgunScript : MonoBehaviour
     void Update()
     {
         Vector2 angle = fixedJoystick.Direction;
-
-        float rotZ = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rotZ);        
+        if (angle != Vector2.zero)
+        {
+            float rotZ = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, rotZ);
+        }
         // transform.LookAt(angle);
 
 
@@ -125,14 +127,14 @@ public class ShotgunScript : MonoBehaviour
     // 산탄총 발사 함수
     void ShootShotgun(GameObject nearestEnemy)
     {
-        Vector2 directionToEnemy = (nearestEnemy.transform.position - firePoint.position).normalized;
+        Vector2 directionToEnemy = (nearestEnemy.transform.position - transform.position).normalized;
         for (int i = 0; i < pelletsCount; i++)
         {
             float randomAngle = Random.Range(-shotgunAngle, shotgunAngle);
             Quaternion randomRotation = Quaternion.AngleAxis(randomAngle, Vector3.forward);
             Vector2 shootDirection = randomRotation * directionToEnemy;
 
-            GameObject pellet = Instantiate(shotgun_shell, firePoint.position, Quaternion.identity);
+            GameObject pellet = Instantiate(shotgun_shell, transform.position, Quaternion.identity);
             Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
 
             if (rb != null)
