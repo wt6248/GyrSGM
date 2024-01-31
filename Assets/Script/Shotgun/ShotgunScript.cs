@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,8 +54,8 @@ public class ShotgunScript : MonoBehaviour
         Vector2 angle = fixedJoystick.Direction;
         if (angle != Vector2.zero)
         {
-            float rotZ = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, rotZ);
+            shotgunAngle = vec2angle(angle);
+            transform.rotation = Quaternion.Euler(0, 0, shotgunAngle);
         }
         // transform.LookAt(angle);
 
@@ -142,20 +143,24 @@ public class ShotgunScript : MonoBehaviour
                 rb.velocity = shootDirection * pelletSpeedMultiplier;
             }
         }
+        shotgunAngle = vec2angle(directionToEnemy);
+        transform.rotation = Quaternion.Euler(0,0,shotgunAngle);
     }
 
     void ShootShotgun_manually()
     {
-        Vector3 temp_firept = new Vector3( 1.0f, 1.0f , 0);
-        Vector2 directionToEnemy = new Vector2(transform.rotation.eulerAngles.x , transform.rotation.eulerAngles.y);
+        // Vector3 temp_firept = new Vector3( 1.0f, 1.0f , 0);
+        // Vector2 directionToEnemy = new Vector2(transform.rotation.eulerAngles.x , transform.rotation.eulerAngles.y);
+        Vector2 directionToEnemy = fixedJoystick.Direction;
         for (int i = 0; i < pelletsCount; i++)
         {
-            Debug.Log(i);
+            // Debug.Log(i);
             float randomAngle = Random.Range(-shotgunAngle, shotgunAngle);
             Quaternion randomRotation = Quaternion.AngleAxis(randomAngle, Vector3.forward);
             Vector2 shootDirection = randomRotation * directionToEnemy;
 
-            GameObject pellet = Instantiate(Bullet, temp_firept, Quaternion.identity);
+            // GameObject pellet = Instantiate(Bullet, temp_firept, Quaternion.identity);
+            GameObject pellet = Instantiate(shotgun_shell, transform.position, Quaternion.identity);
             Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
 
             if (rb != null)
@@ -163,6 +168,8 @@ public class ShotgunScript : MonoBehaviour
                 rb.velocity = shootDirection * pelletSpeedMultiplier;
             }
         }
+        shotgunAngle = vec2angle(directionToEnemy);
+        transform.rotation = Quaternion.Euler(0,0,shotgunAngle);
     }
 
     // 적을 찾아 산탄총을 발사하는 함수
@@ -182,5 +189,10 @@ public class ShotgunScript : MonoBehaviour
             ShootShotgun(nearestEnemy);
             Debug.Log("적을 제거함");
         }
+    }
+
+    float vec2angle(Vector2 v)
+    {
+        return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
     }
 }
