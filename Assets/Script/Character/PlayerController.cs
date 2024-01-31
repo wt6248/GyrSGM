@@ -6,14 +6,16 @@ public class PlayerController : MonoBehaviour
 {
     private Cursor cursor;
     private ShotgunController shotGun;
-
+    private GameObject cursorObject;
     public GyroGameObj GyroControl;
     
 
     
     void Start()
     {
-      cursor = GetComponentInChildren<Cursor>();
+      //cursor = GetComponentInChildren<Cursor>();
+      CreateCursor();
+      cursor = cursorObject.GetComponent<Cursor>();
       shotGun = GetComponentInChildren<ShotgunController>();
       //GyroControl = GameObject.Find("Gyro Controller").GetComponent<GyroGameObj>();
     }
@@ -22,8 +24,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //주인공(커서) 움직이기
-        MovePlayerWithCursor();
-
+        //MovePlayerWithCursor();
+        MovePlayerWithCursor_modified();
+        
         //임시로 주인공 자이로 직접 움직이기
         //tempMovePlayerByGyro();
 
@@ -32,6 +35,20 @@ public class PlayerController : MonoBehaviour
             FireGun();
         }   
     }
+
+    private void CreateCursor()
+    {
+        Debug.Log("CreateCursor() 메서드 호출됨");
+        if(cursorObject == null)
+        {
+            GameObject cursorPrefab = Resources.Load<GameObject>("Prefabs/CursorPrefab");
+            cursorObject = Instantiate(cursorPrefab, Vector3.zero, Quaternion.identity);
+            cursorObject.transform.parent = transform;
+            Debug.Log("커서 생성");
+        }
+    }
+
+
 
     void MovePlayerWithCursor()
     {
@@ -49,6 +66,17 @@ public class PlayerController : MonoBehaviour
 
         // 플레이어 이동
         transform.position += moveDirection;
+    }
+
+    void MovePlayerWithCursor_modified()
+    {
+        if(cursor == null)
+        {
+            cursor = transform.GetChild(1).gameObject.GetComponent<Cursor>();
+        }
+        Vector3 relativePosition = cursor.CursorLocalPosition();
+        transform.Translate(relativePosition * Time.deltaTime * 4); //4는 임의로 정한 속도. 너무 느려서 배속 넣음
+
     }
 
     void tempMovePlayerByGyro()
