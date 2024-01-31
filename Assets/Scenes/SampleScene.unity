@@ -552,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fixedJoystick: {fileID: 520828417}
   shotgun_shell: {fileID: 0}
+  Bullet: {fileID: 0}
   FireButton: {fileID: 0}
   gunshotSound: {fileID: 0}
   firePoint: {fileID: 0}
@@ -1034,6 +1035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2889927a4a5ee1e499e0f67aba6b7dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
   GyroControl: {fileID: 271827748}
 --- !u!114 &1310912403
 MonoBehaviour:

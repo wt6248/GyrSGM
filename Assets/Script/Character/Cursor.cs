@@ -11,19 +11,19 @@ public class Cursor : MonoBehaviour
 
     private void Start()
     {
-       if(instance == null)
-       {
-            instance = this;
-            CreateCursor();
-       }
-       else{
-            Debug.Log("커서 이미 생성됨");
-       }
+    //    if(instance == null)
+    //    {
+    //         instance = this;
+    //         CreateCursor();
+    //    }
+    //    else{
+    //         Debug.Log("커서 이미 생성됨");
+    //    }
 
        gyroGameObj = FindObjectOfType<GyroGameObj>();
     }
     
-    //커서가 커서를 생성하는 스택 오버플로우가 발생함. 수정 바람.
+    // 커서가 커서를 생성하는 스택 오버플로우가 발생함. 수정 바람.
     private void CreateCursor()
     {
         Debug.Log("CreateCursor() 메서드 호출됨");
@@ -57,10 +57,10 @@ public class Cursor : MonoBehaviour
         transform.Translate(cursorMovement);
 
         // 화면을 벗어나지 않도록 커서의 위치를 제한
-        Vector3 clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -5f, 5f);
-        clampedPosition.y = Mathf.Clamp(clampedPosition.y, -3f, 3f);
-        transform.position = clampedPosition;
+        // Vector3 clampedPosition = transform.position;
+        // clampedPosition.x = Mathf.Clamp(clampedPosition.x, -5f, 5f);
+        // clampedPosition.y = Mathf.Clamp(clampedPosition.y, -3f, 3f);
+        // transform.position = clampedPosition;
     }
 
     // 커서 위치 반환 함수
@@ -70,9 +70,15 @@ public class Cursor : MonoBehaviour
         return transform.position;
     }
 
+    public Vector3 CursorLocalPosition()
+    {
+        //Debug.Log("Cursor Position return: " + transform.position);
+        return transform.localPosition;
+    }
+
     // 커서 위치 리셋 함수
     public void ResetCursorPosition()
     {
-        transform.position = Vector3.zero;
+        transform.localPosition = Vector3.zero;
     }
 }
