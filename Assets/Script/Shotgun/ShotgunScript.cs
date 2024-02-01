@@ -99,8 +99,8 @@ public class ShotgunScript : MonoBehaviour
     // 가까운 적을 찾는 함수
     GameObject FindNearestEnemy()
     {        
-       Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
-       
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
+
         GameObject nearestEnemy = null;
         float nearestDistance = Mathf.Infinity;
         foreach (Collider2D enemy in hitEnemies)
