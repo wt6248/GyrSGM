@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,8 @@ public class ShotgunScript : MonoBehaviour
     public int pelletsCount = 8; 
     // 산탄 투사체 속도 계수
     public float pelletSpeedMultiplier = 50f; 
+    // Radious of auto-aim
+    const float autoAimRadious = 10f;
 
 
     // Start is called before the first frame update
@@ -102,18 +105,27 @@ public class ShotgunScript : MonoBehaviour
     // 가까운 적을 찾는 함수
     GameObject FindNearestEnemy()
     {   
-
-        //Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
+        /*
+            Replace depricated function, OverlapCircleAll
+            if hitEnemies empty -> nullptr exception
+        */
+        // // Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
+        // Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
+        EnemyManage[] enemyManageList = FindObjectsByType<EnemyManage>(FindObjectsSortMode.None);
+        EnemyManage enemyManage = enemyManageList[0];
+        if (1 < enemyManageList.Length)
+        {
+            Debug.Log("More than two EnemyManage");
+        }
 
         GameObject nearestEnemy = null;
-        float nearestDistance = Mathf.Infinity;
-        foreach (Collider2D enemy in hitEnemies)
+        float nearestDistance = autoAimRadious;
+        foreach (GameObject enemy in enemyManage.enemyList)
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < nearestDistance)
             {
-                nearestEnemy = enemy.gameObject;
+                nearestEnemy = enemy;
                 nearestDistance = distanceToEnemy;
             }
         }
