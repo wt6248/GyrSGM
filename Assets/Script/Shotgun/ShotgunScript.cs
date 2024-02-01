@@ -46,6 +46,9 @@ public class ShotgunScript : MonoBehaviour
         //fire button manage
         FireButton =  GameObject.Find("Fire Button").GetComponent<Button>();
         FireButton.onClick.AddListener(CustomButton_onClick); //subscribe to the onClick event
+
+        // 자동사격: 적을 찾아서 총을 발사하는 함수를 1초마다 호출
+        InvokeRepeating("AutoShoot", 0f, 1f); 
     }
 
     // Update is called once per frame
@@ -53,7 +56,6 @@ public class ShotgunScript : MonoBehaviour
     {
         rotateShotgun(fixedJoystick.Direction);
         // transform.LookAt(angle);
-
 
         /*
         산탄총 발사
@@ -184,6 +186,13 @@ public class ShotgunScript : MonoBehaviour
             Debug.Log("적을 제거함");
         }
     }
+
+    // 자동 사격 함수
+    void AutoShoot()
+    {        
+        FindEnemiesAndShoot();
+        Debug.Log("자동 사격");
+    }   
 
     float vec2angle(Vector2 v)
     {
