@@ -5,43 +5,61 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
 
-    public class enemy_unit_base : MonoBehaviour
+public class enemy_unit_base : MonoBehaviour
+{
+    private bool is_move = true;
+    protected int hp = 3;
+
+    // audio instances
+    public AudioSource hurt_sound_source;
+    public AudioClip hurt_sound;
+    public AudioSource dead_sound_source;
+    public AudioClip dead_sound;
+    void Start() {
+        Vector3 init_pos = new Vector3(5f, 5f, 0f);
+        transform.position = init_pos; 
+
+
+        // init audio
+        hurt_sound_source = gameObject.AddComponent<AudioSource>();
+        hurt_sound = Resources.Load<AudioClip>("Audio/dspunch");
+        dead_sound_source = gameObject.AddComponent<AudioSource>();
+        dead_sound = Resources.Load<AudioClip>("Audio/dsbgdth1");
+    } 
+    void Update()
     {
-        private bool is_move = true;
-        protected int hp = 3;
-
-        void Start() {
-            Vector3 init_pos = new Vector3(5f, 5f, 0f);
-            transform.position = init_pos; 
-        } 
-        void Update()
-        {
-            //Debug.Log("enemy: (" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + ")\n");
-            Move();
-        }
-
-        private void Move()
-        {
-            Vector3 player_pos = get_player_pos(); 
-            
-            if ((transform.position - player_pos).magnitude > 1) {
-                transform.Translate((player_pos - transform.position).normalized * 0.005f);
-            } 
-        }
-        public void DecreaseHp() {
-
-            hp--;
-            //Debug.Log(hp);
-            if (hp<=0) {
-                Destroy(this.gameObject);
-            }
-            return;
-        }
-        private Vector3 get_player_pos() {
-            Transform player_info = GameObject.Find("Main Character").GetComponent<Transform>();
-            Vector3 player_pos = player_info.position;
-            //Debug.Log("player_pos: (" + player_pos.x + ", " + player_pos.y + ", " + player_pos.z + ")\n");
-            return player_pos;
-        }
+        //Debug.Log("enemy: (" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + ")\n");
+        Move();
     }
+
+    private void Move()
+    {
+        Vector3 player_pos = get_player_pos(); 
+        
+        if ((transform.position - player_pos).magnitude > 1) {
+            transform.Translate((player_pos - transform.position).normalized * 0.005f);
+        } 
+    }
+    public void DecreaseHp() {
+
+        hp--;
+        if(hurt_sound != null && hp > 0f) {
+            hurt_sound_source.PlayOneShot(hurt_sound);
+        }
+        //Debug.Log(hp);
+        if (hp<=0) {
+            if(dead_sound != null) {
+                dead_sound_source.PlayOneShot(dead_sound);
+            }
+            Destroy(this.gameObject);
+        }
+        return;
+    }
+    private Vector3 get_player_pos() {
+        Transform player_info = GameObject.Find("Main Character").GetComponent<Transform>();
+        Vector3 player_pos = player_info.position;
+        //Debug.Log("player_pos: (" + player_pos.x + ", " + player_pos.y + ", " + player_pos.z + ")\n");
+        return player_pos;
+    }
+}
 

@@ -20,18 +20,32 @@ public class PlayerController : MonoBehaviour
     private float heal_per_sec = 0.05f;
     private float heal_period = 1f;
     
+
+    // audio instances
+    public AudioSource hurt_sound_source;
+    public AudioClip hurt_sound;
+    public AudioSource dead_sound_source;
+    public AudioClip dead_sound;
+
     void Start()
     {
-      //cursor = GetComponentInChildren<Cursor>();
-      CreateCursor();
-      cursor = cursorObject.GetComponent<Cursor>();
-      shotGun = GetComponentInChildren<ShotgunController>();
-      spriteRenderer = GetComponent<SpriteRenderer>();
-      //GyroControl = GameObject.Find("Gyro Controller").GetComponent<GyroGameObj>();
+        //cursor = GetComponentInChildren<Cursor>();
+        CreateCursor();
+        cursor = cursorObject.GetComponent<Cursor>();
+        shotGun = GetComponentInChildren<ShotgunController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        //GyroControl = GameObject.Find("Gyro Controller").GetComponent<GyroGameObj>();
 
 
-      // basic self healing
-      InvokeRepeating("heal", 0f, heal_period);
+        hurt_sound_source = gameObject.AddComponent<AudioSource>();
+        hurt_sound = Resources.Load<AudioClip>("Audio/dsoof");
+        dead_sound_source = gameObject.AddComponent<AudioSource>();
+        dead_sound = Resources.Load<AudioClip>("Audio/dsplpain");
+
+
+
+        // basic self healing
+        InvokeRepeating("heal", 0f, heal_period);
     }
 
     
@@ -125,8 +139,15 @@ public class PlayerController : MonoBehaviour
 
 
         hp -= damage;
+        if(hurt_sound != null && hp > 0f) {
+            hurt_sound_source.PlayOneShot(hurt_sound);
+        }
         Debug.Log("Player HP is " + hp);
         if (hp <= 0.0f) {
+
+            if(dead_sound != null) {
+                dead_sound_source.PlayOneShot(dead_sound);
+            }
             Debug.Log("Player Died");
             CancelInvoke("heal");
         }
