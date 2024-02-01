@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "GyroShotgunGame.sln"
+    "dotnet.defaultSolution": "GyrSGM.sln"
 }
