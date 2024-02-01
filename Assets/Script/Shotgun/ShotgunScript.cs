@@ -74,6 +74,7 @@ public class ShotgunScript : MonoBehaviour
         //GameObject shotgun_shell_temp = Instantiate(shotgun_shell, shell_drop_position,Quaternion.identity, transform);
         GameObject shotgun_shell_temp = Instantiate(shotgun_shell, transform, true );
         shotgun_shell_temp.transform.localPosition = shell_drop_position;
+        shotgun_shell_temp.transform.SetParent(null);
     }
 
     public void makeFireSound(){
