@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class EnemyManage : MonoBehaviour
 {
-    // list of enemy position
-    public List<GameObject> enemyList;
     const float generateCoolTime = 5f;
-    const float spawnRadious = 10f;
+    const float spawnRadious = 1f;
     float generateCooldown = 0;
     GameObject enemy;
 
@@ -32,7 +30,6 @@ public class EnemyManage : MonoBehaviour
         {
             generateCooldown = generateCoolTime;
             GameObject instance = Instantiate(enemy, spawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
-            enemyList.Add(instance);
         }
     }
 }
