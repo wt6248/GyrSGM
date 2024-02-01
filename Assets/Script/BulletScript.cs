@@ -31,9 +31,9 @@ public class BulletScript : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<enemy_unit_base>().DecreaseHp();//의 체력깍는 함수 호출
-            Destroy(this.gameObject);
-
         }
+        // destroy whatever hit something
+        Destroy(this.gameObject);
     }
     
     //처음 시작할 때 주어진 속도에 따라 움직이는 코드 작성
