@@ -105,7 +105,6 @@ public class ShotgunScript : MonoBehaviour
 
         //Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
-        print(hitEnemies.Length);
 
         GameObject nearestEnemy = null;
         float nearestDistance = Mathf.Infinity;
