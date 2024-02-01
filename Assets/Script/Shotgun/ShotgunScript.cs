@@ -51,12 +51,7 @@ public class ShotgunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 angle = fixedJoystick.Direction;
-        if (angle != Vector2.zero)
-        {
-            shotgunAngle = vec2angle(angle);
-            transform.rotation = Quaternion.Euler(0, 0, shotgunAngle);
-        }
+        rotateShotgun(fixedJoystick.Direction);
         // transform.LookAt(angle);
 
 
@@ -168,8 +163,7 @@ public class ShotgunScript : MonoBehaviour
                 rb.velocity = shootDirection * pelletSpeedMultiplier;
             }
         }
-        shotgunAngle = vec2angle(directionToEnemy);
-        transform.rotation = Quaternion.Euler(0,0,shotgunAngle);
+        rotateShotgun(directionToEnemy);
     }
 
     // 적을 찾아 산탄총을 발사하는 함수
@@ -194,5 +188,15 @@ public class ShotgunScript : MonoBehaviour
     float vec2angle(Vector2 v)
     {
         return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+    }
+
+    // rotate shotgun along v if v is not zero. if v is zero, do nothing
+    void rotateShotgun(Vector2 v)
+    {
+        if (v != Vector2.zero)
+        {
+            shotgunAngle = vec2angle(v);
+            transform.rotation = Quaternion.Euler(0, 0, shotgunAngle);
+        }
     }
 }

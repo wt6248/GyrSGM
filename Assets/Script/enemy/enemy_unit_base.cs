@@ -12,7 +12,7 @@ namespace GyrSGM.Assets.Script.enemy
         protected int hp = 3;
 
         void Start() {
-            Vector3 init_pos = new Vector3(0f, 0f, 0f);
+            Vector3 init_pos = new Vector3(5f, 5f, 0f);
             transform.position = init_pos; 
         } 
         void Update()
