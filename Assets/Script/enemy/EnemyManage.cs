@@ -33,7 +33,6 @@ public class EnemyManage : MonoBehaviour
             generateCooldown = generateCoolTime;
             GameObject instance = Instantiate(enemy, spawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
             enemyList.Add(instance);
-            // print(Random.insideUnitCircle.normalized);
         }
     }
 }
