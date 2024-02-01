@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GyrSGM.Assets.Script.enemy
-{
     public class enemy_unit_base : MonoBehaviour
     {
         private bool is_move = true;
@@ -30,9 +29,11 @@ namespace GyrSGM.Assets.Script.enemy
             } 
         }
         public void DecreaseHp() {
+
             hp--;
+            //Debug.Log(hp);
             if (hp<=0) {
-                Destroy(this);
+                Destroy(this.gameObject);
             }
             return;
         }
@@ -43,6 +44,4 @@ namespace GyrSGM.Assets.Script.enemy
             return player_pos;
         }
     }
-}
-
 
