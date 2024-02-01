@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3494864454807966629}
   m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e93994bee1c262468b500287ac6e00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurt_sound_source: {fileID: 0}
+  hurt_sound: {fileID: 0}
+  dead_sound_source: {fileID: 0}
+  dead_sound: {fileID: 0}
 --- !u!50 &7373365711714288345
 Rigidbody2D:
   serializedVersion: 4
