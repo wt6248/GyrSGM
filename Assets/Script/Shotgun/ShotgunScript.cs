@@ -59,11 +59,11 @@ public class ShotgunScript : MonoBehaviour
 
         /*
         산탄총 발사
-        */
         if(Input.GetKeyDown(KeyCode.Space))
         {
             FindEnemiesAndShoot();
         }
+        */        
     }
 
     public void generate_shotgun_shell()
@@ -132,7 +132,8 @@ public class ShotgunScript : MonoBehaviour
             Quaternion randomRotation = Quaternion.AngleAxis(randomAngle, Vector3.forward);
             Vector2 shootDirection = randomRotation * directionToEnemy;
 
-            GameObject pellet = Instantiate(shotgun_shell, transform.position, Quaternion.identity);
+            //GameObject pellet = Instantiate(shotgun_shell, transform.position, Quaternion.identity);
+            GameObject pellet = Instantiate(Bullet, transform.position, Quaternion.identity);
             Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
 
             if (rb != null)
@@ -156,8 +157,9 @@ public class ShotgunScript : MonoBehaviour
             Quaternion randomRotation = Quaternion.AngleAxis(randomAngle, Vector3.forward);
             Vector2 shootDirection = randomRotation * directionToEnemy;
 
-            // GameObject pellet = Instantiate(Bullet, temp_firept, Quaternion.identity);
-            GameObject pellet = Instantiate(shotgun_shell, transform.position, Quaternion.identity);
+            //GameObject pellet = Instantiate(Bullet, temp_firep, Quaternion.identity);
+            //GameObject pellet = Instantiate(shotgun_shell, transform.position, Quaternion.identity);
+            GameObject pellet = Instantiate(Bullet, transform.position, Quaternion.identity);
             Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
 
             if (rb != null)
@@ -191,6 +193,7 @@ public class ShotgunScript : MonoBehaviour
     void AutoShoot()
     {        
         FindEnemiesAndShoot();
+        generate_shotgun_shell();
         Debug.Log("자동 사격");
     }   
 
