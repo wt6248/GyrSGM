@@ -57,7 +57,7 @@ public class ShotgunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotateShotgun(fixedJoystick.Direction);
+        AutoAim();
         // transform.LookAt(angle);
 
         /*
@@ -104,28 +104,23 @@ public class ShotgunScript : MonoBehaviour
     */
     // 가까운 적을 찾는 함수
     GameObject FindNearestEnemy()
-    {   
-        /*
-            Replace depricated function, OverlapCircleAll
-            if hitEnemies empty -> nullptr exception
-        */
+    { 
         // // Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
-        // Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
-        EnemyManage[] enemyManageList = FindObjectsByType<EnemyManage>(FindObjectsSortMode.None);
-        EnemyManage enemyManage = enemyManageList[0];
-        if (1 < enemyManageList.Length)
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
+        // killed every enemy || no enemy detected
+        if (hitEnemies == null)
         {
-            Debug.Log("More than two EnemyManage");
+            return null;
         }
 
         GameObject nearestEnemy = null;
         float nearestDistance = autoAimRadious;
-        foreach (GameObject enemy in enemyManage.enemyList)
+        foreach (Collider2D enemy in hitEnemies)
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < nearestDistance)
             {
-                nearestEnemy = enemy;
+                nearestEnemy = enemy.gameObject;
                 nearestDistance = distanceToEnemy;
             }
         }
@@ -152,8 +147,6 @@ public class ShotgunScript : MonoBehaviour
                 rb.velocity = shootDirection * pelletSpeedMultiplier;
             }
         }
-        shotgunAngle = Vec2angle(directionToEnemy);
-        transform.rotation = Quaternion.Euler(0,0,shotgunAngle);
     }
 
     void ShootShotgun_manually()
@@ -178,7 +171,6 @@ public class ShotgunScript : MonoBehaviour
                 rb.velocity = shootDirection * pelletSpeedMultiplier;
             }
         }
-        RotateShotgun(directionToEnemy);
     }
 
     // 적을 찾아 산탄총을 발사하는 함수
@@ -222,7 +214,32 @@ public class ShotgunScript : MonoBehaviour
         if (v != Vector2.zero)
         {
             shotgunAngle = Vec2angle(v);
+            if (-90 < shotgunAngle && shotgunAngle < 90)
+            {
+                transform.localScale = new(0.2f, 0.2f, 1);
+            }
+            else
+            {
+                transform.localScale = new(0.2f, -0.2f, 1);
+            }
             transform.rotation = Quaternion.Euler(0, 0, shotgunAngle);
+        }
+    }
+
+    void AutoAim()
+    {
+        // Not holding joystick
+        if (fixedJoystick.Direction == Vector2.zero)
+        {
+            GameObject nearestEnemy = FindNearestEnemy();
+            if (nearestEnemy != null)
+            {
+                RotateShotgun(nearestEnemy.transform.position - transform.position);
+            }
+        }
+        else
+        {
+            RotateShotgun(fixedJoystick.Direction);
         }
     }
 }
