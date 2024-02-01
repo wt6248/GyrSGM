@@ -25,9 +25,9 @@ namespace GyrSGM.Assets.Script.enemy
         {
             Vector3 player_pos = get_player_pos(); 
             
-            if ((transform.position - player_pos).magnitude > 0.1) {
+            if ((transform.position - player_pos).magnitude > 1) {
                 transform.Translate((player_pos - transform.position).normalized * 0.005f);
-            }
+            } 
         }
         public void DecreaseHp() {
             hp--;

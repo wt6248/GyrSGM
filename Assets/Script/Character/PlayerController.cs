@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
     private Cursor cursor;
     private ShotgunController shotGun;
 
-    public GyroGameObj GyroControl;
-    
+    private SpriteRenderer spriteRenderer;
 
+    public GyroGameObj GyroControl;
+    private float hp = 10.0f;
+
+    private bool isInvincible = false;
     
     void Start()
     {
       cursor = GetComponentInChildren<Cursor>();
       shotGun = GetComponentInChildren<ShotgunController>();
+      spriteRenderer = GetComponent<SpriteRenderer>();
       //GyroControl = GameObject.Find("Gyro Controller").GetComponent<GyroGameObj>();
     }
 
@@ -64,5 +69,50 @@ public class PlayerController : MonoBehaviour
     {
         shotGun.FireGun(transform.position);
     }   
-    
+    private void Unbeatable() {
+        isInvincible = !isInvincible;
+
+        if (isInvincible) {
+            spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+        } else {
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+        }
+    } 
+    void getDamaged(float damage=3.0f, float invincible_time=0.5f) 
+    {
+        if (isInvincible) {
+            Debug.Log("Invincible!");
+            return;
+        }
+
+
+        hp -= damage;
+        Debug.Log("Player HP is " + hp);
+        if (hp <= 0.0f) {
+            Debug.Log("Player Died");
+        }
+
+        // 무적 
+        Unbeatable();
+        Invoke("Unbeatable", invincible_time);
+
+
+    }
+    void OnCollisionEnter2D(Collision2D other) {
+        bool local_debug = false;
+        int n_attack = local_debug ? 2:1;
+
+        for (int i=0;i<n_attack;i++){
+            getDamaged(3.0f);
+        }
+
+        // test code for the function operates well
+        if (hp > 0 && local_debug) {
+            other.gameObject.transform.position = new Vector3(10, 10, 0);
+        }
+        
+        
+
+    }
+   
 }
