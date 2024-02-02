@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -150,6 +151,16 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log("Player Died");
             CancelInvoke("heal");
+
+            /*
+                Enemy finds player object -> do not destroy player
+            */
+            CancelInvoke("AutoShoot");
+            Time.timeScale = 0;
+            Button FireButton =  GameObject.Find("Fire Button").GetComponent<Button>();
+            FireButton.onClick.RemoveAllListeners();
+            // Destroy(this.gameObject);
+            return;
         }
 
         // 무적 
