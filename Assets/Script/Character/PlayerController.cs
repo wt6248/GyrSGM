@@ -10,18 +10,42 @@ public class PlayerController : MonoBehaviour
     private GameObject cursorObject;
     private SpriteRenderer spriteRenderer;
     public GyroGameObj GyroControl;
-    private float hp = 10.0f;
+    
+    private static float max_hp = 5f;
+    private float hp = max_hp;
 
     private bool isInvincible = false;
+
+    // heal variable
+    private float heal_per_sec = 0.05f;
+    private float heal_period = 1f;
     
+
+    // audio instances
+    public AudioSource hurt_sound_source;
+    public AudioClip hurt_sound;
+    public AudioSource dead_sound_source;
+    public AudioClip dead_sound;
+
     void Start()
     {
-      //cursor = GetComponentInChildren<Cursor>();
-      CreateCursor();
-      cursor = cursorObject.GetComponent<Cursor>();
-      shotGun = GetComponentInChildren<ShotgunController>();
-      spriteRenderer = GetComponent<SpriteRenderer>();
-      //GyroControl = GameObject.Find("Gyro Controller").GetComponent<GyroGameObj>();
+        //cursor = GetComponentInChildren<Cursor>();
+        CreateCursor();
+        cursor = cursorObject.GetComponent<Cursor>();
+        shotGun = GetComponentInChildren<ShotgunController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        //GyroControl = GameObject.Find("Gyro Controller").GetComponent<GyroGameObj>();
+
+
+        hurt_sound_source = gameObject.AddComponent<AudioSource>();
+        hurt_sound = Resources.Load<AudioClip>("Audio/dsoof");
+        dead_sound_source = gameObject.AddComponent<AudioSource>();
+        dead_sound = Resources.Load<AudioClip>("Audio/dsplpain");
+
+
+
+        // basic self healing
+        InvokeRepeating("heal", 0f, heal_period);
     }
 
     
@@ -38,6 +62,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){ //스페이스바를 누르면 발사
             FireGun();
         }   
+        
     }
 
     private void CreateCursor()
@@ -105,18 +130,26 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.color = new Color(1, 1, 1, 1);
         }
     } 
-    void getDamaged(float damage=3.0f, float invincible_time=0.5f) 
+    void getDamaged(float damage=1.0f, float invincible_time=0.5f) 
     {
         if (isInvincible) {
-            Debug.Log("Invincible!");
+            //Debug.Log("Invincible!");
             return;
         }
 
 
         hp -= damage;
+        if(hurt_sound != null && hp > 0f) {
+            hurt_sound_source.PlayOneShot(hurt_sound);
+        }
         Debug.Log("Player HP is " + hp);
         if (hp <= 0.0f) {
+
+            if(dead_sound != null) {
+                dead_sound_source.PlayOneShot(dead_sound);
+            }
             Debug.Log("Player Died");
+            CancelInvoke("heal");
         }
 
         // 무적 
@@ -129,9 +162,15 @@ public class PlayerController : MonoBehaviour
         bool local_debug = false;
         int n_attack = local_debug ? 2:1;
 
-        for (int i=0;i<n_attack;i++){
-            getDamaged(3.0f);
-        }
+
+
+
+
+
+        
+        StartCoroutine(DamageRoutine(1f, 0.1f));
+            
+        
 
         // test code for the function operates well
         if (hp > 0 && local_debug) {
@@ -140,6 +179,31 @@ public class PlayerController : MonoBehaviour
         
         
 
+    }
+
+
+    IEnumerator DamageRoutine(float damage, float period)
+    {
+        while (hp > 0)
+        {
+            // give damage
+            getDamaged(damage);
+
+            // wait
+            yield return new WaitForSeconds(period);
+        }
+    }
+
+    void heal()
+    {
+        hp += heal_per_sec;
+        if (hp >= max_hp) {
+            hp = max_hp;
+            //Debug.Log("Full HP: "+ hp);
+            return;
+        } else {
+            Debug.Log("Healed: " + hp);
+        }
     }
    
 }

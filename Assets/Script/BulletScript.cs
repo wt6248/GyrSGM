@@ -26,13 +26,14 @@ public class BulletScript : MonoBehaviour
     }
 
     //적과 충돌했을 때 적의 체력을 깎는 함수를 호출하고 사라짐.
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
+        //Debug.Log("hitted!");
         if(other.gameObject.CompareTag("Enemy"))
         {
-            //other.gameObject.getcomponent<ScriptName>() 의 체력깍는 함수 호출
-            //Destroy(this);
-
+            other.gameObject.GetComponent<enemy_unit_base>().DecreaseHp();//의 체력깍는 함수 호출
         }
+        // destroy whatever hit something
+        Destroy(this.gameObject);
     }
     
     //처음 시작할 때 주어진 속도에 따라 움직이는 코드 작성
@@ -41,6 +42,11 @@ public class BulletScript : MonoBehaviour
         speed = givenSpeed;
         directionX = givenDirection.x;
         directionY = givenDirection.y;
+    }
+
+    public void set_direction(float givenDirection)
+    {
+
     }
 
 
