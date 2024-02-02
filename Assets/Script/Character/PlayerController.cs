@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     public AudioSource dead_sound_source;
     public AudioClip dead_sound;
 
+    // player size
+    public const float playerRadious = 0.5f; // if chose circle collider
+    public readonly Vector2 playerSize = new(0.5f, 0.5f); // if chose box collider
+
     void Start()
     {
         //cursor = GetComponentInChildren<Cursor>();
@@ -43,7 +47,16 @@ public class PlayerController : MonoBehaviour
         dead_sound_source = gameObject.AddComponent<AudioSource>();
         dead_sound = Resources.Load<AudioClip>("Audio/dsplpain");
 
-
+        /*
+            if player has circle collider
+        */
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        collider.radius = playerRadious;
+        /*
+            if player has box collider
+        */
+        // BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        // collider.size = playerSize;
 
         // basic self healing
         InvokeRepeating("heal", 0f, heal_period);
@@ -138,7 +151,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-
+        damage = 0;
         hp -= damage;
         if(hurt_sound != null && hp > 0f) {
             hurt_sound_source.PlayOneShot(hurt_sound);
