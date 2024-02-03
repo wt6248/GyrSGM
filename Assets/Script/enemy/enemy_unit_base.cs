@@ -59,7 +59,8 @@ public class enemy_unit_base : MonoBehaviour
         Vector3 player_pos = get_player_pos(); 
         
         if ((transform.position - player_pos).magnitude > 1) {
-            transform.Translate((player_pos - transform.position).normalized * 0.005f);
+            //transform.Translate((player_pos - transform.position).normalized * 0.005f);
+            transform.Translate((player_pos - transform.position).normalized * Time.deltaTime);
         } 
     }
     public void DecreaseHp() {

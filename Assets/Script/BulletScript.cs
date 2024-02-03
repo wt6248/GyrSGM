@@ -1,27 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    float speed, directionX, directionY;
+    public float speed = 0f, directionX, directionY;
+    public Vector2 direction;
     // Start is called before the first frame update
     void Start()
     {
-        speed = 10f;
-        directionX = 0.3f;
-        directionY = 0.7f;
-        Destroy(gameObject, 10);
+        //샷건에서 총알 생성을 초기화 하고 난 뒤에 start가 적용되서, speed, direction을 정할 수 없는 문제가 있었음.
+        // if(speed == 0f)
+        // speed = 0.1f;
+        //directionX = 0.1f;
+        //directionY = 0.1f;
+        Destroy(gameObject, 3);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        float speedX = speed * directionX * Time.deltaTime;
-        float speedY = speed * directionY * Time.deltaTime;
-        
-        transform.Translate(speedX,speedY,0f);
+        Vector2 movement = direction * speed * Time.deltaTime;
+        transform.Translate(movement);
         
     }
 
@@ -37,16 +40,18 @@ public class BulletScript : MonoBehaviour
     }
     
     //처음 시작할 때 주어진 속도에 따라 움직이는 코드 작성
-    public void set_velocity(float givenSpeed, Vector2 givenDirection)
+    public void set_velocity(float givenSpeed, Vector2 givenIdentityDirection)
     {
         speed = givenSpeed;
-        directionX = givenDirection.x;
-        directionY = givenDirection.y;
+        direction = givenIdentityDirection;
     }
 
-    public void set_direction(float givenDirection)
+    public void set_velocity(float givenSpeed, float givenEulerAngle)
     {
-
+        speed = givenSpeed;
+        directionX = Mathf.Cos(givenEulerAngle* Mathf.Deg2Rad);
+        directionY = Mathf.Sin(givenEulerAngle* Mathf.Deg2Rad);
+        direction = new Vector2(directionX, directionY);
     }
 
 

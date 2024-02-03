@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,6 +25,7 @@ public class ShotgunScript : MonoBehaviour
     */    
     // 총구 위치
     public Vector3 firePoint = new(8f, 0.88f, 0f);
+    public Vector2 firePoint_new = new(1.6f,0f);
     // 적 게임오브젝트
     public GameObject enemyObject;
     // 산탄총 발사 각도
@@ -137,12 +140,11 @@ public class ShotgunScript : MonoBehaviour
     {
         for (int i = 0; i < pelletsCount; i++)
         {
-            float randomAngle = Random.Range(-spreadAngle, spreadAngle);
-            Quaternion error = Quaternion.AngleAxis(randomAngle, Vector3.forward);
-            Vector2 shootDirection = error * transform.rotation * Vector3.right;
-
-            GameObject pellet = Instantiate(Bullet, transform.position + firePoint, Quaternion.identity);
-            Debug.Log(pellet.transform.position);
+            float randomErrorAngle = UnityEngine.Random.Range(-spreadAngle, spreadAngle);
+            //Quaternion error = Quaternion.AngleAxis(randomAngle, Vector3.forward);
+            //Vector2 shootDirection = error * transform.rotation * Vector3.right;
+            Vector3 firePoint_Rotated = Quaternion.AngleAxis(shotgunAngle, Vector3.forward) * firePoint_new;
+            GameObject pellet = Instantiate(Bullet, transform.position + firePoint_Rotated, Quaternion.identity);
             // Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
 
             // if (rb != null)
@@ -150,7 +152,7 @@ public class ShotgunScript : MonoBehaviour
             //     rb.velocity = shootDirection * pelletSpeedMultiplier;
             // }
             // TODO : fix this!!!!!
-            pellet.GetComponent<BulletScript>().set_velocity(0.4f, shootDirection.normalized);
+            pellet.GetComponent<BulletScript>().set_velocity(1.0f, shotgunAngle + randomErrorAngle);
         }
     }
 
