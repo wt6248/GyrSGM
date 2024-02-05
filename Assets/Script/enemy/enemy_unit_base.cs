@@ -5,48 +5,53 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class enemy_unit_base : MonoBehaviour
+public class EnemyUnitBase : MonoBehaviour
 {
-    private bool is_move = true;
-    protected int hp = 3;
+    /*
+        Enemy is not EneityStat -> No ingeritanec
+        If want, refactor EntityType to Entity
+    */
+    EntityStat _stat;
 
     // audio instances
-    public AudioSource hurt_sound_source;
-    public AudioClip hurt_sound;
-    public AudioSource dead_sound_source;
-    public AudioClip dead_sound;
+    public AudioSource _hurtSoundSource;
+    public AudioClip _hurtSound;
+    public AudioSource _deadSoundSource;
+    public AudioClip _deadSound;
 
-    // player size
-    public const float enemyRadious = 0.5f; // if chose circle collider
-    public readonly Vector2 enemySize = new(0.5f, 0.5f); // if chose box collider
+    // enemy size
+    public float _enemyRadious = 0.5f; // if chose circle collider
+    public Vector3 _enemySize = new(0.5f, 0.5f, 0f); // if chose box collider
 
-    void Start() {
-
-        /*
-            This is disabled since it fixes every enemy's initial coordinate
-            Look EnemyManage.cs
-        */
-        // Vector3 init_pos = new Vector3(5f, 5f, 0f);
-        // transform.position = init_pos; 
-    
+    void Start()
+    {
+        // init stat
+        _stat = gameObject.AddComponent<EntityStat>();
+        _stat.SetType(EntityStat.EntityType.Enemy);
+        _stat.SetHP(1);
+        // _stat.SetSize();
+        // _stat.SetPosition();
+        // _stat.SetSpeed();
+        // _stat.SetAttackDamage();
+        // _stat.SetInventorySize();
 
 
         // init audio
-        hurt_sound_source = gameObject.AddComponent<AudioSource>();
-        hurt_sound = Resources.Load<AudioClip>("Audio/dspunch");
-        dead_sound_source = gameObject.AddComponent<AudioSource>();
-        dead_sound = Resources.Load<AudioClip>("Audio/dsbgdth1");
+        _hurtSoundSource = gameObject.AddComponent<AudioSource>();
+        _hurtSound = Resources.Load<AudioClip>("Audio/dspunch");
+        _deadSoundSource = gameObject.AddComponent<AudioSource>();
+        _deadSound = Resources.Load<AudioClip>("Audio/dsbgdth1");
 
         /*
             if enemy has circle collider
         */
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
-        collider.radius = enemyRadious;
+        collider.radius = _enemyRadious;
         /*
             if enemy has box collider
         */
         // BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        // collider.size = enemySize;
+        // collider.size = _enemySize;
     } 
     void Update()
     {
@@ -56,33 +61,39 @@ public class enemy_unit_base : MonoBehaviour
 
     private void Move()
     {
-        Vector3 player_pos = get_player_pos(); 
+        Vector3 playerPosition = GetPlayerPosition(); 
         
-        if ((transform.position - player_pos).magnitude > 1) {
-            //transform.Translate((player_pos - transform.position).normalized * 0.005f);
-            transform.Translate((player_pos - transform.position).normalized * Time.deltaTime);
+        if ((transform.position - playerPosition).magnitude > 1) {
+            //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
+            transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime);
+            //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
         } 
     }
-    public void DecreaseHp() {
-
-        hp--;
-        if(hurt_sound != null && hp > 0f) {
-            hurt_sound_source.PlayOneShot(hurt_sound);
-        }
-        //Debug.Log(hp);
-        if (hp<=0) {
-            if(dead_sound != null) {
-                dead_sound_source.PlayOneShot(dead_sound);
+    public void DecreaseHP()
+    {
+        _stat.DecreaseHP(1);
+        if (_stat.IsDead())
+        { // dead
+            if(_deadSound != null)
+            {
+                _deadSoundSource.PlayOneShot(_deadSound);
             }
             Destroy(this.gameObject);
         }
+        else
+        { // alive
+            Debug.Log(_stat._hp);
+            if (_hurtSound != null)
+            {
+                _hurtSoundSource.PlayOneShot(_hurtSound);
+            }
+        }
         return;
     }
-    private Vector3 get_player_pos() {
-        Transform player_info = GameObject.Find("Main Character").GetComponent<Transform>();
-        Vector3 player_pos = player_info.position;
-        //Debug.Log("player_pos: (" + player_pos.x + ", " + player_pos.y + ", " + player_pos.z + ")\n");
-        return player_pos;
+    private Vector3 GetPlayerPosition()
+    {
+        Transform playerInfo = GameObject.Find("Main Character").GetComponent<Transform>();
+        return playerInfo.position;
     }
 }
 

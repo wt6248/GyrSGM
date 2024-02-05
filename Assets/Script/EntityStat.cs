@@ -40,17 +40,21 @@ public class EntityStat : MonoBehaviour
     {
         if (0 < delta)
         {
-            _hp += delta;
+            _hp -= delta;
         }
     }
     public void IncreaseHP(float delta)
     {
         if (0 < delta)
         {
-            _hp -= delta;
+            _hp += delta;
         }
     }
 
+    public void SetHP(float hp)
+    {
+        _hp = hp;
+    }
     public void SetType(EntityType type)
     {
         _type = type;
