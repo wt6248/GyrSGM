@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,8 +14,6 @@ public class ShotgunScript : MonoBehaviour
 
     public GameObject shotgun_shell;
     public GameObject Bullet;
-    // ShootShotGun()함수에서 산탄총의 위치를 가져오는 데 사용
-    //public Transform shotgunPosition;
     Vector3 shell_drop_position = new Vector3(4.81f, 0.88f, 0f);
     
     private AudioSource audioSource;
@@ -24,17 +24,18 @@ public class ShotgunScript : MonoBehaviour
         산탄총 발사 관련 변수
     */    
     // 총구 위치
-    public Vector3 firePoint = new(6.81f, 9f, 0f);
+    public Vector3 firePoint = new(8f, 0.88f, 0f);
+    public Vector2 firePoint_new = new(1.6f,0f);
     // 적 게임오브젝트
     public GameObject enemyObject;
     // 산탄총 발사 각도
     public float shotgunAngle = 0;
     // Spreading angle
-    public float spreadAngle = 7.5f;
+    public float spreadAngle = 15f;
     // 총알 개수
     public int pelletsCount = 8; 
     // 산탄 투사체 속도 계수
-    public float pelletSpeedMultiplier = 0.01f; 
+    public float pelletSpeedMultiplier = 50f; 
     // Radious of auto-aim
     const float autoAimRadious = 10f;
 
@@ -55,11 +56,8 @@ public class ShotgunScript : MonoBehaviour
         FireButton =  GameObject.Find("Fire Button").GetComponent<Button>();
         FireButton.onClick.AddListener(CustomButton_onClick); //subscribe to the onClick event
 
-        // 산탄총의 위치 가져오기
-        //shotgunPosition = ShotgunController.Instance.shotgunPosition;
-        
         // 자동사격: 적을 찾아서 총을 발사하는 함수를 1초마다 호출
-        InvokeRepeating("AutoShoot", 0f, 10f); 
+        InvokeRepeating("AutoShoot", 0f, 1f); 
     }
 
     // Update is called once per frame
@@ -142,30 +140,19 @@ public class ShotgunScript : MonoBehaviour
     {
         for (int i = 0; i < pelletsCount; i++)
         {
-            GameObject nearestEnemy = FindNearestEnemy();
-            Vector3 directionToEnemy = transform.position;
+            float randomErrorAngle = UnityEngine.Random.Range(-spreadAngle, spreadAngle);
+            //Quaternion error = Quaternion.AngleAxis(randomAngle, Vector3.forward);
+            //Vector2 shootDirection = error * transform.rotation * Vector3.right;
+            Vector3 firePoint_Rotated = Quaternion.AngleAxis(shotgunAngle, Vector3.forward) * firePoint_new;
+            GameObject pellet = Instantiate(Bullet, transform.position + firePoint_Rotated, Quaternion.identity);
+            // Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
 
-            if (nearestEnemy != null)
-            {
-                directionToEnemy = nearestEnemy.transform.position - transform.position;
-            }
-
-            float randomAngle = Random.Range(-spreadAngle, spreadAngle);
-            Quaternion error = Quaternion.AngleAxis(randomAngle, Vector3.forward);
-            Vector2 shootDirection = directionToEnemy + error * transform.rotation * Vector3.right;
-
-            GameObject pellet = Instantiate(Bullet, transform.position + firePoint, transform.rotation);
-
-            Debug.Log("총알 포지션" + pellet.transform.position);
-            Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
-
-            if (rb != null)
-            {
-                rb.velocity = (shootDirection.normalized) * pelletSpeedMultiplier;
-                Debug.Log("속도"+rb.velocity);
-            }
+            // if (rb != null)
+            // {
+            //     rb.velocity = shootDirection * pelletSpeedMultiplier;
+            // }
             // TODO : fix this!!!!!
-            //pellet.GetComponent<BulletScript>().set_velocity(0.4f, shootDirection.normalized);
+            pellet.GetComponent<BulletScript>().set_velocity(1.0f, shotgunAngle + randomErrorAngle);
         }
     }
 

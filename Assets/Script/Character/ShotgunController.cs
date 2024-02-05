@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ShotgunController : MonoBehaviour
 {
-    private AudioSource audioSource;
-    public AudioClip gunshotSound;
+   private AudioSource audioSource;
+   public AudioClip gunshotSound;
 
     // Start is called before the first frame update
     private void Start()
     {
         CreateShotGun();
-        
+
         audioSource = gameObject.AddComponent<AudioSource>();
         gunshotSound = Resources.Load<AudioClip>("Audio/gunshotSound");
     }
