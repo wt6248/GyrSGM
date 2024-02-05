@@ -62,6 +62,11 @@ public class EnemyUnitBase : Entity
     }
     public void DecreaseHP(float delta)
     {
+        /*
+            Be careful that _DecreaseHP includes
+            Destroy(this.gameObject);
+        */
+        _DecreaseHP(delta);
         if (IsDead())
         { // dead
             if(_deadSound != null)
@@ -76,7 +81,6 @@ public class EnemyUnitBase : Entity
                 _hurtSoundSource.PlayOneShot(_hurtSound);
             }
         }
-        DecreaseHP(delta);
         return;
     }
     private Vector3 GetPlayerPosition()
