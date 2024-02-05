@@ -52,7 +52,11 @@ public class EnemyUnitBase : Entity
 
     private void Move()
     {
-        Vector3 playerPosition = GetPlayerPosition(); 
+        /*
+            GetPlayerPosition returns position itself if NO player exists
+            This enables enemy auto-stop if player dead
+        */
+        Vector3 playerPosition = GetPlayerPosition();
         
         if ((transform.position - playerPosition).magnitude > 1) {
             //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
@@ -85,8 +89,16 @@ public class EnemyUnitBase : Entity
     }
     private Vector3 GetPlayerPosition()
     {
-        Transform playerInfo = GameObject.Find("Main Character").GetComponent<Transform>();
-        return playerInfo.position;
+        GameObject player = GameObject.Find("Main Character");
+        // GetComponent<Transform>();
+        if (player == null)
+        {
+            return transform.position;
+        }
+        else
+        {
+            return player.transform.position;
+        }
     }
 }
 
