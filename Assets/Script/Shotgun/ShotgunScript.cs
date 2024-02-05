@@ -84,7 +84,7 @@ public class ShotgunScript : MonoBehaviour
         shotgun_shell_temp.transform.localPosition = shell_drop_position;
         shotgun_shell_temp.transform.SetParent(null);
     }
-
+    
     public void makeFireSound(){
         if(gunshotSound != null)
         {
