@@ -7,7 +7,7 @@ public class Cursor : MonoBehaviour
     private static Cursor instance;
     private GameObject cursorObject;
     private GyroGameObj gyroGameObj;
-
+    public StopButton stopButton;
 
     private void Start()
     {
@@ -20,7 +20,11 @@ public class Cursor : MonoBehaviour
     //         Debug.Log("커서 이미 생성됨");
     //    }
 
-       gyroGameObj = FindObjectOfType<GyroGameObj>();
+        gyroGameObj = FindObjectOfType<GyroGameObj>();
+
+
+        // hold button to stop
+        stopButton = FindObjectOfType<StopButton>();
     }
     
     // 커서가 커서를 생성하는 스택 오버플로우가 발생함. 수정 바람.
@@ -54,7 +58,14 @@ public class Cursor : MonoBehaviour
         Vector3 cursorMovement = new Vector3(gyroValue.x, gyroValue.y, 0f) * Time.deltaTime;
 
         // 커서의 위치를 업데이트
-        transform.Translate(cursorMovement);
+        if (stopButton.IsPressed() == false)
+        {
+            transform.Translate(cursorMovement);
+        }
+        else
+        {
+            ResetCursorPosition();
+        }
 
         // 화면을 벗어나지 않도록 커서의 위치를 제한
         // Vector3 clampedPosition = transform.position;
