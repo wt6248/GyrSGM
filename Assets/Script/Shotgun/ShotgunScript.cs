@@ -115,13 +115,13 @@ public class ShotgunScript : MonoBehaviour
         // // Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
         // killed every enemy || no enemy detected
-        if (hitEnemies == null)
+        if (hitEnemies == null | hitEnemies.Length == 0)
         {
             return null;
         }
 
         GameObject nearestEnemy = null;
-        float nearestDistance = autoAimRadious;
+        float nearestDistance = float.MaxValue;
         foreach (Collider2D enemy in hitEnemies)
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
@@ -158,10 +158,18 @@ public class ShotgunScript : MonoBehaviour
 
     // 자동 사격 함수
     void AutoShoot()
-    {        
-        ShootShotgun();
-        generate_shotgun_shell();
-        Debug.Log("자동 사격");
+    {  
+        GameObject nearestEnemy = FindNearestEnemy();
+        if (nearestEnemy != null)
+        {
+            ShootShotgun();
+            generate_shotgun_shell();
+            Debug.Log("근처 적"+ nearestEnemy);
+            Debug.Log("자동 사격");
+        }
+        else{
+
+        }
     }   
 
     float Vec2angle(Vector2 v)
