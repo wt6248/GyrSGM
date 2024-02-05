@@ -9,55 +9,51 @@ using UnityEngine.UI;
 
 public class ShotgunScript : MonoBehaviour
 {
-    public FixedJoystick fixedJoystick;
-    public Button FireButton;
+    public FixedJoystick _fixedJoystick;
+    public Button _fireButton;
 
-    public GameObject shotgun_shell;
-    public GameObject Bullet;
-    Vector3 shell_drop_position = new Vector3(4.81f, 0.88f, 0f);
-    
-    private AudioSource audioSource;
-    public AudioClip gunshotSound;
+    public GameObject _shotgunShell;
+    public GameObject _bullet;
+    Vector3 _shellDropPosition = new(4.81f, 0.88f, 0f);
+
+    private AudioSource _audioSource;
+    public AudioClip _gunshotSound;
 
 
     /*
         산탄총 발사 관련 변수
-    */    
+    */
     // 총구 위치
-    public Vector3 firePoint = new(8f, 0.88f, 0f);
-    public Vector2 firePoint_new = new(1.6f,0f);
-    // 적 게임오브젝트
-    public GameObject enemyObject;
+    public Vector3 _firePoint = new(1.6f, 0f, 0f);
     // 산탄총 발사 각도
-    public float shotgunAngle = 0;
+    public float _shotgunAngle = 0;
     // Spreading angle
-    public float spreadAngle = 15f;
+    public float _spreadAngle = 15f;
     // 총알 개수
-    public int pelletsCount = 8; 
+    public int _pelletCount = 8;
     // 산탄 투사체 속도 계수
-    public float pelletSpeedMultiplier = 50f; 
+    public float _pelletSpeed = 1f;
     // Radious of auto-aim
-    const float autoAimRadious = 10f;
-
+    float _autoAimRadious = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
-        shotgun_shell = Resources.Load("Prefabs/shotgun_shell") as GameObject;
-        Bullet = Resources.Load("Prefabs/bullet") as GameObject;
-        //fixedJoystick 을 실시간으로 찾아오는 스크립트 작성
-        fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
+        _shotgunShell = Resources.Load("Prefabs/_shotgunShell") as GameObject;
+        _bullet = Resources.Load("Prefabs/bullet") as GameObject;
+        //_fixedJoystick 을 실시간으로 찾아오는 스크립트 작성
+        _fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
 
         //
-        audioSource = gameObject.AddComponent<AudioSource>();
-        gunshotSound = Resources.Load<AudioClip>("Audio/gunshotSound");
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _gunshotSound = Resources.Load<AudioClip>("Audio/_gunshotSound");
 
         //fire button manage
-        FireButton =  GameObject.Find("Fire Button").GetComponent<Button>();
-        FireButton.onClick.AddListener(CustomButton_onClick); //subscribe to the onClick event
+        _fireButton = GameObject.Find("Fire Button").GetComponent<Button>();
+        _fireButton.onClick.AddListener(CustomButton_onClick); //subscribe to the onClick event
 
         // 자동사격: 적을 찾아서 총을 발사하는 함수를 1초마다 호출
-        InvokeRepeating("AutoShoot", 0f, 1f); 
+        InvokeRepeating("AutoShoot", 0f, 1f);
     }
 
     // Update is called once per frame
@@ -72,28 +68,29 @@ public class ShotgunScript : MonoBehaviour
         {
             FindEnemiesAndShoot();
         }
-        */        
+        */
     }
 
-    public void generate_shotgun_shell()
+    public void GenerateShotgunShell()
     {
-        //GameObject shotgun_shell_temp = Instantiate(shotgun_shell, shell_drop_position,Quaternion.identity, transform);
-        GameObject shotgun_shell_temp = Instantiate(shotgun_shell, transform, true );
-        shotgun_shell_temp.transform.localPosition = shell_drop_position;
-        shotgun_shell_temp.transform.SetParent(null);
+        //GameObject shotgunShell = Instantiate(_shotgunShell, _shellDropPosition,Quaternion.identity, transform);
+        GameObject shotgunShell = Instantiate(_shotgunShell, transform, true);
+        shotgunShell.transform.localPosition = _shellDropPosition;
+        shotgunShell.transform.SetParent(null);
     }
-    
-    public void makeFireSound(){
-        if(gunshotSound != null)
+
+    public void MakeFireSound()
+    {
+        if (_gunshotSound != null)
         {
-            audioSource.PlayOneShot(gunshotSound);
+            _audioSource.PlayOneShot(_gunshotSound);
         }
     }
 
 
     void Awake()
     {
-        
+
     }
 
     //Handle the onClick event
@@ -101,8 +98,8 @@ public class ShotgunScript : MonoBehaviour
     {
         //Debug.Log("testtttt");
         ShootShotgun();
-        generate_shotgun_shell();
-        makeFireSound();
+        GenerateShotgunShell();
+        MakeFireSound();
     }
 
 
@@ -111,24 +108,24 @@ public class ShotgunScript : MonoBehaviour
     */
     // 가까운 적을 찾는 함수
     GameObject FindNearestEnemy()
-    { 
-        // // Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
-        // killed every enemy || no enemy detected
-        if (hitEnemies == null | hitEnemies.Length == 0)
-        {
+    {
+        // // Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _autoAimRadious, LayerMask.GetMask("Enemy"));
+
+        if (enemies == null)
+        { // killed every enemy || no enemy detected
             return null;
         }
 
         GameObject nearestEnemy = null;
-        float nearestDistance = float.MaxValue;
-        foreach (Collider2D enemy in hitEnemies)
+        float minDistance = float.MaxValue;
+        foreach (Collider2D enemy in enemies)
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < nearestDistance)
+            if (distanceToEnemy < minDistance)
             {
                 nearestEnemy = enemy.gameObject;
-                nearestDistance = distanceToEnemy;
+                minDistance = distanceToEnemy;
             }
         }
 
@@ -138,41 +135,29 @@ public class ShotgunScript : MonoBehaviour
     // 산탄총 발사 함수
     void ShootShotgun()
     {
-        for (int i = 0; i < pelletsCount; i++)
+        for (int i = 0; i < _pelletCount; i++)
         {
-            float randomErrorAngle = UnityEngine.Random.Range(-spreadAngle, spreadAngle);
-            //Quaternion error = Quaternion.AngleAxis(randomAngle, Vector3.forward);
-            //Vector2 shootDirection = error * transform.rotation * Vector3.right;
-            Vector3 firePoint_Rotated = Quaternion.AngleAxis(shotgunAngle, Vector3.forward) * firePoint_new;
-            GameObject pellet = Instantiate(Bullet, transform.position + firePoint_Rotated, Quaternion.identity);
-            // Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
-
-            // if (rb != null)
-            // {
-            //     rb.velocity = shootDirection * pelletSpeedMultiplier;
-            // }
-            // TODO : fix this!!!!!
-            pellet.GetComponent<BulletScript>().set_velocity(1.0f, shotgunAngle + randomErrorAngle);
+            float randomErrorAngle = UnityEngine.Random.Range(-_spreadAngle / 2, _spreadAngle / 2);
+            Vector3 firePoint = Quaternion.AngleAxis(_shotgunAngle, Vector3.forward) * _firePoint;
+            GameObject pellet = Instantiate(_bullet, transform.position + firePoint, Quaternion.identity);
+            pellet.GetComponent<BulletScript>().SetVelocity(_pelletSpeed, _shotgunAngle + randomErrorAngle);
         }
     }
 
     // 자동 사격 함수
     void AutoShoot()
-    {  
+    {
         GameObject nearestEnemy = FindNearestEnemy();
         if (nearestEnemy != null)
         {
             ShootShotgun();
-            generate_shotgun_shell();
-            Debug.Log("근처 적"+ nearestEnemy);
+            GenerateShotgunShell();
+            Debug.Log("근처 적" + nearestEnemy);
             Debug.Log("자동 사격");
         }
-        else{
+    }
 
-        }
-    }   
-
-    float Vec2angle(Vector2 v)
+    float Vec2Angle(Vector3 v)
     {
         return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
     }
@@ -181,27 +166,27 @@ public class ShotgunScript : MonoBehaviour
         if v is zero vector -> rotate shotgun along v
         else                -> do nothing
     */
-    void RotateShotgun(Vector2 v)
+    void RotateShotgun(Vector3 v)
     {
-        if (v != Vector2.zero)
+        if (v != Vector3.zero)
         {
-            shotgunAngle = Vec2angle(v);
-            if (-90 < shotgunAngle && shotgunAngle < 90)
-            {
+            _shotgunAngle = Vec2Angle(v);
+            if (-90 < _shotgunAngle && _shotgunAngle < 90)
+            { // Do not flip shotgun image
                 transform.localScale = new(0.2f, 0.2f, 1);
             }
             else
-            {
+            { // Flip shotgun image
                 transform.localScale = new(0.2f, -0.2f, 1);
             }
-            transform.rotation = Quaternion.Euler(0, 0, shotgunAngle);
+            transform.rotation = Quaternion.Euler(0, 0, _shotgunAngle);
         }
     }
 
     void AutoAim()
     {
         // Not holding joystick
-        if (fixedJoystick.Direction == Vector2.zero)
+        if (_fixedJoystick.Direction == Vector2.zero)
         {
             GameObject nearestEnemy = FindNearestEnemy();
             if (nearestEnemy != null)
@@ -211,7 +196,7 @@ public class ShotgunScript : MonoBehaviour
         }
         else
         {
-            RotateShotgun(fixedJoystick.Direction);
+            RotateShotgun(_fixedJoystick.Direction);
         }
     }
 }
