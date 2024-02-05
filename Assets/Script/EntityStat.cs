@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EntityStat : MonoBehaviour
@@ -22,6 +23,7 @@ public class EntityStat : MonoBehaviour
     public Vector3 _position;
     // ammo inventory
     public int _inventorySize;
+    public EntityType _type;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +52,10 @@ public class EntityStat : MonoBehaviour
         }
     }
 
+    public void SetType(EntityType type)
+    {
+        _type = type;
+    }
     public void SetSize(Vector3 size)
     {
         _size = size;
