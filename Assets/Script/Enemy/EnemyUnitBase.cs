@@ -5,14 +5,8 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class EnemyUnitBase : MonoBehaviour
+public class EnemyUnitBase : Entity
 {
-    /*
-        Enemy is not EneityStat -> No ingeritanec
-        If want, refactor EntityType to Entity
-    */
-    EntityStat _stat;
-
     // audio instances
     public AudioSource _hurtSoundSource;
     public AudioClip _hurtSound;
@@ -26,8 +20,8 @@ public class EnemyUnitBase : MonoBehaviour
     void Start()
     {
         // init stat
-        _stat = gameObject.AddComponent<EntityStat>();
-        _stat.SetType(EntityStat.EntityType.Enemy);
+        _stat = gameObject.AddComponent<Entity>();
+        _stat.SetType(Entity.EntityType.Enemy);
         _stat.SetHP(1);
         // _stat.SetSize();
         // _stat.SetPosition();
