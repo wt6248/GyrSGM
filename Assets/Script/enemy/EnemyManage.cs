@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManage : MonoBehaviour
 {
     const float generateCoolTime = 5f;
-    const float spawnRadious = 1f;
+    const float spawnRadious = 4f;
     float generateCooldown = 0;
     GameObject enemy;
 

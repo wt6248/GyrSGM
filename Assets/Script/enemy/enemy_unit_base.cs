@@ -15,6 +15,11 @@ public class enemy_unit_base : MonoBehaviour
     public AudioClip hurt_sound;
     public AudioSource dead_sound_source;
     public AudioClip dead_sound;
+
+    // player size
+    public const float enemyRadious = 0.5f; // if chose circle collider
+    public readonly Vector2 enemySize = new(0.5f, 0.5f); // if chose box collider
+
     void Start() {
 
         /*
@@ -31,6 +36,17 @@ public class enemy_unit_base : MonoBehaviour
         hurt_sound = Resources.Load<AudioClip>("Audio/dspunch");
         dead_sound_source = gameObject.AddComponent<AudioSource>();
         dead_sound = Resources.Load<AudioClip>("Audio/dsbgdth1");
+
+        /*
+            if enemy has circle collider
+        */
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        collider.radius = enemyRadious;
+        /*
+            if enemy has box collider
+        */
+        // BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        // collider.size = enemySize;
     } 
     void Update()
     {
@@ -43,7 +59,8 @@ public class enemy_unit_base : MonoBehaviour
         Vector3 player_pos = get_player_pos(); 
         
         if ((transform.position - player_pos).magnitude > 1) {
-            transform.Translate((player_pos - transform.position).normalized * 0.005f);
+            //transform.Translate((player_pos - transform.position).normalized * 0.005f);
+            transform.Translate((player_pos - transform.position).normalized * Time.deltaTime);
         } 
     }
     public void DecreaseHp() {
