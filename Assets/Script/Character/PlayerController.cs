@@ -229,5 +229,4 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Healed: " + hp);
         }
     }
-   
 }
