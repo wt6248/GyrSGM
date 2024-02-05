@@ -39,14 +39,14 @@ public class ShotgunScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _shotgunShell = Resources.Load("Prefabs/_shotgunShell") as GameObject;
+        _shotgunShell = Resources.Load("Prefabs/shotgunShell") as GameObject;
         _bullet = Resources.Load("Prefabs/bullet") as GameObject;
         //_fixedJoystick 을 실시간으로 찾아오는 스크립트 작성
         _fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
 
         //
         _audioSource = gameObject.AddComponent<AudioSource>();
-        _gunshotSound = Resources.Load<AudioClip>("Audio/_gunshotSound");
+        _gunshotSound = Resources.Load<AudioClip>("Audio/gunshotSound");
 
         //fire button manage
         _fireButton = GameObject.Find("Fire Button").GetComponent<Button>();
