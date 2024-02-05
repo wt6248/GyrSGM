@@ -20,7 +20,6 @@ public class EntityStat : MonoBehaviour
     public float _speed;
     // what does size mean
     public Vector3 _size;
-    public Vector3 _position;
     // ammo inventory
     public int _inventorySize;
     public EntityType _type;
@@ -73,12 +72,7 @@ public class EntityStat : MonoBehaviour
     public void SetSize(Vector3 size)
     {
         _size = size;
-    }
-    public void SetPosition(Vector3 position)
-    {
-        _position = position;
-    }
-    public void SetSpeed(float speed)
+    }    public void SetSpeed(float speed)
     {
         _speed = speed;
     }
