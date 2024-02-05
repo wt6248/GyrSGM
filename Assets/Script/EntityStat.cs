@@ -55,6 +55,20 @@ public class EntityStat : MonoBehaviour
     public void SetType(EntityType type)
     {
         _type = type;
+        switch (type)
+        {
+            case EntityType.Enemy:
+                _name = "Enemy";
+                break;
+            case EntityType.Player:
+                _name = "Player";
+                break;
+            case EntityType.Breakable:
+                _name = "Breakable";
+                break;
+            default:
+                break;
+        }
     }
     public void SetSize(Vector3 size)
     {
