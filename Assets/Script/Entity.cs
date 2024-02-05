@@ -12,8 +12,8 @@ public class Entity : MonoBehaviour
         Player,
         Breakable
     }
+    public EntityType _type;
 
-    // This must be private
     public float _maxHP;
     public float _hp;
     public string _name;
@@ -24,7 +24,6 @@ public class Entity : MonoBehaviour
     public float _radious;
     // ammo inventory
     public int _inventorySize;
-    public EntityType _type;
 
     // Start is called before the first frame update
     void Start()
@@ -38,30 +37,31 @@ public class Entity : MonoBehaviour
         
     }
 
-    virtual public void DecreaseHP(float delta)
+    protected void _DecreaseHP(float delta)
     {
         if (0 < delta)
         {
             _hp -= delta;
         }
+        if (IsDead())
+        {
+            Destroy(this.gameObject);
+        }
     }
-    virtual public void IncreaseHP(float delta)
+    protected void _IncreaseHP(float delta)
     {
         if (0 < delta)
         {
             _hp += delta;
         }
+        if (_maxHP < _hp)
+        {
+            _hp = _maxHP;
+        }
     }
 
     public bool IsDead()
     {
-        if (_hp <= 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return _hp <= 0;
     }
 }

@@ -33,7 +33,7 @@ public class BulletScript : MonoBehaviour
         //Debug.Log("hitted!");
         if(other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EnemyUnitBase>().DecreaseHP();//의 체력깍는 함수 호출
+            other.gameObject.GetComponent<EnemyUnitBase>().DecreaseHP(1);//의 체력깍는 함수 호출
         }
         // destroy whatever hit something
         Destroy(this.gameObject);
