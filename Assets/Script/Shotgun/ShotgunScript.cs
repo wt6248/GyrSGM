@@ -39,7 +39,7 @@ public class ShotgunScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _shotgunShell = Resources.Load("Prefabs/shotgunShell") as GameObject;
+        _shotgunShell = Resources.Load("Prefabs/shotgun_Shell") as GameObject;
         _bullet = Resources.Load("Prefabs/bullet") as GameObject;
         //_fixedJoystick 을 실시간으로 찾아오는 스크립트 작성
         _fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
@@ -142,6 +142,9 @@ public class ShotgunScript : MonoBehaviour
             GameObject pellet = Instantiate(_bullet, transform.position + firePoint, Quaternion.identity);
             pellet.GetComponent<BulletScript>().SetVelocity(_pelletSpeed, _shotgunAngle + randomErrorAngle);
         }
+
+        CameraShake cameraShake = GameObject.FindObjectOfType<CameraShake>();
+        cameraShake.Shake(Quaternion.Euler(0, 0, _shotgunAngle) * Vector3.left);
     }
 
     // 자동 사격 함수

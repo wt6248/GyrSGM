@@ -4,46 +4,36 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    public float amount = 0.5f;
-    float time;
-    Vector3 dir;
-    Vector3 initialPos = new Vector3(0, 0, -10);
-    Camera cam;
-
+    public float _shakeAmount = 0.1f;
+    float _shakeTime = 0.5f;
+    float _coolDown = 0;
+    Vector3 _initialCameraPos = new(0, 0, -10);
+    Transform _cam;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
-        dir = new Vector3(0.3f, 0.4f, -10);
+        _cam = Camera.main.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (0 < time)
+        if (0 < _coolDown)
         {
-            time -= Time.deltaTime;
-            cam.transform.position = dir * amount;
+            _coolDown -= Time.deltaTime;
+            _cam.Translate((_initialCameraPos - _cam.position) * _coolDown / _shakeTime);
         }
         else
         {
-            time = 0;
-            cam.transform.position = initialPos;
+            _coolDown = 0;
+            _cam.position = _initialCameraPos;
         }
     }
 
-    public void Shake(float timeInSec = 0)
+    public void Shake(Vector3 dir)
     {
-        Debug.Log("shake!!!!!");
-        if (timeInSec == 0)
-        {
-            time = 0.05f;
-        }
-        else
-        {
-            time = timeInSec;
-        }
-        initialPos = cam.transform.localPosition;
+        _coolDown = _shakeTime;
+        _cam.position = _initialCameraPos + _shakeAmount * dir;
     }
 }
