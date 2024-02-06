@@ -42,8 +42,8 @@ public class BulletScript : Bullet
     public void SetVelocity(float speed, float eulerAngle)
     {
         _speed = speed;
-        directionX = Mathf.Cos(eulerAngle * Mathf.Deg2Rad);
-        directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
+        float directionX = Mathf.Cos(eulerAngle * Mathf.Deg2Rad);
+        float directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
         _dir = new(directionX, directionY, 0);
     }
 
