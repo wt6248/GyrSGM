@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     }
 
     // damage of bullet
-    public uint _damage = 0;
+    public uint _damage = 1;
     // speed of bullet
     public float _speed = 0;
     // bullet direction
