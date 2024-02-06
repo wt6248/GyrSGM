@@ -79,6 +79,15 @@ public class ShotgunScript : MonoBehaviour
         shotgunShell.transform.SetParent(null);
     }
 
+    public void GenerateShotgunShell(float shellEulerAngle)
+    {
+        GameObject shotgunShell = Instantiate(_shotgunShell, transform, true);
+        shotgunShell.transform.localPosition = _shellDropPosition;
+        shotgunShell.transform.SetParent(null);
+        shotgunShell.GetComponent<ShellScript>().Set_direction(shellEulerAngle);
+    }
+
+
     public void MakeFireSound()
     {
         if (_gunshotSound != null)
@@ -98,7 +107,7 @@ public class ShotgunScript : MonoBehaviour
     {
         //Debug.Log("testtttt");
         ShootShotgun();
-        GenerateShotgunShell();
+        GenerateShotgunShell(_shotgunAngle + 180.0f);
         MakeFireSound();
     }
 
@@ -154,7 +163,7 @@ public class ShotgunScript : MonoBehaviour
         if (nearestEnemy != null)
         {
             ShootShotgun();
-            GenerateShotgunShell();
+            GenerateShotgunShell(_shotgunAngle + 180.0f);
             Debug.Log("근처 적" + nearestEnemy);
             Debug.Log("자동 사격");
         }
