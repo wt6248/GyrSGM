@@ -29,6 +29,9 @@ public class PlayerController : Entity
     public const float playerRadious = 0.5f; // if chose circle collider
     public readonly Vector2 playerSize = new(0.5f, 0.5f); // if chose box collider
 
+    // player collision with the enemy
+    private bool isTouchingEnemy = false;
+
     void Start()
     {
         // init stat
@@ -84,6 +87,10 @@ public class PlayerController : Entity
         if (Input.GetKeyDown(KeyCode.Space))
         { //스페이스바를 누르면 발사
             FireGun();
+        }
+
+        if(isTouchingEnemy){
+            StartCoroutine(DamageRoutine(1f, 0.1f));
         }
 
     }
@@ -198,20 +205,35 @@ public class PlayerController : Entity
         bool local_debug = false;
         int n_attack = local_debug ? 2 : 1;
 
-        StartCoroutine(DamageRoutine(1f, 0.1f));
-
-
-        // test code for the function operates well
-        if (_hp > 0 && local_debug)
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.transform.position = new Vector3(10, 10, 0);
+            isTouchingEnemy = true;
+        }
+
+        else{
+            StartCoroutine(DamageRoutine(1f, 0.1f));
+        
+
+            // test code for the function operates well
+            if (_hp > 0 && local_debug)
+            {
+                other.gameObject.transform.position = new Vector3(10, 10, 0);
+            }      
+        }  
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            isTouchingEnemy = false;
         }
     }
 
 
     IEnumerator DamageRoutine(float damage, float period)
     {
-        while (_hp > 0)
+        while(_hp > 0)
         {
             // give damage
             GetDamaged(damage);
