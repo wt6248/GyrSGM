@@ -4,23 +4,19 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class BulletScript : Bullet
 {
-    public float _speed = 0f;
-    public float _attackDamage = 1;
-    public float directionX;
-    public float directionY;
-    public Vector3 _direction = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
+
         Destroy(gameObject, 3);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 movement = _speed * Time.deltaTime * _direction;
+        Vector3 movement = _speed * Time.deltaTime * _dir;
         transform.Translate(movement);
     }
 
@@ -30,7 +26,7 @@ public class BulletScript : MonoBehaviour
         //Debug.Log("hitted!");
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EnemyUnitBase>().DecreaseHP(_attackDamage);//의 체력깍는 함수 호출
+            other.gameObject.GetComponent<EnemyUnitBase>().DecreaseHP(_damage);//의 체력깍는 함수 호출
         }
         // destroy whatever hit something
         Destroy(this.gameObject);
@@ -40,7 +36,7 @@ public class BulletScript : MonoBehaviour
     public void SetVelocity(float speed, Vector3 direction)
     {
         _speed = speed;
-        _direction = direction;
+        _dir = direction;
     }
 
     public void SetVelocity(float speed, float eulerAngle)
@@ -48,7 +44,7 @@ public class BulletScript : MonoBehaviour
         _speed = speed;
         directionX = Mathf.Cos(eulerAngle * Mathf.Deg2Rad);
         directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
-        _direction = new(directionX, directionY, 0);
+        _dir = new(directionX, directionY, 0);
     }
 
 

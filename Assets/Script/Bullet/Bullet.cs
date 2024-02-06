@@ -13,14 +13,10 @@ public class Bullet : MonoBehaviour
         Gauge28
     }
 
-    // number of bullet in one magazine
-    public uint _remainingAmmo;
-    // capacity of one magazine
-    public uint _magazineCapacity;
     // damage of bullet
     public uint _damage;
     // speed of bullet
-    public uint _speed;
+    public float _speed;
     // bullet direction
     public Vector3 _dir;
 
@@ -34,10 +30,5 @@ public class Bullet : MonoBehaviour
     void Update()
     {
 
-    }
-
-    public bool IsMagazineEmpty()
-    {
-        return _remainingAmmo == 0;
     }
 }
