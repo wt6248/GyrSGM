@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShotgunScript : MonoBehaviour
+public class ShotgunScript : Weapon
 {
     public FixedJoystick _fixedJoystick;
     public Button _fireButton;
@@ -16,29 +16,28 @@ public class ShotgunScript : MonoBehaviour
     public GameObject _bullet;
     Vector3 _shellDropPosition = new(4.81f, 0.88f, 0f);
 
-    private AudioSource _audioSource;
-    public AudioClip _gunshotSound;
-
 
     /*
         산탄총 발사 관련 변수
     */
     // 총구 위치
     public Vector3 _firePoint = new(1.6f, 0f, 0f);
-    // 산탄총 발사 각도
-    public float _shotgunAngle = 0;
-    // Spreading angle
-    public float _spreadAngle = 15f;
+
     // 총알 개수
     public int _pelletCount = 8;
     // 산탄 투사체 속도 계수
     public float _pelletSpeed = 1f;
-    // Radious of auto-aim
-    float _autoAimRadious = 10f;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        /*
+            Audio can differ depending on the type of weapon
+        */
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _gunshotSound = Resources.Load<AudioClip>("Audio/gunshotSound");
+
         _shotgunShell = Resources.Load("Prefabs/shotgun_Shell") as GameObject;
         _bullet = Resources.Load("Prefabs/bullet") as GameObject;
         //_fixedJoystick 을 실시간으로 찾아오는 스크립트 작성
@@ -59,7 +58,6 @@ public class ShotgunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AutoAim();
         // transform.LookAt(angle);
 
         /*
@@ -112,34 +110,7 @@ public class ShotgunScript : MonoBehaviour
     }
 
 
-    /*
-        산탄총을 발사하는 데 필요한 함수들
-    */
-    // 가까운 적을 찾는 함수
-    GameObject FindNearestEnemy()
-    {
-        // // Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _autoAimRadious, LayerMask.GetMask("Enemy"));
 
-        if (enemies == null)
-        { // killed every enemy || no enemy detected
-            return null;
-        }
-
-        GameObject nearestEnemy = null;
-        float minDistance = float.MaxValue;
-        foreach (Collider2D enemy in enemies)
-        {
-            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < minDistance)
-            {
-                nearestEnemy = enemy.gameObject;
-                minDistance = distanceToEnemy;
-            }
-        }
-
-        return nearestEnemy;
-    }
 
     // 산탄총 발사 함수
     void ShootShotgun()
@@ -169,46 +140,8 @@ public class ShotgunScript : MonoBehaviour
         }
     }
 
-    float Vec2Angle(Vector3 v)
-    {
-        return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
-    }
 
-    /*
-        if v is zero vector -> rotate shotgun along v
-        else                -> do nothing
-    */
-    void RotateShotgun(Vector3 v)
-    {
-        if (v != Vector3.zero)
-        {
-            _shotgunAngle = Vec2Angle(v);
-            if (-90 < _shotgunAngle && _shotgunAngle < 90)
-            { // Do not flip shotgun image
-                transform.localScale = new(0.2f, 0.2f, 1);
-            }
-            else
-            { // Flip shotgun image
-                transform.localScale = new(0.2f, -0.2f, 1);
-            }
-            transform.rotation = Quaternion.Euler(0, 0, _shotgunAngle);
-        }
-    }
 
-    void AutoAim()
-    {
-        // Not holding joystick
-        if (_fixedJoystick.Direction == Vector2.zero)
-        {
-            GameObject nearestEnemy = FindNearestEnemy();
-            if (nearestEnemy != null)
-            {
-                RotateShotgun(nearestEnemy.transform.position - transform.position);
-            }
-        }
-        else
-        {
-            RotateShotgun(_fixedJoystick.Direction);
-        }
-    }
+
+
 }

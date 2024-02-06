@@ -86,7 +86,7 @@ public class PlayerController : Entity
         //총 발사
         if (Input.GetKeyDown(KeyCode.Space))
         { //스페이스바를 누르면 발사
-            FireGun();
+            _shotGun.FireGun();
         }
 
         if(isTouchingEnemy){
