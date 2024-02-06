@@ -14,11 +14,11 @@ public class Bullet : MonoBehaviour
     }
 
     // damage of bullet
-    public uint _damage;
+    public uint _damage = 0;
     // speed of bullet
-    public float _speed;
+    public float _speed = 0;
     // bullet direction
-    public Vector3 _dir;
+    public Vector3 _dir = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()

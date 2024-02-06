@@ -46,6 +46,4 @@ public class BulletScript : Bullet
         float directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
         _dir = new(directionX, directionY, 0);
     }
-
-
 }
