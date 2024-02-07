@@ -37,6 +37,7 @@ public class ShotgunController : MonoBehaviour
         _bullet = gameObject.AddComponent<BulletScript>();
         // create shotgun member variable
         _shotgun = gameObject.AddComponent<ShotgunScript>();
+        _shotgun.transform.SetParent(null);
 
         // shogtun shell
         _shotgunShell = Resources.Load("Prefabs/shotgun_Shell") as GameObject;
@@ -150,7 +151,7 @@ public class ShotgunController : MonoBehaviour
             { // Flip shotgun image
                 transform.localScale = new(0.2f, -0.2f, 1);
             }
-            transform.rotation = Quaternion.Euler(0, 0, _shotgunAngle);
+            _shotgun.transform.rotation = Quaternion.Euler(0, 0, _shotgunAngle);
         }
     }
 
