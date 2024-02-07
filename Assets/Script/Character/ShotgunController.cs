@@ -71,7 +71,7 @@ public class ShotgunController : MonoBehaviour
     {
         _shotgun.Fire(_shotgunAngle, _bulletPrefab);
         _shotgun.PlayFireSound();
-        GenerateShotgunShell();
+        GenerateShotgunShell(_shotgunAngle + 180.0f);
         ShakeCamera();
     }
     public void ShakeCamera()
@@ -86,6 +86,13 @@ public class ShotgunController : MonoBehaviour
         GameObject shotgunShell = Instantiate(_shotgunShell, transform, true);
         shotgunShell.transform.localPosition = _shellDropPosition;
         shotgunShell.transform.SetParent(null);
+    }
+    public void GenerateShotgunShell(float shellEulerAngle)
+    {
+        GameObject shotgunShell = Instantiate(_shotgunShell, transform, true);
+        shotgunShell.transform.localPosition = _shellDropPosition;
+        shotgunShell.transform.SetParent(null);
+        shotgunShell.GetComponent<ShellScript>().Set_direction(shellEulerAngle);
     }
 
     void AutoAim()
@@ -168,7 +175,7 @@ public class ShotgunController : MonoBehaviour
         {
             FireGun();
             // ShootShotgun();
-            // GenerateShotgunShell();
+            GenerateShotgunShell(_shotgunAngle + 180.0f);
             // Debug.Log("근처 적" + nearestEnemy);
             // Debug.Log("자동 사격");
         }
