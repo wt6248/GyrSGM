@@ -20,7 +20,7 @@ public class ShotgunController : MonoBehaviour
 
 
     public GameObject _shotgunShell;
-    Vector3 _shellDropPosition = new(4.81f, 0.88f, 0f);
+    Vector3 _shellDropPosition = new(0.96f, 0.18f, 0f);
 
     // Start is called before the first frame update
     private void Start()
@@ -83,13 +83,13 @@ public class ShotgunController : MonoBehaviour
     public void GenerateShotgunShell()
     {
         //GameObject shotgunShell = Instantiate(_shotgunShell, _shellDropPosition,Quaternion.identity, transform);
-        GameObject shotgunShell = Instantiate(_shotgunShell, transform, true);
+        GameObject shotgunShell = Instantiate(_shotgunShell, _shotgun.transform, true);
         shotgunShell.transform.localPosition = _shellDropPosition;
         shotgunShell.transform.SetParent(null);
     }
     public void GenerateShotgunShell(float shellEulerAngle)
     {
-        GameObject shotgunShell = Instantiate(_shotgunShell, transform, true);
+        GameObject shotgunShell = Instantiate(_shotgunShell, _shotgun.transform, true);
         shotgunShell.transform.localPosition = _shellDropPosition;
         shotgunShell.transform.SetParent(null);
         shotgunShell.GetComponent<ShellScript>().Set_direction(shellEulerAngle);
