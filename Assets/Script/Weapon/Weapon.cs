@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public bool _isDebugging = false;
     // number of bullet in one magazine
     public uint _remainingAmmo = 4;
     public uint _remainingMagazine = 1;
@@ -15,6 +16,8 @@ public class Weapon : MonoBehaviour
 
     public AudioSource _audioSource = null;
     public AudioClip _gunshotSound = null;
+
+    public Vector3 _firePoint = new(1.6f, 0f, 0f);
 
     // Start is called before the first frame update
     void Start()
@@ -39,13 +42,21 @@ public class Weapon : MonoBehaviour
     {
         return _reloadCoolDown == 0;
     }
-    public void Fire(float angle)
+    public void Fire(BulletScript bullet, float angle)
     {
         if (IsReloading())
         {
             return;
         }
+        Debug.Log("asdf");
 
+        for (int i = 0; i < bullet._pelletCount; i++)
+        {
+            float randomErrorAngle = UnityEngine.Random.Range(-bullet._spreadAngle / 2, bullet._spreadAngle / 2);
+            Vector3 firePoint = Quaternion.AngleAxis(angle, Vector3.forward) * _firePoint;
+            BulletScript pellet = Instantiate(bullet, transform.position + firePoint, Quaternion.identity);
+            pellet.GetComponent<BulletScript>().SetVelocity(bullet._speed, angle + randomErrorAngle);
+        }
     }
     public void PlayFireSound()
     {
