@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
     }
     bool IsReloading()
     {
-        return _reloadCoolDown == 0;
+        return _reloadCoolDown != 0;
     }
     public void Fire(float angle, BulletScript bullet, GameObject bulletPrefab)
     {
@@ -48,7 +48,6 @@ public class Weapon : MonoBehaviour
         {
             return;
         }
-        Debug.Log("asdf");
 
         for (int i = 0; i < bullet._pelletCount; i++)
         {

@@ -68,7 +68,6 @@ public class ShotgunController : MonoBehaviour
     // 총 쏘는 함수
     public void FireGun()
     {
-        print(_bullet);
         _shotgun.Fire(_shotgunAngle, _bullet, _bulletPrefab);
         _shotgun.PlayFireSound();
         GenerateShotgunShell();
