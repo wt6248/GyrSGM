@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
     {
         return _reloadCoolDown == 0;
     }
-    public void Fire(BulletScript bullet, float angle)
+    public void Fire(float angle, BulletScript bullet, GameObject bulletPrefab)
     {
         if (IsReloading())
         {
@@ -54,7 +54,7 @@ public class Weapon : MonoBehaviour
         {
             float randomErrorAngle = UnityEngine.Random.Range(-bullet._spreadAngle / 2, bullet._spreadAngle / 2);
             Vector3 firePoint = Quaternion.AngleAxis(angle, Vector3.forward) * _firePoint;
-            BulletScript pellet = Instantiate(bullet, transform.position + firePoint, Quaternion.identity);
+            GameObject pellet = Instantiate(bulletPrefab, transform.position + firePoint, Quaternion.identity);
             pellet.GetComponent<BulletScript>().SetVelocity(bullet._speed, angle + randomErrorAngle);
         }
     }

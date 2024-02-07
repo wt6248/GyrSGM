@@ -32,8 +32,11 @@ public class ShotgunController : MonoBehaviour
 
         // bullet
         _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
+
         // create bullet member variable
         _bullet = gameObject.AddComponent<BulletScript>();
+        // create shotgun member variable
+        _shotgun = gameObject.AddComponent<ShotgunScript>();
 
         // shogtun shell
         _shotgunShell = Resources.Load("Prefabs/shotgun_Shell") as GameObject;
@@ -65,8 +68,8 @@ public class ShotgunController : MonoBehaviour
     // 총 쏘는 함수
     public void FireGun()
     {
-        print(_bullet._spreadAngle);
-        _shotgun.Fire(_bullet, _shotgunAngle);
+        print(_bullet);
+        _shotgun.Fire(_shotgunAngle, _bullet, _bulletPrefab);
         _shotgun.PlayFireSound();
         GenerateShotgunShell();
         ShakeCamera();
