@@ -146,10 +146,10 @@ public class PlayerController : Entity
         transform.Translate(b);
     }
 
-    void FireGun()
-    {
-        _shotGun.FireGun(transform.position);
-    }
+    // void FireGun()
+    // {
+    //     _shotGun.FireGun(transform.position);
+    // }
     private void Unbeatable()
     {
         _isInvincible = !_isInvincible;
