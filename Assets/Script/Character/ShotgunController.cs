@@ -26,6 +26,7 @@ public class ShotgunController : MonoBehaviour
     private void Start()
     {
         // CreateShotGun();
+        // TODO? : instantiate prefab at the start()
         GameObject shotgunPrefab = Resources.Load<GameObject>("Prefabs/ShotgunPrefab");
         GameObject shotgunObject = Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
         shotgunObject.transform.parent = transform;
@@ -34,10 +35,9 @@ public class ShotgunController : MonoBehaviour
         _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
 
         // create bullet member variable
-        _bullet = gameObject.AddComponent<BulletScript>();
+        _bullet = GameObject.FindObjectOfType<BulletScript>();
         // create shotgun member variable
-        _shotgun = gameObject.AddComponent<ShotgunScript>();
-        _shotgun.transform.SetParent(null);
+        _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
 
         // shogtun shell
         _shotgunShell = Resources.Load("Prefabs/shotgun_Shell") as GameObject;
@@ -69,7 +69,7 @@ public class ShotgunController : MonoBehaviour
     // 총 쏘는 함수
     public void FireGun()
     {
-        _shotgun.Fire(_shotgunAngle, _bullet, _bulletPrefab);
+        _shotgun.Fire(_shotgunAngle, _bulletPrefab);
         _shotgun.PlayFireSound();
         GenerateShotgunShell();
         ShakeCamera();
@@ -145,11 +145,11 @@ public class ShotgunController : MonoBehaviour
             _shotgunAngle = Vec2Angle(v);
             if (-90 < _shotgunAngle && _shotgunAngle < 90)
             { // Do not flip shotgun image
-                transform.localScale = new(0.2f, 0.2f, 1);
+                _shotgun.transform.localScale = new(0.2f, 0.2f, 1);
             }
             else
             { // Flip shotgun image
-                transform.localScale = new(0.2f, -0.2f, 1);
+                _shotgun.transform.localScale = new(0.2f, -0.2f, 1);
             }
             _shotgun.transform.rotation = Quaternion.Euler(0, 0, _shotgunAngle);
         }
