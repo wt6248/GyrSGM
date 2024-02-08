@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -179,5 +180,5 @@ public class ShotgunController : MonoBehaviour
             // Debug.Log("근처 적" + nearestEnemy);
             // Debug.Log("자동 사격");
         }
-    }
+    }    
 }

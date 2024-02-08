@@ -84,10 +84,10 @@ public class PlayerController : Entity
         //tempMovePlayerByGyro();
 
         //총 발사
-        if (Input.GetKeyDown(KeyCode.Space))
-        { //스페이스바를 누르면 발사
-            _shotGun.FireGun();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{ //스페이스바를 누르면 발사
+          //  _shotGun.FireGun();
+        //}
 
         if(isTouchingEnemy){
             StartCoroutine(DamageRoutine(1f, 0.1f));
@@ -208,17 +208,22 @@ public class PlayerController : Entity
         if (other.gameObject.CompareTag("Enemy"))
         {
             isTouchingEnemy = true;
+                        
+            /* for debuging
+                // Move player away from the enemy
+                Vector3 awayFromEnemy = transform.position - other.transform.position;
+                transform.Translate(awayFromEnemy.normalized * Time.deltaTime * _speed * 20);
+            */
         }
 
         else{
-            StartCoroutine(DamageRoutine(1f, 0.1f));
-        
+            StartCoroutine(DamageRoutine(1f, 0.1f));      
 
             // test code for the function operates well
-            if (_hp > 0 && local_debug)
-            {
-                other.gameObject.transform.position = new Vector3(10, 10, 0);
-            }      
+            //if (_hp > 0 && local_debug)
+            //{
+            //    other.gameObject.transform.position = new Vector3(10, 10, 0);
+            //}      
         }  
     }
 
@@ -233,7 +238,7 @@ public class PlayerController : Entity
 
     IEnumerator DamageRoutine(float damage, float period)
     {
-        while(_hp > 0)
+        while(_hp > 0 && isTouchingEnemy == true)
         {
             // give damage
             GetDamaged(damage);
