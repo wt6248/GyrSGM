@@ -18,11 +18,11 @@ public class EnemyUnitHP : Entity
     {
         // init stat
         _type = Entity.EntityType.Enemy;
-        _maxHP = 1.5f;
+        _maxHP = 30f;
         _hp = _maxHP;
         _name = "Enemy" + gameObject.GetInstanceID();
-        _attackDamage = 1;
-        _speed = 0.7f;
+        _attackDamage = 1.5f;
+        _speed = 0.4f;
         _radious = 0.5f; // if chose circle collider
         //_size = new(0.5f, 0.5f, 0f); // if chose box collider
 
@@ -60,11 +60,11 @@ public class EnemyUnitHP : Entity
         
         if ((transform.position - playerPosition).magnitude > 1) {
             //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
-            transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime);
+            transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime * _speed);
             //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
         } 
     }
-    public void DecreaseHP(float delta)
+    public override void DecreaseHP(float delta)
     {
         /*
             Be careful that _DecreaseHP includes

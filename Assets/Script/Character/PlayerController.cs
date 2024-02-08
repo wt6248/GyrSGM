@@ -24,6 +24,7 @@ public class PlayerController : Entity
     public AudioClip _hurtSound;
     public AudioSource _deadSoundSource;
     public AudioClip _deadSound;
+    public float _invincibleTime;
 
     // player size
     public const float playerRadious = 0.5f; // if chose circle collider
@@ -43,6 +44,7 @@ public class PlayerController : Entity
         _speed = 4;
         _radious = 0.5f; // if chose circle collider
         _size = new(0.5f, 0.5f, 0f); // if chose box collider
+        _invincibleTime = 0.5f;
 
 
         //_cursor = GetComponentInChildren<Cursor>();
@@ -163,7 +165,7 @@ public class PlayerController : Entity
             _spriteRenderer.color = new Color(1, 1, 1, 1);
         }
     }
-    void GetDamaged(float damage = 1.0f, float invincibleTime = 0.5f)
+    public override void DecreaseHP(float damage = 1.0f)
     {
         if (_isInvincible)
         {
@@ -198,7 +200,7 @@ public class PlayerController : Entity
 
         // 무적
         Unbeatable();
-        Invoke("Unbeatable", invincibleTime);
+        Invoke("Unbeatable", _invincibleTime);
     }
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -243,7 +245,7 @@ public class PlayerController : Entity
         while(_hp > 0 && isTouchingEnemy == true)
         {
             // give damage
-            GetDamaged(damage);
+            DecreaseHP(damage);
 
             // wait
             yield return new WaitForSeconds(period);
@@ -265,6 +267,6 @@ public class PlayerController : Entity
 
     public void SetAttackDamage()
     {
-        _attackDamage += 1.1f
+        _attackDamage += 1.1f;
     }
 }

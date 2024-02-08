@@ -21,8 +21,8 @@ public class EnemyUnitSoeed : Entity
         _maxHP = 0.8f;
         _hp = _maxHP;
         _name = "Enemy" + gameObject.GetInstanceID();
-        _attackDamage = 1;
-        _speed = 1.2f;
+        _attackDamage = 10;
+        _speed = 3;
         _radious = 0.5f; // if chose circle collider
         //_size = new(0.5f, 0.5f, 0f); // if chose box collider
 
@@ -60,11 +60,11 @@ public class EnemyUnitSoeed : Entity
         
         if ((transform.position - playerPosition).magnitude > 1) {
             //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
-            transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime);
+            transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime * _speed);
             //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
         } 
     }
-    public void DecreaseHP(float delta)
+    public override void DecreaseHP(float delta)
     {
         /*
             Be careful that _DecreaseHP includes

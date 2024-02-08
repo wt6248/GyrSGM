@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
     public enum EntityType
     {
@@ -25,6 +25,8 @@ public class Entity : MonoBehaviour
     // ammo inventory
     public int _inventorySize;
 
+    abstract public void DecreaseHP(float delta);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,15 +41,18 @@ public class Entity : MonoBehaviour
 
     protected void _DecreaseHP(float delta)
     {
+       
         if (0 < delta)
         {
             _hp -= delta;
+            Debug.Log("HP: " + _hp);
         }
         if (IsDead())
         {
             Destroy(this.gameObject);
         }
     }
+    
     protected void _IncreaseHP(float delta)
     {
         if (0 < delta)
