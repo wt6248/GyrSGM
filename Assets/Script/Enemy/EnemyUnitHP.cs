@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyUnitBase : Entity
+public class EnemyUnitHP : Entity
 {
     // audio instances
     public AudioSource _hurtSoundSource;
