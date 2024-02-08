@@ -40,6 +40,7 @@ public class PlayerController : Entity
         _hp = _maxHP;
         _name = "Player";
         _attackDamage = 1;
+        _attackSpeed = 2;
         _speed = 4;
         _radious = 0.5f; // if chose circle collider
         _size = new(0.5f, 0.5f, 0f); // if chose box collider
@@ -269,8 +270,8 @@ public class PlayerController : Entity
         _attackDamage += 1.1f;
     }
 
-    public void SetSpeed()
+    public void SetAttckSpeed()
     {
-        _speed += 1.1f;
+        _attckspeed += 1.1f;
     }
 }
