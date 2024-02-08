@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyManage : MonoBehaviour
 {
-    const float generateCoolTime = 5f;
-    const float spawnRadious = 4f;
-    float generateCooldown = 0;
+    public float _enemyGenerateCoolTime = 5f;
+    public float _enemySpawnRadious = 4f;
+    public Vector3 _enemySpawnSize;
+    public float _enemyGenerateCooldown = 0;
     GameObject enemy;
 
 
@@ -22,14 +23,15 @@ public class EnemyManage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (0 < generateCooldown)
+        if (0 < _enemyGenerateCooldown)
         {
-            generateCooldown -= Time.deltaTime;
+            _enemyGenerateCooldown -= Time.deltaTime;
         }
         else
         {
-            generateCooldown = generateCoolTime;
-            GameObject instance = Instantiate(enemy, spawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+            _enemyGenerateCooldown = _enemyGenerateCoolTime;
+            // TODO : spawn enemy outside the map, not circle
+            GameObject instance = Instantiate(enemy, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
         }
     }
 }
