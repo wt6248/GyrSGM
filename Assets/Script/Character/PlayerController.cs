@@ -265,6 +265,11 @@ public class PlayerController : Entity
 
     public void SetAttackDamage()
     {
-        _attackDamage += 1.1f
+        _attackDamage += 1.1f;
+    }
+
+    public void SetSpeed()
+    {
+        _speed += 1.1f;
     }
 }
