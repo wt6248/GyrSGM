@@ -86,7 +86,7 @@ public class PlayerController : Entity
         //총 발사
         //if (Input.GetKeyDown(KeyCode.Space))
         //{ //스페이스바를 누르면 발사
-          //  _shotGun.FireGun();
+        //  _shotGun.FireGun();
         //}
 
         if (isTouchingEnemy)
@@ -208,7 +208,7 @@ public class PlayerController : Entity
         if (other.gameObject.CompareTag("Enemy"))
         {
             isTouchingEnemy = true;
-                        
+
             /* for debuging
                 // Move player away from the enemy
                 Vector3 awayFromEnemy = transform.position - other.transform.position;
@@ -240,7 +240,7 @@ public class PlayerController : Entity
 
     IEnumerator DamageRoutine(float damage, float period)
     {
-        while(_hp > 0 && isTouchingEnemy == true)
+        while (_hp > 0 && isTouchingEnemy == true)
         {
             // give damage
             GetDamaged(damage);
@@ -254,11 +254,12 @@ public class PlayerController : Entity
     {
         _IncreaseHP(_healPerSec);
     }
-    
+
     // player hp restoration function
     public void SetHealthPoint()
     {
-        if(_hp < _maxHP){
+        if (_hp < _maxHP)
+        {
             _hp += 1;
         }
     }
