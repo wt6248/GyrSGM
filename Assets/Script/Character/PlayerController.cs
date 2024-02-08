@@ -256,9 +256,15 @@ public class PlayerController : Entity
     }
     
     // player hp restoration function
-    public void SetHealthPoint(){
+    public void SetHealthPoint()
+    {
         if(_hp < _maxHP){
             _hp += 1;
         }
+    }
+
+    public void SetAttackDamage()
+    {
+        _attackDamage += 1.1f
     }
 }
