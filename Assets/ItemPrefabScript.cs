@@ -41,7 +41,7 @@ public class ItemPrefabScript : MonoBehaviour
             }
             else if(itemType == 2 || itemType == 3)
             {
-                playerController.SetSpeed();
+                playerController.SetAttackSpeed();
             }
             else // item 4, 5 (체력키트, 알약)
             {
