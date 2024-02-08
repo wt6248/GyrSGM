@@ -254,4 +254,11 @@ public class PlayerController : Entity
     {
         _IncreaseHP(_healPerSec);
     }
+    
+    // player hp restoration function
+    public void SetHealthPoint(){
+        if(_hp < _maxHP){
+            _hp += 1;
+        }
+    }
 }
