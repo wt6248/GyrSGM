@@ -7,13 +7,15 @@ public class ItemPrefabScript : MonoBehaviour
 {
     public SpriteAtlas itemSpriteAtlas;
     public SpriteRenderer itemSpriteRenderer;
+    public PlayerController playerController;
     public int itemType;
     // Start is called before the first frame update
     void Start()
     {
         itemSpriteAtlas = Resources.Load<SpriteAtlas>("Sprites/ItemSpriteAtlas");
         itemSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
+        playerController = FindObjectOfType<PlayerController>();
+        
         SetItemType();
     }
 
@@ -33,7 +35,10 @@ public class ItemPrefabScript : MonoBehaviour
         //주인공과 충돌했을 때 주인공의 함수 호출. 
         if(other.gameObject.name == "main character")
         {
-            //do something
+            if(itemType == 4 && playerController != null)
+            {
+                playerController.SetHealthPoint();
+            }
         }
     }
 }
