@@ -13,11 +13,12 @@ public class GyroGameObj : MonoBehaviour
     List<Vector3> _rotList = new List<Vector3>();
 
 
-    // TODO: modify these values properly
+    // Priority : value under < inspector < value in start()
     public float _deadZoneRadious = 0.05f;
     public float _maxSpeedRadious = 10.1f;
     // to calculate average of frameCount-many rotation
     public int _gyroCountPerFrame = 15;
+    public float _gyroSensitivity = 1f;
 
 
     // Start is called before the first frame update
@@ -52,6 +53,7 @@ public class GyroGameObj : MonoBehaviour
     {
         // This average might make inertia
         Vector3 avr = new(_rotList.Average(x => x.x), _rotList.Average(x => x.y), _rotList.Average(x => x.z));
+        avr *= _gyroSensitivity;
         // Dead Zone
         if (avr.magnitude < _deadZoneRadious)
         {
