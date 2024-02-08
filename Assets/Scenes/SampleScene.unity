@@ -369,6 +369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d455026dcf4c32591d74371f294b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deadZoneRadious: 0.05
+  _maxSpeedRadious: 10.1
+  _gyroCountPerFrame: 15
 --- !u!1 &274280791
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,16 +649,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33d687c2b215464f89ba93b0f2c761e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fixedJoystick: {fileID: 0}
-  _fireButton: {fileID: 0}
-  _shotgunShell: {fileID: 0}
-  _bullet: {fileID: 0}
+  _isDebugging: 0
+  _remainingAmmo: 4
+  _remainingMagazine: 1
+  _magazineCapacity: 4
+  _reloadTime: 3
+  _reloadCoolDown: 0
+  _audioSource: {fileID: 0}
   _gunshotSound: {fileID: 0}
   _firePoint: {x: 1.6, y: 0, z: 0}
-  _shotgunAngle: 0
-  _spreadAngle: 15
-  _pelletCount: 8
-  _pelletSpeed: 1
 --- !u!1 &480319035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1031,7 @@ GameObject:
   - component: {fileID: 1310912403}
   - component: {fileID: 1310912402}
   - component: {fileID: 1310912401}
+  - component: {fileID: 1310912408}
   - component: {fileID: 1310912406}
   - component: {fileID: 1310912404}
   - component: {fileID: 1310912407}
@@ -1066,7 +1069,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b679440dbc26cae40ae218d76a2438b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunshotSound: {fileID: 8300000, guid: fe063f215b4bf14459f1c8322b2e7d11, type: 3}
+  _fixedJoystick: {fileID: 0}
+  _fireButton: {fileID: 0}
+  _autoAimRadious: 10
+  _shotgunAngle: 0
+  _shotgunShell: {fileID: 0}
 --- !u!114 &1310912402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,6 +1096,9 @@ MonoBehaviour:
   _radious: 0
   _inventorySize: 0
   _gyroControl: {fileID: 0}
+  _isInvincible: 0
+  _healPerSec: 0.05
+  _healPeriod: 1
   _hurtSoundSource: {fileID: 0}
   _hurtSound: {fileID: 0}
   _deadSoundSource: {fileID: 0}
@@ -1205,6 +1215,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f9837632f292f9c8f84d1ec7559c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1310912408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310912399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33d687c2b215464f89ba93b0f2c761e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDebugging: 0
+  _remainingAmmo: 4
+  _remainingMagazine: 1
+  _magazineCapacity: 4
+  _reloadTime: 3
+  _reloadCoolDown: 0
+  _audioSource: {fileID: 0}
+  _gunshotSound: {fileID: 0}
+  _firePoint: {x: 1.6, y: 0, z: 0}
 --- !u!1 &1489622255
 GameObject:
   m_ObjectHideFlags: 0

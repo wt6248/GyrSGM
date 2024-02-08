@@ -12,14 +12,13 @@ public class GyroGameObj : MonoBehaviour
     Vector3 _velocity;
     List<Vector3> _rotList = new List<Vector3>();
 
-    struct GyroConst
-    {
-        // TODO: modify these values properly
-        public const float deadZoneRadious = 0.05f;
-        public const float maxSpeedRadious = 10.1f;
-        // to calculate average of frameCount-many rotation
-        public const int frameCount = 15;
-    }
+
+    // TODO: modify these values properly
+    public float _deadZoneRadious = 0.05f;
+    public float _maxSpeedRadious = 10.1f;
+    // to calculate average of frameCount-many rotation
+    public int _gyroCountPerFrame = 15;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +31,7 @@ public class GyroGameObj : MonoBehaviour
     void Update()
     {
         _rotList.Clear();
-        for (int i = 0; i < GyroConst.frameCount; i++)
+        for (int i = 0; i < _gyroCountPerFrame; i++)
         {
             _rotList.Add(_gyroController.rotationRateUnbiased);
         }
@@ -54,14 +53,14 @@ public class GyroGameObj : MonoBehaviour
         // This average might make inertia
         Vector3 avr = new(_rotList.Average(x => x.x), _rotList.Average(x => x.y), _rotList.Average(x => x.z));
         // Dead Zone
-        if (avr.magnitude < GyroConst.deadZoneRadious)
+        if (avr.magnitude < _deadZoneRadious)
         {
             avr = Vector3.zero;
         }
         // Max speed
-        if (GyroConst.maxSpeedRadious < avr.magnitude)
+        if (_maxSpeedRadious < avr.magnitude)
         {
-            avr = avr.normalized * GyroConst.maxSpeedRadious;
+            avr = avr.normalized * _maxSpeedRadious;
         }
         return avr;
     }

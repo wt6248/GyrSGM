@@ -12,11 +12,11 @@ public class PlayerController : Entity
     private SpriteRenderer _spriteRenderer;
     public GyroGameObj _gyroControl;
 
-    private bool _isInvincible = false;
+    public bool _isInvincible = false;
 
     // heal variable
-    private float _healPerSec = 0.05f;
-    private float _healPeriod = 1f;
+    public float _healPerSec = 0.05f;
+    public float _healPeriod = 1f;
 
 
     // audio instances
@@ -89,10 +89,10 @@ public class PlayerController : Entity
           //  _shotGun.FireGun();
         //}
 
-        if(isTouchingEnemy){
+        if (isTouchingEnemy)
+        {
             StartCoroutine(DamageRoutine(1f, 0.1f));
         }
-
     }
 
     private void CreateCursor()
@@ -216,15 +216,17 @@ public class PlayerController : Entity
             */
         }
 
-        else{
-            StartCoroutine(DamageRoutine(1f, 0.1f));      
+        else
+        {
+            StartCoroutine(DamageRoutine(1f, 0.1f));
+
 
             // test code for the function operates well
-            //if (_hp > 0 && local_debug)
-            //{
-            //    other.gameObject.transform.position = new Vector3(10, 10, 0);
-            //}      
-        }  
+            if (_hp > 0 && local_debug)
+            {
+                other.gameObject.transform.position = new Vector3(10, 10, 0);
+            }
+        }
     }
 
     void OnCollisionExit2D(Collision2D other)
