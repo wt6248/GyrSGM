@@ -369,6 +369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d455026dcf4c32591d74371f294b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deadZoneRadious: 0.05
+  _maxSpeedRadious: 10.1
+  _gyroCountPerFrame: 15
 --- !u!1 &274280791
 GameObject:
   m_ObjectHideFlags: 0
