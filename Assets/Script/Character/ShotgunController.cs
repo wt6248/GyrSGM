@@ -14,7 +14,7 @@ public class ShotgunController : MonoBehaviour
     public Button _fireButton;
 
     // Radious of auto-aim
-    float _autoAimRadious = 10f;
+    public float _autoAimRadious = 10f;
     // 산탄총 발사 각도
     public float _shotgunAngle = 0;
 
