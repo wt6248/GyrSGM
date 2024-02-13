@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class EnemyManage : MonoBehaviour
 {
-    public float _enemyGenerateCoolTime = 5f;
-    public float _enemySpawnRadious = 4f;
+
     public Vector3 _enemySpawnSize;
     public float _enemyGenerateCooldown = 0;
     GameObject enemy;
 
     GameObject enemy_speed;
     GameObject enemy_hp;
+
+    [Header ("Generate Policy")]
+    public float _enemyGenerateCoolTime; // 5f
+    public float _enemySpawnRadious; // 4f
+    public int _generateUnitNumber;
+    public Vector3 _enemyProbability; // (0,3, 0.3, 0.3)
 
 
 
@@ -38,9 +43,39 @@ public class EnemyManage : MonoBehaviour
         {
             _enemyGenerateCooldown = _enemyGenerateCoolTime;
             // TODO : spawn enemy outside the map, not circle
-
-            GameObject instance = Instantiate(enemy_hp, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+            
+            // spawn under the probability (base, speed, hp) -> (1, 1, 1) base
+            
+            for (int i=0;i<_generateUnitNumber;i++){
+                int unitIdx = getUnitID(_enemyProbability);
+                GameObject instance;
+                if (unitIdx == 0)
+                    instance = Instantiate(enemy, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+                else if (unitIdx == 1)
+                    instance = Instantiate(enemy_speed, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+                else
+                    instance = Instantiate(enemy_hp, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+            }
+                
 
         }
+    }
+    int getUnitID(Vector3 probVec) { // TODO: change to array
+        int selectedIndex;
+        Vector3 normalizedProb = _enemyProbability.normalized;
+        float randomValue = Random.Range(0f, 1f);
+        if (randomValue < normalizedProb.x)
+        {
+            selectedIndex = 0;
+        }
+        else if (randomValue < normalizedProb.x + normalizedProb.y)
+        {
+            selectedIndex = 1;
+        }
+        else
+        {
+            selectedIndex = 2;
+        }
+        return selectedIndex;
     }
 }

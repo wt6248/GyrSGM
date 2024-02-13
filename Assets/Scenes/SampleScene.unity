@@ -939,10 +939,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f9837632f292f9c8f84d1ec7559c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyGenerateCoolTime: 5
-  _enemySpawnRadious: 4
   _enemySpawnSize: {x: 0, y: 0, z: 0}
   _enemyGenerateCooldown: 0
+  _enemyGenerateCoolTime: 5
+  _enemySpawnRadious: 4
+  _generateUnitNumber: 1
+  _enemyProbability: {x: 1, y: 0, z: 0}
 --- !u!114 &861298603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1221,7 @@ MonoBehaviour:
   _hurtSound: {fileID: 0}
   _deadSoundSource: {fileID: 0}
   _deadSound: {fileID: 0}
+  _invincibleTime: 0
 --- !u!114 &1310912403
 MonoBehaviour:
   m_ObjectHideFlags: 0
