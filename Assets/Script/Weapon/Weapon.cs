@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
     {
         return _reloadCoolDown != 0;
     }
-    public void Fire(float angle, BulletScript bullet, GameObject bulletPrefab)
+    public void Fire(float angle, BulletScript bullet)
     {
         if (IsReloading())
         {
@@ -53,8 +53,9 @@ public class Weapon : MonoBehaviour
         {
             float randomErrorAngle = UnityEngine.Random.Range(-bullet._spreadAngle / 2, bullet._spreadAngle / 2);
             Vector3 firePoint = Quaternion.AngleAxis(angle, Vector3.forward) * _firePoint;
-            GameObject pellet = Instantiate(bulletPrefab, transform.position + firePoint, Quaternion.identity);
+            GameObject pellet = Instantiate(bullet._bulletPrefab, transform.position + firePoint, Quaternion.identity);
             pellet.GetComponent<BulletScript>().SetVelocity(bullet._speed, angle + randomErrorAngle);
+            pellet.GetComponent<BulletScript>().Activate();
         }
 
         // TODO : decrease ammo
