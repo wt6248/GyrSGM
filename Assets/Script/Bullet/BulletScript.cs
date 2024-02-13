@@ -4,8 +4,19 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BulletScript : Bullet
+public class BulletScript : MonoBehaviour
 {
+    // damage of bullet
+    public uint _damage = 1;
+    // speed of bullet
+    public float _speed = 1f;
+
+    // 총알 개수
+    public uint _pelletCount = 8;
+    // Spreading angle
+    public float _spreadAngle = 15f;
+    // bullet direction
+    public Vector3 _dir = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
