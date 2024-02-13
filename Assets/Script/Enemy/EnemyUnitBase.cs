@@ -60,11 +60,11 @@ public class EnemyUnitBase : Entity
         
         if ((transform.position - playerPosition).magnitude > 1) {
             //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
-            transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime);
+            transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime * _speed);
             //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
         } 
     }
-    public void DecreaseHP(float delta)
+    public override void DecreaseHP(float delta)
     {
         /*
             Be careful that _DecreaseHP includes

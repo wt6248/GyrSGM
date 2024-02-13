@@ -9,7 +9,7 @@ public class BulletScript : Bullet
     // Start is called before the first frame update
     void Start()
     {
-
+        
         Destroy(gameObject, 3);
     }
 
@@ -26,7 +26,7 @@ public class BulletScript : Bullet
         //Debug.Log("hitted!");
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EnemyUnitBase>().DecreaseHP(_damage);//의 체력깍는 함수 호출
+            other.gameObject.GetComponent<Entity>().DecreaseHP(_damage);//의 체력깍는 함수 호출
         }
         // destroy whatever hit something
         Destroy(this.gameObject);

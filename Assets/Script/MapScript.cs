@@ -20,8 +20,10 @@ public class Map : MonoBehaviour
             TODO : send map size to EnemyManage
             EnemyManage will modify enemy spawn range
         */
+
         _enemyManage = GameObject.FindObjectOfType<EnemyManage>();
         _enemyManage._enemySpawnSize = _size;
+
     }
 
     // Update is called once per frame
