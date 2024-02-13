@@ -8,7 +8,7 @@ public class BulletSlug : BulletScript
     void Start()
     {
         _damage = 1;
-        _speed = 2f;
+        _speed = 8f;
         _pelletCount = 1;
         _spreadAngle = 0f;
         _duration = 3f;

@@ -21,6 +21,12 @@ public class BulletScript : MonoBehaviour
     public Vector3 _dir = Vector3.zero;
     // bullet prefab
     public GameObject _bulletPrefab;
+    public enum BulletType
+    {
+        Slug, // sniper
+        Scatter, // shotgun
+        Rocket // rocket luncher
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +45,7 @@ public class BulletScript : MonoBehaviour
         적과 충돌했을 때 적의 체력을 깎는 함수를 호출하고 사라짐.
         Rocket Luncher should use its own OnTriggerEnter2D
     */
-    protected void OnTriggerEnter2D(Collider2D other)
+    virtual public void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("hitted!");
         if (other.gameObject.CompareTag("Enemy"))

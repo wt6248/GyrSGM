@@ -8,7 +8,7 @@ public class BulletScatter : BulletScript
     void Start()
     {
         _damage = 1;
-        _speed = 1f;
+        _speed = 4f;
         _pelletCount = 8;
         _spreadAngle = 15f;
         _duration = 3f;

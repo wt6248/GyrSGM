@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class BulletRocket : BulletScript
 {
+    public float _explosionRadious;
+
     // Start is called before the first frame update
     void Start()
     {
         _damage = 10;
-        _speed = 1f;
+        _speed = 4f;
         _pelletCount = 1;
         _spreadAngle = 0f;
         _duration = 3f;
+        _explosionRadious = 1.5f;
         _bulletPrefab = Resources.Load("Prefabs/BulletRocket") as GameObject;
     }
 
@@ -22,13 +25,13 @@ public class BulletRocket : BulletScript
         transform.Translate(movement);
     }
 
-    // FIXME : override
-    void OnTriggerEnter2D(Collider2D other)
+    // override
+    override public void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("hitted!");
-        if (other.gameObject.CompareTag("Enemy"))
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _explosionRadious, LayerMask.GetMask("Enemy"));
+        foreach (Collider2D enemy in enemies)
         {
-            other.gameObject.GetComponent<Entity>().DecreaseHP(_damage);//의 체력깍는 함수 호출
+            enemy.gameObject.GetComponent<Entity>().DecreaseHP(_damage);//의 체력깍는 함수 호출
         }
         // destroy whatever hit something
         Destroy(this.gameObject);
