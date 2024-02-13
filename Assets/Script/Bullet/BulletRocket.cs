@@ -12,6 +12,7 @@ public class BulletRocket : BulletScript
         _pelletCount = 1;
         _spreadAngle = 0f;
         _duration = 3f;
+        _bulletPrefab = Resources.Load("Prefabs/BulletRocket") as GameObject;
     }
 
     // Update is called once per frame

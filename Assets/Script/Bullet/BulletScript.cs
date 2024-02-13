@@ -19,6 +19,9 @@ public class BulletScript : MonoBehaviour
     public float _duration;
     // bullet direction
     public Vector3 _dir = Vector3.zero;
+    // bullet prefab
+    public GameObject _bulletPrefab;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class ShotgunController : MonoBehaviour
 {
     ShotgunScript _shotgun;
-    BulletScript _bullet;
-    GameObject _bulletPrefab;
+    BulletScatter _bullet;
+    // GameObject _bulletPrefab;
 
     public FixedJoystick _fixedJoystick;
     public Button _fireButton;
@@ -33,10 +33,12 @@ public class ShotgunController : MonoBehaviour
         shotgunObject.transform.parent = transform;
 
         // bullet
-        _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
+        // _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
 
         // create bullet member variable
-        _bullet = GameObject.FindObjectOfType<BulletScript>();
+        _bullet = GameObject.FindObjectOfType<BulletScatter>();
+        // _bullet = gameObject.AddComponent<BulletScatter>();
+        // _bullet.transform.SetParent(null);
         // create shotgun member variable
         _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
 
@@ -70,7 +72,8 @@ public class ShotgunController : MonoBehaviour
     // 총 쏘는 함수
     public void FireGun()
     {
-        _shotgun.Fire(_shotgunAngle, _bulletPrefab);
+        // _shotgun.Fire(_shotgunAngle);
+        _shotgun.Fire(_shotgunAngle, _bullet);
         _shotgun.PlayFireSound();
         GenerateShotgunShell(_shotgunAngle + 180.0f);
         ShakeCamera();
@@ -175,10 +178,6 @@ public class ShotgunController : MonoBehaviour
         if (nearestEnemy != null)
         {
             FireGun();
-            // ShootShotgun();
-            GenerateShotgunShell(_shotgunAngle + 180.0f);
-            // Debug.Log("근처 적" + nearestEnemy);
-            // Debug.Log("자동 사격");
         }
-    }    
+    }
 }
