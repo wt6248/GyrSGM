@@ -8,7 +8,11 @@ using UnityEngine.UI;
 public class ShotgunController : MonoBehaviour
 {
     ShotgunScript _shotgun;
-    BulletScatter _bullet;
+    BulletScript _bullet;
+    /*
+        bulletType for player speeds each respects to weight of weapon
+    */
+    BulletScript.BulletType _bulletType;
     // GameObject _bulletPrefab;
 
     public FixedJoystick _fixedJoystick;
@@ -35,10 +39,8 @@ public class ShotgunController : MonoBehaviour
         // bullet
         // _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
 
-        // create bullet member variable
-        _bullet = GameObject.FindObjectOfType<BulletScatter>();
-        // _bullet = gameObject.AddComponent<BulletScatter>();
-        // _bullet.transform.SetParent(null);
+        // set bullet type and change bullet
+        ChangeBulletType(BulletScript.BulletType.Rocket);
         // create shotgun member variable
         _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
 
@@ -178,6 +180,25 @@ public class ShotgunController : MonoBehaviour
         if (nearestEnemy != null)
         {
             FireGun();
+        }
+    }
+
+    public void ChangeBulletType(BulletScript.BulletType bulletType)
+    {
+        _bulletType = bulletType;
+        switch (bulletType)
+        {
+            case BulletScript.BulletType.Slug:
+                _bullet = GameObject.FindObjectOfType<BulletSlug>();
+                break;
+            case BulletScript.BulletType.Scatter:
+                _bullet = GameObject.FindObjectOfType<BulletScatter>();
+                break;
+            case BulletScript.BulletType.Rocket:
+                _bullet = GameObject.FindObjectOfType<BulletRocket>();
+                break;
+            default:
+                break;
         }
     }
 }
