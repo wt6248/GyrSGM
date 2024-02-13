@@ -18,11 +18,11 @@ public class EnemyUnitSpeed : Entity
     {
         // init stat
         _type = Entity.EntityType.Enemy;
-        _maxHP = 0.8f;
+        //_maxHP = 0.8f;
         _hp = _maxHP;
         _name = "Enemy" + gameObject.GetInstanceID();
-        _attackDamage = 10;
-        _speed = 3;
+        //_attackDamage = 10;
+        //_speed = 3;
         _radious = 0.5f; // if chose circle collider
         //_size = new(0.5f, 0.5f, 0f); // if chose box collider
 

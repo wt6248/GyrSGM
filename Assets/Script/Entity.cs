@@ -13,7 +13,7 @@ public abstract class Entity : MonoBehaviour
         Breakable
     }
     public EntityType _type;
-
+    [Header ("Entity Stat")]
     public float _maxHP;
     public float _hp;
     public string _name;
