@@ -18,6 +18,7 @@ public abstract class Entity : MonoBehaviour
     public float _hp;
     public string _name;
     public float _attackDamage;
+    public float _attackSpeed;
     public float _speed;
     // what does size mean
     public Vector3 _size;

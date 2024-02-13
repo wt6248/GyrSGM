@@ -41,6 +41,7 @@ public class PlayerController : Entity
         _hp = _maxHP;
         _name = "Player";
         _attackDamage = 1;
+        _attackSpeed = 2;
         _speed = 4;
         _radious = 0.5f; // if chose circle collider
         _size = new(0.5f, 0.5f, 0f); // if chose box collider
@@ -88,7 +89,7 @@ public class PlayerController : Entity
         //총 발사
         //if (Input.GetKeyDown(KeyCode.Space))
         //{ //스페이스바를 누르면 발사
-          //  _shotGun.FireGun();
+        //  _shotGun.FireGun();
         //}
 
         if (isTouchingEnemy)
@@ -210,7 +211,7 @@ public class PlayerController : Entity
         if (other.gameObject.CompareTag("Enemy"))
         {
             isTouchingEnemy = true;
-                        
+
             /* for debuging
                 // Move player away from the enemy
                 Vector3 awayFromEnemy = transform.position - other.transform.position;
@@ -242,7 +243,7 @@ public class PlayerController : Entity
 
     IEnumerator DamageRoutine(float damage, float period)
     {
-        while(_hp > 0 && isTouchingEnemy == true)
+        while (_hp > 0 && isTouchingEnemy == true)
         {
             // give damage
             DecreaseHP(damage);
@@ -256,17 +257,25 @@ public class PlayerController : Entity
     {
         _IncreaseHP(_healPerSec);
     }
-    
+
     // player hp restoration function
     public void SetHealthPoint()
     {
-        if(_hp < _maxHP){
+        if (_hp < _maxHP)
+        {
             _hp += 1;
         }
     }
 
     public void SetAttackDamage()
     {
-        _attackDamage += 1.1f;
+
+        _attackDamage *= 1.1f;
+    }
+
+    public void SetAttackSpeed()
+    {
+        _attackSpeed *= 1.1f;
+
     }
 }

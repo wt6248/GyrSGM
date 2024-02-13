@@ -6,7 +6,7 @@ public class Map : MonoBehaviour
 {
     public Vector3 _size = new(1, 2, 0);
     GameObject _map;
-    GameObject _enemyManage;
+    EnemyManage _enemyManage;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +20,10 @@ public class Map : MonoBehaviour
             TODO : send map size to EnemyManage
             EnemyManage will modify enemy spawn range
         */
-        //_enemyManage = GameObject.FindObjectOfType<EnemyManage>();
-        //_enemyManage._size = _size;
+
+        _enemyManage = GameObject.FindObjectOfType<EnemyManage>();
+        _enemyManage._enemySpawnSize = _size;
+
     }
 
     // Update is called once per frame
