@@ -7,14 +7,16 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     // damage of bullet
-    public uint _damage = 1;
+    public uint _damage;
     // speed of bullet
-    public float _speed = 1f;
+    public float _speed;
 
     // 총알 개수
-    public uint _pelletCount = 8;
+    public uint _pelletCount;
     // Spreading angle
-    public float _spreadAngle = 15f;
+    public float _spreadAngle;
+    // duration
+    public float _duration;
     // bullet direction
     public Vector3 _dir = Vector3.zero;
     // Start is called before the first frame update
@@ -30,8 +32,11 @@ public class BulletScript : MonoBehaviour
         transform.Translate(movement);
     }
 
-    //적과 충돌했을 때 적의 체력을 깎는 함수를 호출하고 사라짐.
-    private void OnTriggerEnter2D(Collider2D other)
+    /*
+        적과 충돌했을 때 적의 체력을 깎는 함수를 호출하고 사라짐.
+        Rocket Luncher should use its own OnTriggerEnter2D
+    */
+    protected void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("hitted!");
         if (other.gameObject.CompareTag("Enemy"))
@@ -46,7 +51,7 @@ public class BulletScript : MonoBehaviour
     public void SetVelocity(float speed, Vector3 direction)
     {
         _speed = speed;
-        _dir = direction;
+        _dir = direction.normalized;
     }
 
     public void SetVelocity(float speed, float eulerAngle)
@@ -55,5 +60,14 @@ public class BulletScript : MonoBehaviour
         float directionX = Mathf.Cos(eulerAngle * Mathf.Deg2Rad);
         float directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
         _dir = new(directionX, directionY, 0);
+    }
+
+    public void Activate()
+    {
+        if (_duration < 0)
+        {
+            _duration = 3f;
+        }
+        Destroy(this.gameObject, _duration);
     }
 }
