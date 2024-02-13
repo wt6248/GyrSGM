@@ -18,7 +18,8 @@ public class BulletRocket : BulletScript
     // Update is called once per frame
     void Update()
     {
-
+        Vector3 movement = _speed * Time.deltaTime * _dir;
+        transform.Translate(movement);
     }
 
     // FIXME : override
