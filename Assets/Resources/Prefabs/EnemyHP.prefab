@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _maxHP: 1
+  _maxHP: 10
   _hp: 0
   _name: 
   _attackDamage: 0

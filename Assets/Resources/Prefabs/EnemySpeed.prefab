@@ -162,11 +162,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _maxHP: 0
+  _maxHP: 0.8
   _hp: 0
   _name: 
   _attackDamage: 0
-  _speed: 0
+  _attackSpeed: 0
+  _speed: 2
   _size: {x: 0, y: 0, z: 0}
   _radious: 0
   _inventorySize: 0
