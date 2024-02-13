@@ -16,7 +16,7 @@ public class BulletScript : MonoBehaviour
     // Spreading angle
     public float _spreadAngle;
     // duration
-    public float _duration;
+    public float _duration = 3f;
     // bullet direction
     public Vector3 _dir = Vector3.zero;
     // bullet prefab
@@ -67,7 +67,7 @@ public class BulletScript : MonoBehaviour
 
     public void Activate()
     {
-        if (_duration < 0)
+        if (_duration <= 0)
         {
             _duration = 3f;
         }
