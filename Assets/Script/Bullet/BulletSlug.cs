@@ -11,6 +11,7 @@ public class BulletSlug : BulletScript
         _speed = 8f;
         _pelletCount = 1;
         _spreadAngle = 0f;
+        _knockbackDistance = 3f;
         _duration = 3f;
         _bulletPrefab = Resources.Load("Prefabs/BulletSlug") as GameObject;
     }

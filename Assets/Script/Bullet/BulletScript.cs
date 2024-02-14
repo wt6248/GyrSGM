@@ -15,6 +15,8 @@ public class BulletScript : MonoBehaviour
     public uint _pelletCount;
     // Spreading angle
     public float _spreadAngle;
+    // knockback factor
+    public float _knockbackDistance;
     // duration
     public float _duration = 3f;
     // bullet direction
@@ -51,6 +53,7 @@ public class BulletScript : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<Entity>().DecreaseHP(_damage);//의 체력깍는 함수 호출
+            other.gameObject.GetComponent<Entity>().Knockback(_dir, _knockbackDistance);
         }
         // destroy whatever hit something
         Destroy(this.gameObject);
