@@ -40,7 +40,7 @@ public class ShotgunController : MonoBehaviour
         // _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
 
         // set bullet type and change bullet
-        ChangeBulletType(BulletScript.BulletType.Rocket);
+        ChangeBulletType(BulletScript.BulletType.Scatter);
         // create shotgun member variable
         _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
 

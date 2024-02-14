@@ -19,6 +19,7 @@ public class BulletScript : MonoBehaviour
     public float _knockbackDistance;
     // duration
     public float _duration = 3f;
+    public uint _maxPenetration = 1;
     // bullet direction
     public Vector3 _dir = Vector3.zero;
     // bullet prefab
@@ -55,8 +56,12 @@ public class BulletScript : MonoBehaviour
             other.gameObject.GetComponent<Entity>().DecreaseHP(_damage);//의 체력깍는 함수 호출
             other.gameObject.GetComponent<Entity>().Knockback(_dir, _knockbackDistance);
         }
-        // destroy whatever hit something
-        Destroy(this.gameObject);
+        if (_maxPenetration <= 0)
+        {
+            // destroy whatever hit something
+            Destroy(this.gameObject);
+        }
+        _maxPenetration -= 1;
     }
 
     //처음 시작할 때 주어진 속도에 따라 움직이는 코드 작성
