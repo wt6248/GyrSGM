@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
+using UnityEngine.UIElements;
 
 public class ItemPrefabScript : MonoBehaviour
 {
+    // init stat
     public SpriteAtlas itemSpriteAtlas;
     public SpriteRenderer itemSpriteRenderer;
     public PlayerController playerController;
+    public ItemManage itemManage;
     public int itemType;
+
     // Start is called before the first frame update
     void Start()
     {
+        //init
         itemSpriteAtlas = Resources.Load<SpriteAtlas>("Sprites/ItemSpriteAtlas");
         itemSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerController = FindObjectOfType<PlayerController>();
-        
-        SetItemType();
-    }
+        itemManage = FindObjectOfType<ItemManage>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SetItemType();        
     }
 
     public void SetItemType(int givenItemType = 0)
@@ -31,7 +31,8 @@ public class ItemPrefabScript : MonoBehaviour
         itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("item_" + itemType.ToString());
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
         //주인공과 충돌했을 때 주인공의 함수 호출. 
         if(other.gameObject.name == "main character" && playerController != null)
         {
@@ -48,5 +49,16 @@ public class ItemPrefabScript : MonoBehaviour
                 playerController.SetHealthPoint();
             }
         }
+        DestroyItem();
+    }
+
+    private void DestroyItem()
+    {
+        Destroy(gameObject);
+        if (itemManage != null)
+        {
+            itemManage.DestroyItem(); // 아이템 개수 줄이기
+        }
     }
 }
+

@@ -921,7 +921,7 @@ Transform:
   m_GameObject: {fileID: 861298599}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -941,6 +941,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyGenerateCoolTime: 5
   _enemySpawnRadious: 4
+  _enemySpawnSize: {x: 0, y: 0, z: 0}
   _enemyGenerateCooldown: 0
 --- !u!114 &861298603
 MonoBehaviour:
@@ -1205,6 +1206,7 @@ MonoBehaviour:
   _hp: 0
   _name: 
   _attackDamage: 0
+  _attackSpeed: 0
   _speed: 0
   _size: {x: 0, y: 0, z: 0}
   _radious: 0
