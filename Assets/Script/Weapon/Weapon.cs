@@ -17,12 +17,14 @@ public class Weapon : MonoBehaviour
     public AudioSource _audioSource = null;
     public AudioClip _gunshotSound = null;
 
-    public Vector3 _firePoint = new(1.6f, 0f, 0f);
+    
+    private Vector3 _firePoint;
 
+    
     // Start is called before the first frame update
     void Start()
     {
-
+         _firePoint = new(0f, 0f, 0f);
     }
 
     // Update is called once per frame

@@ -46,7 +46,6 @@ public abstract class Entity : MonoBehaviour
         if (0 < delta)
         {
             _hp -= delta;
-            Debug.Log("HP: " + _hp);
         }
         if (IsDead())
         {

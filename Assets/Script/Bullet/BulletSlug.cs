@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class BulletSlug : BulletScript
 {
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        _damage = 1;
-        _speed = 8f;
-        _pelletCount = 1;
-        _spreadAngle = 0f;
-        _duration = 3f;
         _bulletPrefab = Resources.Load("Prefabs/BulletSlug") as GameObject;
     }
 

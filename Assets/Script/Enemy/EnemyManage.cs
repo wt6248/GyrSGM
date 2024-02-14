@@ -16,7 +16,7 @@ public class EnemyManage : MonoBehaviour
     public float _enemyGenerateCoolTime; // 5f
     public float _enemySpawnRadious; // 4f
     public int _generateUnitNumber;
-    public Vector3 _enemyProbability; // (0,3, 0.3, 0.3)
+    public Vector3 _enemyProbability; // (1, 1, 1)
 
 
 
@@ -63,7 +63,6 @@ public class EnemyManage : MonoBehaviour
     int getUnitID(Vector3 probVec) { // TODO: change to array
         int selectedIndex;
         Vector3 normalizedProb = toRatio(_enemyProbability);
-        Debug.Log(normalizedProb);
         float randomValue = Random.Range(0f, 1f);
         if (randomValue < normalizedProb.x)
         {
@@ -77,8 +76,7 @@ public class EnemyManage : MonoBehaviour
         {
             selectedIndex = 2;
         }
-        Debug.Log(randomValue);
-        Debug.Log(selectedIndex);
+        
         return selectedIndex;
     }
     Vector3 toRatio(Vector3 inputVec) {

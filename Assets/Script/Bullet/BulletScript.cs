@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    [Header ("Status")]
     // damage of bullet
     public uint _damage;
     // speed of bullet

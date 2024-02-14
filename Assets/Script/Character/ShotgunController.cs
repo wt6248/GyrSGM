@@ -42,7 +42,7 @@ public class ShotgunController : MonoBehaviour
         // set bullet type and change bullet
         //ChangeBulletType(BulletScript.BulletType.Rocket);
         //ChangeBulletType(BulletScript.BulletType.Scatter);
-        ChangeBulletType(BulletScript.BulletType.Slug);
+        ChangeBulletType(BulletScript.BulletType.Rocket);
         
         // create shotgun member variable
         _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
@@ -60,6 +60,8 @@ public class ShotgunController : MonoBehaviour
 
         // 자동사격: 적을 찾아서 총을 발사하는 함수를 1초마다 호출
         InvokeRepeating("AutoShoot", 0f, 1f);
+
+        
     }
 
     // Update is called once per frame
@@ -201,26 +203,30 @@ public class ShotgunController : MonoBehaviour
                 _bullet = GameObject.FindObjectOfType<BulletRocket>();
                 break;
             default:
+                _bullet = GameObject.FindObjectOfType<BulletRocket>();
                 break;
         }
     }
 
     public void ChangeBulletTypeByButton()
     {
+        Debug.Log("ChangeBullet!");
+        Debug.Log(_bulletType);
         switch (_bulletType)
         {
-            case BulletScript.BulletType.Slug:
-                _bullet = GameObject.FindObjectOfType<BulletSlug>();
-                break;
             case BulletScript.BulletType.Scatter:
-                _bullet = GameObject.FindObjectOfType<BulletScatter>();
+                _bulletType = BulletScript.BulletType.Slug;
+                break;
+            case BulletScript.BulletType.Slug:
+                _bulletType = BulletScript.BulletType.Rocket;
                 break;
             case BulletScript.BulletType.Rocket:
-                _bullet = GameObject.FindObjectOfType<BulletRocket>();
+                _bulletType = BulletScript.BulletType.Scatter;
                 break;
             default:
-                _bullet = GameObject.FindObjectOfType<BulletScatter>();
+                _bulletType = BulletScript.BulletType.Scatter;
                 break;
         }
+        ChangeBulletType(_bulletType);
     }
 }

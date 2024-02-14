@@ -9,12 +9,6 @@ public class BulletRocket : BulletScript
     // Start is called before the first frame update
     void Start()
     {
-        _damage = 10;
-        _speed = 4f;
-        _pelletCount = 1;
-        _spreadAngle = 0f;
-        _duration = 3f;
-        _explosionRadious = 1.5f;
         _bulletPrefab = Resources.Load("Prefabs/BulletRocket") as GameObject;
     }
 

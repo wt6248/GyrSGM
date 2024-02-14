@@ -133,10 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca2d9712e46e1f7d8024c34b44b856d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
-  _speed: 0
-  _pelletCount: 0
-  _spreadAngle: 0
-  _duration: 0
+  _damage: 1
+  _speed: 4
+  _pelletCount: 8
+  _spreadAngle: 15
+  _duration: 3
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}
