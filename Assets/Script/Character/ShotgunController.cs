@@ -40,7 +40,10 @@ public class ShotgunController : MonoBehaviour
         // _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
 
         // set bullet type and change bullet
-        ChangeBulletType(BulletScript.BulletType.Rocket);
+        //ChangeBulletType(BulletScript.BulletType.Rocket);
+        //ChangeBulletType(BulletScript.BulletType.Scatter);
+        ChangeBulletType(BulletScript.BulletType.Slug);
+        
         // create shotgun member variable
         _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
 
@@ -198,6 +201,25 @@ public class ShotgunController : MonoBehaviour
                 _bullet = GameObject.FindObjectOfType<BulletRocket>();
                 break;
             default:
+                break;
+        }
+    }
+
+    public void ChangeBulletTypeByButton()
+    {
+        switch (_bulletType)
+        {
+            case BulletScript.BulletType.Slug:
+                _bullet = GameObject.FindObjectOfType<BulletSlug>();
+                break;
+            case BulletScript.BulletType.Scatter:
+                _bullet = GameObject.FindObjectOfType<BulletScatter>();
+                break;
+            case BulletScript.BulletType.Rocket:
+                _bullet = GameObject.FindObjectOfType<BulletRocket>();
+                break;
+            default:
+                _bullet = GameObject.FindObjectOfType<BulletScatter>();
                 break;
         }
     }
