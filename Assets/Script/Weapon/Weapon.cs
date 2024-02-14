@@ -17,12 +17,13 @@ public class Weapon : MonoBehaviour
     public AudioSource _audioSource = null;
     public AudioClip _gunshotSound = null;
 
-    public Vector3 _firePoint = new(1.6f, 0f, 0f);
+    private Vector3 _firePoint;
 
     // Start is called before the first frame update
     void Start()
     {
 
+        _firePoint = new Vector3(0f, 0f, 0f);
     }
 
     // Update is called once per frame
@@ -53,6 +54,8 @@ public class Weapon : MonoBehaviour
         {
             float randomErrorAngle = UnityEngine.Random.Range(-bullet._spreadAngle / 2, bullet._spreadAngle / 2);
             Vector3 firePoint = Quaternion.AngleAxis(angle, Vector3.forward) * _firePoint;
+            Debug.Log(firePoint);
+            Debug.Log(_firePoint);
             GameObject pellet = Instantiate(bullet._bulletPrefab, transform.position + firePoint, Quaternion.identity);
             pellet.GetComponent<BulletScript>().SetVelocity(bullet._speed, angle + randomErrorAngle);
             pellet.GetComponent<BulletScript>().Activate();
