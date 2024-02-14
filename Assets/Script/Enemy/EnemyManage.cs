@@ -12,7 +12,7 @@ public class EnemyManage : MonoBehaviour
     GameObject enemy_speed;
     GameObject enemy_hp;
 
-    [Header ("Generate Policy")]
+    [Header("Generate Policy")]
     public float _enemyGenerateCoolTime; // 5f
     public float _enemySpawnRadious; // 4f
     public int _generateUnitNumber;
@@ -43,10 +43,11 @@ public class EnemyManage : MonoBehaviour
         {
             _enemyGenerateCooldown = _enemyGenerateCoolTime;
             // TODO : spawn enemy outside the map, not circle
-            
+
             // spawn under the probability (base, speed, hp) -> (1, 1, 1) base
-            
-            for (int i=0;i<_generateUnitNumber;i++){
+
+            for (int i = 0; i < _generateUnitNumber; i++)
+            {
                 int unitIdx = getUnitID(_enemyProbability);
                 GameObject instance;
                 if (unitIdx == 0)
@@ -56,11 +57,12 @@ public class EnemyManage : MonoBehaviour
                 else
                     instance = Instantiate(enemy_hp, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
             }
-                
+
 
         }
     }
-    int getUnitID(Vector3 probVec) { // TODO: change to array
+    int getUnitID(Vector3 probVec)
+    { // TODO: change to array
         int selectedIndex;
         Vector3 normalizedProb = toRatio(_enemyProbability);
         //Debug.Log(normalizedProb);
@@ -81,7 +83,8 @@ public class EnemyManage : MonoBehaviour
         //Debug.Log(selectedIndex);
         return selectedIndex;
     }
-    Vector3 toRatio(Vector3 inputVec) {
+    Vector3 toRatio(Vector3 inputVec)
+    {
         Vector3 outVec = new Vector3(0f, 0f, 0f);
         float sum_of_elem = inputVec.x + inputVec.y + inputVec.z;
         outVec.x = inputVec.x / sum_of_elem;
@@ -89,5 +92,5 @@ public class EnemyManage : MonoBehaviour
         outVec.z = inputVec.z / sum_of_elem;
         return outVec;
     }
-    
+
 }
