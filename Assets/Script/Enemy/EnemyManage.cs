@@ -62,7 +62,8 @@ public class EnemyManage : MonoBehaviour
     }
     int getUnitID(Vector3 probVec) { // TODO: change to array
         int selectedIndex;
-        Vector3 normalizedProb = _enemyProbability.normalized;
+        Vector3 normalizedProb = toRatio(_enemyProbability);
+        Debug.Log(normalizedProb);
         float randomValue = Random.Range(0f, 1f);
         if (randomValue < normalizedProb.x)
         {
@@ -76,6 +77,17 @@ public class EnemyManage : MonoBehaviour
         {
             selectedIndex = 2;
         }
+        Debug.Log(randomValue);
+        Debug.Log(selectedIndex);
         return selectedIndex;
     }
+    Vector3 toRatio(Vector3 inputVec) {
+        Vector3 outVec = new Vector3(0f, 0f, 0f);
+        float sum_of_elem = inputVec.x + inputVec.y + inputVec.z;
+        outVec.x = inputVec.x / sum_of_elem;
+        outVec.y = inputVec.y / sum_of_elem;
+        outVec.z = inputVec.z / sum_of_elem;
+        return outVec;
+    }
+    
 }
