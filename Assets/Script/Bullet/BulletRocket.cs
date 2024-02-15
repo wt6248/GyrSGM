@@ -25,16 +25,11 @@ public class BulletRocket : BulletScript
     // override
     override public void OnTriggerEnter2D(Collider2D other)
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _explosionRadious, LayerMask.GetMask("Enemy"));
-        foreach (Collider2D enemy in enemies)
+        Collider2D[] entities = Physics2D.OverlapCircleAll(transform.position, _explosionRadious, LayerMask.GetMask("Enemy"));
+        foreach (Collider2D entity in entities)
         {
-            enemy.gameObject.GetComponent<Entity>().DecreaseHP(_damage);//의 체력깍는 함수 호출
-            /*
-                explosionDir is calculated based on hit-point = bullet's position
-                explosionDir = enemy.position - bullet.position
-            */
-            Vector3 explosionDir = enemy.gameObject.transform.position - transform.position;
-            enemy.gameObject.GetComponent<EnemyUnitParent>().Knockback(explosionDir, _knockbackDistance);
+            Vector3 explosionDir = entity.gameObject.transform.position - transform.position;
+            AttackEntity(entity, explosionDir);
         }
         // destroy whatever hit something
         Destroy(this.gameObject);

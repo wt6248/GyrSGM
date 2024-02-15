@@ -53,30 +53,39 @@ public class BulletScript : MonoBehaviour
     */
     virtual public void OnTriggerEnter2D(Collider2D other)
     {
-        Entity enemy = other.gameObject.GetComponent<Entity>();
-        /*
-            enemy.gameObject.GetInstanceID() != enemy.GetInstanceID()
-            record in coherent value
-        */
-        if (_penetrationList.Contains(enemy.gameObject.GetInstanceID()))
+        Entity entity = other.gameObject.GetComponent<Entity>();
+        if (!CheckPenetration(entity) && !entity.IsDead())
         {
-            return;
-        }
-        _penetrationList.Add(enemy.gameObject.GetInstanceID());
-        if (other.gameObject.CompareTag("Enemy") && !enemy.IsDead())
-        {
-            // TODO : item과 머지 이후 PlayerController의 데미지 배율 값을 가져온다.
-            // TODO : DecreaseHp로 피해를 줄때 damage*PlayerController의 데미지 배율을 준다.
-            enemy.DecreaseHP(_damage);//의 체력깍는 함수 호출
-            enemy.GetComponent<EnemyUnitParent>().Knockback(_dir, _knockbackDistance);
-
-            if (_maxPenetration <= 0)
+            RecordPenetration(entity);
+            AttackEntity(other, _dir);
+            if (_maxPenetration < _penetrationList.Count)
             {
                 Destroy(this.gameObject);
             }
-            _maxPenetration -= 1;
         }
+    }
+    public void RecordPenetration(Entity entity)
+    {
+        if (!CheckPenetration(entity) && !entity.IsDead())
+        {
+            _penetrationList.Add(entity.gameObject.GetInstanceID());
+        }
+    }
+    public bool CheckPenetration(Entity entity)
+    {
+        return _penetrationList.Contains(entity.gameObject.GetInstanceID());
+    }
 
+    public void AttackEntity(Collider2D other, Vector3 knockbackDir)
+    {
+        // TODO : item과 머지 이후 PlayerController의 데미지 배율 값을 가져온
+        // TODO : DecreaseHp로 피해를 줄때 damage*PlayerController의 데미지 배율을 준다.
+        Entity entity = other.gameObject.GetComponent<Entity>();
+        entity.DecreaseHP(_damage);
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<EnemyUnitParent>().Knockback(knockbackDir, _knockbackDistance);
+        }
     }
 
     //처음 시작할 때 주어진 속도에 따라 움직이는 코드 작성
