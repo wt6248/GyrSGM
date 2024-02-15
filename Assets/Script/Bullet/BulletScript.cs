@@ -54,11 +54,15 @@ public class BulletScript : MonoBehaviour
     virtual public void OnTriggerEnter2D(Collider2D other)
     {
         Entity enemy = other.gameObject.GetComponent<Entity>();
-        if (_penetrationList.Contains(enemy.GetInstanceID()))
+        /*
+            enemy.gameObject.GetInstanceID() != enemy.GetInstanceID()
+            record in coherent value
+        */
+        if (_penetrationList.Contains(enemy.gameObject.GetInstanceID()))
         {
             return;
         }
-        _penetrationList.Add(enemy.GetInstanceID());
+        _penetrationList.Add(enemy.gameObject.GetInstanceID());
         if (other.gameObject.CompareTag("Enemy") && !enemy.IsDead())
         {
             // TODO : item과 머지 이후 PlayerController의 데미지 배율 값을 가져온다.
