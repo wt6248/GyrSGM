@@ -26,25 +26,13 @@ public class EnemyUnitParent : Entity
 
     protected void Move()
     {
-        Vector3 displacement = GetPlayerReletivePosition();
+        UpdateKnockbackVelocity();
+        transform.Translate(_knockbackVelocity * Time.deltaTime);
 
+        Vector3 displacement = GetPlayerReletivePosition();
         if (displacement.magnitude > 1)
         {
             Vector3 velocity = _speed * displacement.normalized;
-            // consider knockback
-            if (_knockbackVelocity != Vector3.zero)
-            {
-                float knockbackSpeed = _knockbackVelocity.magnitude - _frictionCoeff;
-                if (knockbackSpeed > 0)
-                {
-                    _knockbackVelocity = knockbackSpeed * _knockbackVelocity.normalized;
-                }
-                else
-                {
-                    _knockbackVelocity = Vector3.zero;
-                }
-                velocity += _knockbackVelocity;
-            }
             transform.Translate(velocity * Time.deltaTime);
         }
     }
@@ -79,7 +67,6 @@ public class EnemyUnitParent : Entity
     private Vector3 GetPlayerReletivePosition()
     {
         GameObject player = GameObject.Find("Main Character");
-        // GetComponent<Transform>();
         if (player == null)
         {
             return Vector3.zero;
@@ -90,13 +77,24 @@ public class EnemyUnitParent : Entity
         }
     }
 
-    public void Knockback(Vector3 dir, float knockbackSpeed)
+    public void Knockback(Vector3 dir, float knockbackDistance)
     {
-        _knockbackVelocity += knockbackSpeed * dir.normalized;
+        _knockbackVelocity += knockbackDistance * dir.normalized;
     }
 
-    bool IsSameDirection(Vector3 a, Vector3 b)
+    private void UpdateKnockbackVelocity()
     {
-        return a.normalized == b.normalized;
+        if (_knockbackVelocity != Vector3.zero)
+        {
+            float knockbackSpeed = _knockbackVelocity.magnitude - _frictionCoeff;
+            if (0 < knockbackSpeed)
+            {
+                _knockbackVelocity = knockbackSpeed * _knockbackVelocity.normalized;
+            }
+            else
+            {
+                _knockbackVelocity = Vector3.zero;
+            }
+        }
     }
 }
