@@ -24,7 +24,8 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         _firePoint = new(0f, 0f, 0f);
+
+
     }
 
     // Update is called once per frame

@@ -13,7 +13,7 @@ public abstract class Entity : MonoBehaviour
         Breakable
     }
     public EntityType _type;
-    [Header ("Entity Stat")]
+    [Header("Entity Stat")]
     public float _maxHP;
     public float _hp;
     public string _name;
@@ -42,7 +42,7 @@ public abstract class Entity : MonoBehaviour
 
     protected void _DecreaseHP(float delta)
     {
-       
+
         if (0 < delta)
         {
             _hp -= delta;
@@ -52,7 +52,7 @@ public abstract class Entity : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    
+
     protected void _IncreaseHP(float delta)
     {
         if (0 < delta)
@@ -68,5 +68,10 @@ public abstract class Entity : MonoBehaviour
     public bool IsDead()
     {
         return _hp <= 0;
+    }
+
+    public void Knockback(Vector3 dir, float knockbackDistance)
+    {
+        transform.Translate(knockbackDistance * dir.normalized);
     }
 }

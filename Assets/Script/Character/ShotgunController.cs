@@ -210,8 +210,8 @@ public class ShotgunController : MonoBehaviour
 
     public void ChangeBulletTypeByButton()
     {
-        Debug.Log("ChangeBullet!");
-        Debug.Log(_bulletType);
+        //Debug.Log("ChangeBullet!");
+        //Debug.Log(_bulletType);
         switch (_bulletType)
         {
             case BulletScript.BulletType.Scatter:
