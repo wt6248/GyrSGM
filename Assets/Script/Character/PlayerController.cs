@@ -100,13 +100,13 @@ public class PlayerController : Entity
 
     private void CreateCursor()
     {
-        Debug.Log("CreateCursor() 메서드 호출됨");
+        //Debug.Log("CreateCursor() 메서드 호출됨");
         if (_cursorObject == null)
         {
             GameObject cursorPrefab = Resources.Load<GameObject>("Prefabs/CursorPrefab");
             _cursorObject = Instantiate(cursorPrefab, Vector3.zero, Quaternion.identity);
             _cursorObject.transform.parent = transform;
-            Debug.Log("커서 생성");
+            //Debug.Log("커서 생성");
         }
     }
 

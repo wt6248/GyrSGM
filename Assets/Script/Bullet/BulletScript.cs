@@ -52,17 +52,21 @@ public class BulletScript : MonoBehaviour
     virtual public void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("hitted!");
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && !other.gameObject.GetComponent<Entity>().IsDead())
         {
+            //ToDo. 
+            //item과 머지 이후 PlayerController의 데미지 배율 값을 가져온다.
+            //DecreaseHp로 피해를 줄때 damage*PlayerController의 데미지 배율을 준다.
             other.gameObject.GetComponent<Entity>().DecreaseHP(_damage);//의 체력깍는 함수 호출
             other.gameObject.GetComponent<Entity>().Knockback(_dir, _knockbackDistance);
+
+            if (_maxPenetration <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+            _maxPenetration -= 1;
         }
-        if (_maxPenetration <= 0)
-        {
-            // destroy whatever hit something
-            Destroy(this.gameObject);
-        }
-        _maxPenetration -= 1;
+        
     }
 
     //처음 시작할 때 주어진 속도에 따라 움직이는 코드 작성
