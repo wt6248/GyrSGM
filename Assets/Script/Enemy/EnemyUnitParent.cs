@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyUnitParent : Entity
 {
     [Header("Knockback")]
-    public Vector3 _knockbackMomentum;
+    public Vector3 _knockbackVelocity;
     public float _frictionCoeff = 0.4f;
 
     [Header("Audio Instances")]
@@ -30,22 +30,22 @@ public class EnemyUnitParent : Entity
 
         if (displacement.magnitude > 1)
         {
-            Vector3 translation = _speed * Time.deltaTime * displacement.normalized;
+            Vector3 velocity = _speed * displacement.normalized;
             // consider knockback
-            if (_knockbackMomentum != Vector3.zero)
+            if (_knockbackVelocity != Vector3.zero)
             {
-                float knockbackSpeed = _knockbackMomentum.magnitude - _frictionCoeff;
+                float knockbackSpeed = _knockbackVelocity.magnitude - _frictionCoeff;
                 if (knockbackSpeed > 0)
                 {
-                    _knockbackMomentum = knockbackSpeed * _knockbackMomentum.normalized;
+                    _knockbackVelocity = knockbackSpeed * _knockbackVelocity.normalized;
                 }
                 else
                 {
-                    _knockbackMomentum = Vector3.zero;
+                    _knockbackVelocity = Vector3.zero;
                 }
-                translation += _knockbackMomentum;
+                velocity += _knockbackVelocity;
             }
-            transform.Translate(translation);
+            transform.Translate(velocity * Time.deltaTime);
         }
     }
     override public void DecreaseHP(float delta)
@@ -90,9 +90,9 @@ public class EnemyUnitParent : Entity
         }
     }
 
-    public void Knockback(Vector3 dir, float knockbackDistance)
+    public void Knockback(Vector3 dir, float knockbackSpeed)
     {
-        _knockbackMomentum = knockbackDistance * dir.normalized;
+        _knockbackVelocity += knockbackSpeed * dir.normalized;
     }
 
     bool IsSameDirection(Vector3 a, Vector3 b)
