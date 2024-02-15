@@ -131,16 +131,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e93994bee1c262468b500287ac6e00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
-  _maxHP: 3
-  _hp: 0
+  _type: 1
   _name: 
-  _attackDamage: 0
+  _maxHP: 3
+  _hp: 3
+  _attackDamage: 1
   _attackSpeed: 0
   _speed: 1
   _size: {x: 0, y: 0, z: 0}
   _radious: 0
   _inventorySize: 0
+  _knockbackVelocity: {x: 0, y: 0, z: 0}
+  _frictionCoeff: 0.4
   _hurtSoundSource: {fileID: 0}
   _hurtSound: {fileID: 0}
   _deadSoundSource: {fileID: 0}

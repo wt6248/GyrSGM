@@ -48,7 +48,7 @@ public class EnemyManage : MonoBehaviour
 
             for (int i = 0; i < _generateUnitNumber; i++)
             {
-                int unitIdx = getUnitID(_enemyProbability);
+                int unitIdx = GetUnitID(_enemyProbability);
                 GameObject instance;
                 if (unitIdx == 0)
                     instance = Instantiate(enemy, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
@@ -61,10 +61,10 @@ public class EnemyManage : MonoBehaviour
 
         }
     }
-    int getUnitID(Vector3 probVec)
+    int GetUnitID(Vector3 probVec)
     { // TODO: change to array
         int selectedIndex;
-        Vector3 normalizedProb = toRatio(_enemyProbability);
+        Vector3 normalizedProb = ToRatio(_enemyProbability);
         //Debug.Log(normalizedProb);
         float randomValue = Random.Range(0f, 1f);
         if (randomValue < normalizedProb.x)
@@ -81,10 +81,10 @@ public class EnemyManage : MonoBehaviour
         }
         //Debug.Log(randomValue);
         //Debug.Log(selectedIndex);
-        
+
         return selectedIndex;
     }
-    Vector3 toRatio(Vector3 inputVec)
+    Vector3 ToRatio(Vector3 inputVec)
     {
         Vector3 outVec = new Vector3(0f, 0f, 0f);
         float sum_of_elem = inputVec.x + inputVec.y + inputVec.z;

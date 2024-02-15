@@ -6,6 +6,7 @@ public class EnemyUnitParent : Entity
 {
     [Header("Knockback")]
     public Vector3 _knockbackVelocity;
+    [Range(0f, 5f)]
     public float _frictionCoeff = 0.4f;
 
     [Header("Audio Instances")]

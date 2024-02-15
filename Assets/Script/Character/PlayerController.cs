@@ -26,51 +26,21 @@ public class PlayerController : Entity
     public AudioClip _deadSound;
     public float _invincibleTime;
 
-    // player size
-    public const float playerRadious = 0.5f; // if chose circle collider
-    public readonly Vector2 playerSize = new(0.5f, 0.5f); // if chose box collider
-
     // player collision with the enemy
     private bool isTouchingEnemy = false;
 
     void Start()
     {
-        // init stat
-        _type = Entity.EntityType.Player;
-        _maxHP = 5;
-        _hp = _maxHP;
-        _name = "Player";
-        _attackDamage = 1;
-        _attackSpeed = 2;
-        _speed = 4;
-        _radious = 0.5f; // if chose circle collider
-        _size = new(0.5f, 0.5f, 0f); // if chose box collider
-        _invincibleTime = 0.5f;
-
-
-        //_cursor = GetComponentInChildren<Cursor>();
         CreateCursor();
         _cursor = _cursorObject.GetComponent<Cursor>();
         _shotGun = GetComponentInChildren<ShotgunController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        //_gyroControl = GameObject.Find("Gyro Controller").GetComponent<GyroGameObj>();
 
-
+        // init audio
         _hurtSoundSource = gameObject.AddComponent<AudioSource>();
         _hurtSound = Resources.Load<AudioClip>("Audio/dsoof");
         _deadSoundSource = gameObject.AddComponent<AudioSource>();
         _deadSound = Resources.Load<AudioClip>("Audio/dsplpain");
-
-        /*
-            if player has circle collider
-        */
-        CircleCollider2D collider = GetComponent<CircleCollider2D>();
-        collider.radius = playerRadious;
-        /*
-            if player has box collider
-        */
-        // BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        // collider.size = playerSize;
 
         // basic self healing
         InvokeRepeating("Regenerate", 0f, _healPeriod);
@@ -100,13 +70,11 @@ public class PlayerController : Entity
 
     private void CreateCursor()
     {
-        //Debug.Log("CreateCursor() 메서드 호출됨");
         if (_cursorObject == null)
         {
             GameObject cursorPrefab = Resources.Load<GameObject>("Prefabs/CursorPrefab");
             _cursorObject = Instantiate(cursorPrefab, Vector3.zero, Quaternion.identity);
             _cursorObject.transform.parent = transform;
-            //Debug.Log("커서 생성");
         }
     }
 

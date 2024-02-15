@@ -4,23 +4,23 @@ using UnityEngine;
 using TMPro;
 public class IDDisplayScript : MonoBehaviour
 {
-    int parentID;
-    TMP_Text textDisplay;
+    int _parentID;
+    TMP_Text _textDisplay;
     // Start is called before the first frame update
     void Start()
     {
-        parentID = gameObject.transform.parent.GetInstanceID();
-        textDisplay = gameObject.GetComponent<TMP_Text>();
+        _parentID = gameObject.transform.parent.GetInstanceID();
+        _textDisplay = gameObject.GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        showIDOnText(parentID);
+        ShowIDOnText(_parentID);
     }
 
-    void showIDOnText(int ID)
+    void ShowIDOnText(int ID)
     {
-        textDisplay.text = ID.ToString();
+        _textDisplay.text = ID.ToString();
     }
 }

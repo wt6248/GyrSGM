@@ -14,15 +14,8 @@ public abstract class Entity : MonoBehaviour
     }
     public EntityType _type;
     [Header("Entity Stat")]
-    public float _maxHP;
-    public float _hp;
     public string _name;
-    public float _attackDamage;
-    public float _attackSpeed;
-    public float _speed;
-    // what does size mean
-    public Vector3 _size;
-    public float _radious;
+    [SerializeField][Range(0, 5)] public float _maxHP, _hp, _attackDamage, _attackSpeed, _speed;
     // ammo inventory
     public int _inventorySize;
 

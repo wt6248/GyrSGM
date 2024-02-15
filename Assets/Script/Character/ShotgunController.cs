@@ -27,10 +27,8 @@ public class ShotgunController : MonoBehaviour
     public GameObject _shotgunShell;
     Vector3 _shellDropPosition = new(0.96f, 0.18f, 0f);
 
-    // Start is called before the first frame update
     private void Start()
     {
-        // CreateShotGun();
         // TODO? : instantiate prefab at the start()
         GameObject shotgunPrefab = Resources.Load<GameObject>("Prefabs/ShotgunPrefab");
         GameObject shotgunObject = Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
@@ -70,12 +68,6 @@ public class ShotgunController : MonoBehaviour
         AutoAim();
     }
 
-    // private void CreateShotGun(){
-    //     GameObject shotgunPrefab = Resources.Load<GameObject>("Prefabs/ShotgunPrefab");
-    //     GameObject shotgunObject = Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
-    //     shotgunObject.transform.parent = transform;
-    // }
-
     // 총 쏘는 함수
     public void FireGun()
     {
@@ -93,7 +85,6 @@ public class ShotgunController : MonoBehaviour
 
     public void GenerateShotgunShell()
     {
-        //GameObject shotgunShell = Instantiate(_shotgunShell, _shellDropPosition,Quaternion.identity, transform);
         GameObject shotgunShell = Instantiate(_shotgunShell, _shotgun.transform, true);
         shotgunShell.transform.localPosition = _shellDropPosition;
         shotgunShell.transform.SetParent(null);
@@ -103,7 +94,7 @@ public class ShotgunController : MonoBehaviour
         GameObject shotgunShell = Instantiate(_shotgunShell, _shotgun.transform, true);
         shotgunShell.transform.localPosition = _shellDropPosition;
         shotgunShell.transform.SetParent(null);
-        shotgunShell.GetComponent<ShellScript>().Set_direction(shellEulerAngle);
+        shotgunShell.GetComponent<ShellScript>().SetDirection(shellEulerAngle);
     }
 
     void AutoAim()
@@ -129,7 +120,6 @@ public class ShotgunController : MonoBehaviour
     // 가까운 적을 찾는 함수
     GameObject FindNearestEnemy()
     {
-        // // Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer);
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _autoAimRadious, LayerMask.GetMask("Enemy"));
 
         if (enemies == null)
@@ -210,8 +200,6 @@ public class ShotgunController : MonoBehaviour
 
     public void ChangeBulletTypeByButton()
     {
-        //Debug.Log("ChangeBullet!");
-        //Debug.Log(_bulletType);
         switch (_bulletType)
         {
             case BulletScript.BulletType.Scatter:
