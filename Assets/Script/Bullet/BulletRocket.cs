@@ -5,10 +5,13 @@ using UnityEngine;
 public class BulletRocket : BulletScript
 {
     public float _explosionRadious;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        //차후 inspector에서 knockbackDistance 값을 저장하면 아래는 삭제할 것.
+        _knockbackDistance = 2f;
         _bulletPrefab = Resources.Load("Prefabs/BulletRocket") as GameObject;
     }
 
