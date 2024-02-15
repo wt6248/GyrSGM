@@ -9,7 +9,7 @@ public class BulletScatter : BulletScript
     {
         //차후 inspector에서 knockbackDistance 값을 저장하면 아래는 삭제할 것.
         _knockbackDistance = 1f;
-        _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
+        _bulletPrefab = Resources.Load("Prefabs/BulletScatter") as GameObject;
     }
 
     // Update is called once per frame
