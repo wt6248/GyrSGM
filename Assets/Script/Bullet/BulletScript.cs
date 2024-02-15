@@ -68,7 +68,7 @@ public class BulletScript : MonoBehaviour
             // TODO : item과 머지 이후 PlayerController의 데미지 배율 값을 가져온다.
             // TODO : DecreaseHp로 피해를 줄때 damage*PlayerController의 데미지 배율을 준다.
             enemy.DecreaseHP(_damage);//의 체력깍는 함수 호출
-            enemy.Knockback(_dir, _knockbackDistance);
+            enemy.GetComponent<EnemyUnitParent>().Knockback(_dir, _knockbackDistance);
 
             if (_maxPenetration <= 0)
             {

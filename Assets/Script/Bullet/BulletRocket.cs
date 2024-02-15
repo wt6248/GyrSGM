@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletRocket : BulletScript
 {
     public float _explosionRadious;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,7 @@ public class BulletRocket : BulletScript
                 explosionDir = enemy.position - bullet.position
             */
             Vector3 explosionDir = enemy.gameObject.transform.position - transform.position;
-            enemy.gameObject.GetComponent<Entity>().Knockback(explosionDir, _knockbackDistance);
+            enemy.gameObject.GetComponent<EnemyUnitParent>().Knockback(explosionDir, _knockbackDistance);
         }
         // destroy whatever hit something
         Destroy(this.gameObject);

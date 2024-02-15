@@ -69,9 +69,4 @@ public abstract class Entity : MonoBehaviour
     {
         return _hp <= 0;
     }
-
-    public void Knockback(Vector3 dir, float knockbackDistance)
-    {
-        transform.Translate(knockbackDistance * dir.normalized);
-    }
 }

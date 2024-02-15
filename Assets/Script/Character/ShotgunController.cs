@@ -42,8 +42,8 @@ public class ShotgunController : MonoBehaviour
         // set bullet type and change bullet
         //ChangeBulletType(BulletScript.BulletType.Rocket);
         //ChangeBulletType(BulletScript.BulletType.Scatter);
-        ChangeBulletType(BulletScript.BulletType.Rocket);
-        
+        ChangeBulletType(BulletScript.BulletType.Slug);
+
         // create shotgun member variable
         _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
 
@@ -61,7 +61,7 @@ public class ShotgunController : MonoBehaviour
         // 자동사격: 적을 찾아서 총을 발사하는 함수를 1초마다 호출
         InvokeRepeating("AutoShoot", 0f, 1f);
 
-        
+
     }
 
     // Update is called once per frame

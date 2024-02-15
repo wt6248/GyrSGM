@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyUnitBase : Entity
+public class EnemyUnitBase : EnemyUnitParent
 {
-    // audio instances
-    public AudioSource _hurtSoundSource;
-    public AudioClip _hurtSound;
-    public AudioSource _deadSoundSource;
-    public AudioClip _deadSound;
-
     void Start()
     {
         // init stat
@@ -22,7 +16,7 @@ public class EnemyUnitBase : Entity
         _hp = _maxHP;
         _name = "Enemy" + gameObject.GetInstanceID();
         //_attackDamage = 1;
-       // _speed = 1;
+        // _speed = 1;
         _radious = 0.5f; // if chose circle collider
         _size = new(0.5f, 0.5f, 0f); // if chose box collider
 
@@ -43,62 +37,10 @@ public class EnemyUnitBase : Entity
         */
         // BoxCollider2D collider = GetComponent<BoxCollider2D>();
         // collider.size = _size;
-    } 
+    }
     void Update()
     {
-        //Debug.Log("enemy: (" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + ")\n");
         Move();
-    }
-
-    private void Move()
-    {
-        /*
-            GetPlayerPosition returns position itself if NO player exists
-            This enables enemy auto-stop if player dead
-        */
-        Vector3 playerPosition = GetPlayerPosition();
-        
-        if ((transform.position - playerPosition).magnitude > 1) {
-            //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
-            transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime * _speed);
-            //transform.Translate((playerPosition - transform.position).normalized * 0.005f);
-        } 
-    }
-    public override void DecreaseHP(float delta)
-    {
-        /*
-            Be careful that _DecreaseHP includes
-            Destroy(this.gameObject);
-        */
-        _DecreaseHP(delta);
-        if (IsDead())
-        { // dead
-            if(_deadSound != null)
-            {
-                _deadSoundSource.PlayOneShot(_deadSound);
-            }
-        }
-        else
-        { // alive
-            if (_hurtSound != null)
-            {
-                _hurtSoundSource.PlayOneShot(_hurtSound);
-            }
-        }
-        return;
-    }
-    private Vector3 GetPlayerPosition()
-    {
-        GameObject player = GameObject.Find("Main Character");
-        // GetComponent<Transform>();
-        if (player == null)
-        {
-            return transform.position;
-        }
-        else
-        {
-            return player.transform.position;
-        }
     }
 }
 
