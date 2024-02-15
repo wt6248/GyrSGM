@@ -961,7 +961,10 @@ MonoBehaviour:
   _speed: 8
   _pelletCount: 1
   _spreadAngle: 0
+  _knockbackDistance: 0
   _duration: 3
+  _maxPenetration: 1
+  _penetrationList: 
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}
 --- !u!1 &519420028
@@ -1025,7 +1028,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 39
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1445,6 +1448,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950730228}
   m_CullTransparentMesh: 1
+--- !u!1 &1139136527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1139136529}
+  - component: {fileID: 1139136528}
+  m_Layer: 0
+  m_Name: ScreenSizeTester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1139136528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139136527}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee015c2d43207740bfe2a8b4dbee4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1139136529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139136527}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1202679113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1998,7 +2045,10 @@ MonoBehaviour:
   _speed: 4
   _pelletCount: 8
   _spreadAngle: 15
+  _knockbackDistance: 0
   _duration: 3
+  _maxPenetration: 1
+  _penetrationList: 
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}
 --- !u!1 &1658037588
@@ -2195,7 +2245,10 @@ MonoBehaviour:
   _speed: 4
   _pelletCount: 1
   _spreadAngle: 0
+  _knockbackDistance: 0
   _duration: 3
+  _maxPenetration: 1
+  _penetrationList: 
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}
   _explosionRadious: 1.5
@@ -2419,3 +2472,4 @@ SceneRoots:
   - {fileID: 1202679115}
   - {fileID: 861298601}
   - {fileID: 279674479}
+  - {fileID: 1139136529}

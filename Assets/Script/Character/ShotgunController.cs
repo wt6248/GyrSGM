@@ -163,11 +163,11 @@ public class ShotgunController : MonoBehaviour
             _shotgunAngle = Vec2Angle(v);
             if (-90 < _shotgunAngle && _shotgunAngle < 90)
             { // Do not flip shotgun image
-                _shotgun.transform.localScale = new(0.2f, 0.2f, 1);
+                _shotgun.transform.localScale = new(1f, 1f, 1);
             }
             else
             { // Flip shotgun image
-                _shotgun.transform.localScale = new(0.2f, -0.2f, 1);
+                _shotgun.transform.localScale = new(1f, -1f, 1);
             }
             _shotgun.transform.rotation = Quaternion.Euler(0, 0, _shotgunAngle);
         }
