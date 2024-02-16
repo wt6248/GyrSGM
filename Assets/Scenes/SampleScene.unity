@@ -1164,10 +1164,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpawnSize: {x: 0, y: 0, z: 0}
   _enemyGenerateCooldown: 0
-  _enemyGenerateCoolTime: 5
-  _enemySpawnRadious: 4
-  _generateUnitNumber: 1
-  _enemyProbability: {x: 1, y: 1, z: 1}
+  _enemyGenerateCoolTime: 3
+  _enemySpawnRadious: 18
+  _generateUnitNumber: 2
+  _enemyProbability: {x: 1, y: 2, z: 0.5}
 --- !u!114 &861298603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,7 +1569,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1721,7 +1721,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
 --- !u!114 &1310912408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2042,7 +2042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
-  _speed: 4
+  _speed: 33
   _pelletCount: 8
   _spreadAngle: 15
   _knockbackDistance: 0
