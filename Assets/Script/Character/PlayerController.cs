@@ -31,6 +31,8 @@ public class PlayerController : Entity
 
     void Start()
     {
+
+        _hp = _maxHP;
         CreateCursor();
         _cursor = _cursorObject.GetComponent<Cursor>();
         _shotGun = GetComponentInChildren<ShotgunController>();
@@ -62,10 +64,7 @@ public class PlayerController : Entity
         //  _shotGun.FireGun();
         //}
 
-        if (isTouchingEnemy)
-        {
-            StartCoroutine(DamageRoutine(1f, 0.1f));
-        }
+
     }
 
     private void CreateCursor()
@@ -140,13 +139,12 @@ public class PlayerController : Entity
         {
             return;
         }
-
         _DecreaseHP(damage);
         if (_hurtSound != null && !IsDead())
         {
             _hurtSoundSource.PlayOneShot(_hurtSound);
         }
-        Debug.Log("Player HP is " + _hp);
+        //Debug.Log("Player HP is " + _hp);
         if (IsDead())
         {
             if (_deadSound != null)
@@ -175,7 +173,6 @@ public class PlayerController : Entity
     {
         bool local_debug = false;
         int n_attack = local_debug ? 2 : 1;
-
         if (other.gameObject.CompareTag("Enemy"))
         {
             isTouchingEnemy = true;
@@ -189,7 +186,7 @@ public class PlayerController : Entity
 
         else
         {
-            StartCoroutine(DamageRoutine(1f, 0.1f));
+            //StartCoroutine(DamageRoutine(1f, 0.1f));
 
 
             // test code for the function operates well
@@ -198,6 +195,7 @@ public class PlayerController : Entity
                 other.gameObject.transform.position = new Vector3(10, 10, 0);
             }
         }
+        StartCoroutine(DamageRoutine(other.gameObject.GetComponent<Entity>()._attackDamage, 0.1f));
     }
 
     void OnCollisionExit2D(Collision2D other)

@@ -15,7 +15,8 @@ public abstract class Entity : MonoBehaviour
     public EntityType _type;
     [Header("Entity Stat")]
     public string _name;
-    [SerializeField][Range(0, 5)] public float _maxHP, _hp, _attackDamage, _attackSpeed, _speed;
+    [SerializeField][Range(0, 5)] public float _maxHP, _attackDamage, _attackSpeed, _speed;
+    public float _hp;
     // ammo inventory
     public int _inventorySize;
 
@@ -24,7 +25,7 @@ public abstract class Entity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _hp = _maxHP;
     }
 
     // Update is called once per frame

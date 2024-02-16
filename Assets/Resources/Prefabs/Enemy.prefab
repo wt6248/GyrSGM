@@ -135,11 +135,9 @@ MonoBehaviour:
   _name: 
   _maxHP: 3
   _hp: 3
-  _attackDamage: 1
+  _attackDamage: 0.1
   _attackSpeed: 0
   _speed: 1
-  _size: {x: 0, y: 0, z: 0}
-  _radious: 0
   _inventorySize: 0
   _knockbackVelocity: {x: 0, y: 0, z: 0}
   _frictionCoeff: 0.4
