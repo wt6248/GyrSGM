@@ -33,6 +33,7 @@ public class ItemPrefabScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
+        Debug.Log("collide with " + other.gameObject.name.ToString());
         //주인공과 충돌했을 때 주인공의 함수 호출. 
         if(other.gameObject.name == "main character" && playerController != null)
         {
@@ -48,9 +49,8 @@ public class ItemPrefabScript : MonoBehaviour
             {
                 playerController.SetHealthPoint();
             }
-            DestroyItem();
         }
-        
+        DestroyItem();
     }
 
     private void DestroyItem()
