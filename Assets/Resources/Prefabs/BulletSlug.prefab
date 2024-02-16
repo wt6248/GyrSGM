@@ -137,6 +137,9 @@ MonoBehaviour:
   _speed: 8
   _pelletCount: 1
   _spreadAngle: 0
+  _knockbackDistance: 0
   _duration: 3
+  _maxPenetration: 1
+  _penetrationList: 
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}

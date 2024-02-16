@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyUnitHP : EnemyUnitParent
+public class EnemyUnitSpeed : EnemyUnitParent
 {
     void Start()
     {
+        // unit type
+        _enemyType = EnemyType.Charging;
         _hp = _maxHP;
         _name = "Enemy" + gameObject.GetInstanceID();
 

@@ -6,6 +6,8 @@ public class EnemyUnitBase : EnemyUnitParent
 {
     void Start()
     {
+        // unit type
+        _enemyType = EnemyType.Patrolling;
         _hp = _maxHP;
         _name = "Enemy" + gameObject.GetInstanceID();
 

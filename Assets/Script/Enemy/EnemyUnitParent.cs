@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class EnemyUnitParent : Entity
 {
+    public enum EnemyType
+    {    
+        Charging , // 플레이어에게 돌진하는 적
+        Stationary , // 가만히 서 있는 적
+        Patrolling // 플레이어와 일정 거리를 유지하는 적
+    }
+
     [Header("Knockback")]
     public Vector3 _knockbackVelocity;
     [Range(0f, 5f)]
@@ -14,18 +21,20 @@ public class EnemyUnitParent : Entity
     public AudioClip _hurtSound;
     public AudioSource _deadSoundSource;
     public AudioClip _deadSound;
-
+    public float _minPlayerDistance; // 원거리 유닛에만 해당
+    
+    // enemy type
+    protected EnemyType _enemyType;
     void Start()
     {
-
+    
     }
 
     void Update()
     {
 
     }
-
-    protected void Move()
+    protected void PastMove() // Move function used before 2/16: Only implemented Charging enemy
     {
         UpdateKnockbackVelocity();
         transform.Translate(_knockbackVelocity * Time.deltaTime);
@@ -36,6 +45,41 @@ public class EnemyUnitParent : Entity
             Vector3 velocity = _speed * displacement.normalized;
             transform.Translate(velocity * Time.deltaTime);
         }
+    }
+    protected void Move()
+    {
+        // Konckback policy
+        UpdateKnockbackVelocity();
+        transform.Translate(_knockbackVelocity * Time.deltaTime);
+        
+        // get displacement from the charactor
+        Vector3 displacement = GetPlayerReletivePosition();
+
+        if (_enemyType == EnemyType.Charging) {
+            if (displacement.magnitude > 1)
+            {
+                Vector3 velocity = _speed * displacement.normalized;
+                transform.Translate(velocity * Time.deltaTime);
+            }
+        } else if (_enemyType == EnemyType.Patrolling) {
+            if (displacement.magnitude > 1)
+            {
+                int moveDir = (displacement.magnitude - _minPlayerDistance) >= 0f ? 1: -1;
+                Vector3 velocity = _speed * displacement.normalized * moveDir;
+                transform.Translate(velocity * Time.deltaTime);
+            }
+        }
+        
+        
+    }
+
+    protected void MoveToMaintainDistance() // 원거리 유닛의 이동 정책
+    {
+        UpdateKnockbackVelocity();
+        transform.Translate(_knockbackVelocity * Time.deltaTime);
+        Vector3 displacement = GetPlayerReletivePosition();
+      
+
     }
     override public void DecreaseHP(float delta)
     {

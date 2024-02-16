@@ -961,7 +961,10 @@ MonoBehaviour:
   _speed: 8
   _pelletCount: 1
   _spreadAngle: 0
+  _knockbackDistance: 0
   _duration: 3
+  _maxPenetration: 1
+  _penetrationList: 
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}
 --- !u!1 &519420028
@@ -1163,8 +1166,8 @@ MonoBehaviour:
   _enemyGenerateCooldown: 0
   _enemyGenerateCoolTime: 5
   _enemySpawnRadious: 4
-  _generateUnitNumber: 1
-  _enemyProbability: {x: 1, y: 1, z: 1}
+  _generateUnitNumber: 5
+  _enemyProbability: {x: 1, y: 0, z: 0}
 --- !u!114 &861298603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,14 +1560,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _maxHP: 10000
-  _hp: 0
   _name: 
+  _maxHP: 5
   _attackDamage: 0
   _attackSpeed: 0
   _speed: 0
-  _size: {x: 0, y: 0, z: 0}
-  _radious: 0
+  _hp: 0
   _inventorySize: 0
   _gyroControl: {fileID: 0}
   _isInvincible: 0
@@ -1574,7 +1575,7 @@ MonoBehaviour:
   _hurtSound: {fileID: 0}
   _deadSoundSource: {fileID: 0}
   _deadSound: {fileID: 0}
-  _invincibleTime: 0
+  _invincibleTime: 0.5
 --- !u!114 &1310912403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1998,7 +1999,10 @@ MonoBehaviour:
   _speed: 4
   _pelletCount: 8
   _spreadAngle: 15
+  _knockbackDistance: 0
   _duration: 3
+  _maxPenetration: 1
+  _penetrationList: 
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}
 --- !u!1 &1658037588
@@ -2195,7 +2199,10 @@ MonoBehaviour:
   _speed: 4
   _pelletCount: 1
   _spreadAngle: 0
+  _knockbackDistance: 0
   _duration: 3
+  _maxPenetration: 1
+  _penetrationList: 
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}
   _explosionRadious: 1.5

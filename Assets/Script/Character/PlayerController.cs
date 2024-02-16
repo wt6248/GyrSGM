@@ -195,7 +195,7 @@ public class PlayerController : Entity
                 other.gameObject.transform.position = new Vector3(10, 10, 0);
             }
         }
-        StartCoroutine(DamageRoutine(other.gameObject.GetComponent<Entity>()._attackDamage, 0.1f));
+        StartCoroutine(DamageRoutine(other.gameObject.GetComponent<Entity>()._attackDamage, other.gameObject.GetComponent<Entity>()._attackSpeed));
     }
 
     void OnCollisionExit2D(Collision2D other)
