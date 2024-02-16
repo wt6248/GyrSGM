@@ -137,7 +137,7 @@ MonoBehaviour:
   _name: 
   _attackDamage: 0
   _attackSpeed: 0
-  _speed: 1
+  _speed: 5
   _size: {x: 0, y: 0, z: 0}
   _radious: 0
   _inventorySize: 0

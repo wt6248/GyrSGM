@@ -42,7 +42,7 @@ public class PlayerController : Entity
         _name = "Player";
         _attackDamage = 1;
         _attackSpeed = 2;
-        _speed = 4;
+        _speed = 100;
         _radious = 0.5f; // if chose circle collider
         _size = new(0.5f, 0.5f, 0f); // if chose box collider
         _invincibleTime = 0.5f;

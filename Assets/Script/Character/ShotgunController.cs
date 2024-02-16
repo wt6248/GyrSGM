@@ -59,7 +59,7 @@ public class ShotgunController : MonoBehaviour
         _fireButton.onClick.AddListener(FireGun);
 
         // 자동사격: 적을 찾아서 총을 발사하는 함수를 1초마다 호출
-        InvokeRepeating("AutoShoot", 0f, 1f);
+        InvokeRepeating("AutoShoot", 0f, 1.5f);
 
         
     }
