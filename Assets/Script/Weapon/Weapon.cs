@@ -31,19 +31,27 @@ public class Weapon : MonoBehaviour
         {
             _reloadCoolDown -= Time.deltaTime;
         }
+        else
+        {
+            _reloadCoolDown = 0;
+        }
     }
 
-    public bool IsMagazineEmpty()
+    private bool IsMagazineEmpty()
     {
         return _remainingAmmo == 0;
     }
-    bool IsReloading()
+    private bool IsReloading()
     {
-        return _reloadCoolDown != 0;
+        return 0 < _reloadCoolDown;
+    }
+    private bool IsReadyToFire()
+    {
+        return !IsReloading() || !IsMagazineEmpty();
     }
     public void Fire(float angle, BulletScript bullet)
     {
-        if (IsReloading())
+        if (!IsReadyToFire())
         {
             return;
         }
@@ -57,9 +65,10 @@ public class Weapon : MonoBehaviour
             pellet.GetComponent<BulletScript>().Activate();
         }
 
-        // TODO : decrease ammo
+        _remainingAmmo -= 1;
+        PlayFireSound();
     }
-    public void PlayFireSound()
+    private void PlayFireSound()
     {
         if (_gunshotSound != null)
         {
@@ -75,5 +84,6 @@ public class Weapon : MonoBehaviour
 
         _reloadCoolDown = _reloadTime;
         _remainingAmmo = _magazineCapacity;
+        _remainingMagazine -= 1;
     }
 }

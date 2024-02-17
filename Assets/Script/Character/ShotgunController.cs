@@ -73,7 +73,6 @@ public class ShotgunController : MonoBehaviour
     {
         // _shotgun.Fire(_shotgunAngle);
         _shotgun.Fire(_shotgunAngle, _bullet);
-        _shotgun.PlayFireSound();
         GenerateShotgunShell(_shotgunAngle + 180.0f);
         ShakeCamera();
     }
