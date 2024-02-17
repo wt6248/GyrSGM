@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public bool _isDebugging = false;
     // number of bullet in one magazine
     public uint _remainingAmmo = 4;
     public uint _remainingMagazine = 1;

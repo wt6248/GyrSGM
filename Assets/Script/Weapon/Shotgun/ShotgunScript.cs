@@ -17,15 +17,6 @@ public class ShotgunScript : Weapon
         */
         _audioSource = gameObject.AddComponent<AudioSource>();
         _gunshotSound = Resources.Load<AudioClip>("Audio/gunshotSound");
-
-        if (_isDebugging == false)
-        { // property of specific shotgun
-            _remainingAmmo = 4;
-            _remainingMagazine = 1;
-            _magazineCapacity = 4;
-            _reloadTime = 3;
-            _reloadCoolDown = 0;
-        }
     }
 
     // Update is called once per frame
