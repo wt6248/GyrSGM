@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class EnemyManage : MonoBehaviour
 {
+    // GameObject enemy;
 
-    public Vector3 _enemySpawnSize;
-    public float _enemyGenerateCooldown = 0;
-    GameObject enemy;
-
-    GameObject enemy_speed;
-    GameObject enemy_hp;
+    // GameObject enemy_speed;
+    // GameObject enemy_hp;
 
     [Header("Generate Policy")]
-    public float _enemyGenerateCoolTime; // 5f
-    public float _enemySpawnRadious; // 4f
     public int _generateUnitNumber;
+    [SerializeField][Range(0f, 5f)] public float _enemyGenerateCoolTime, _enemySpawnRadious;
+    public float _enemyGenerateCooldown = 0;
+    public Vector3 _enemySpawnSize;
     public Vector3 _enemyProbability; // (1, 1, 1)
+    public RatioTable _ratioTable = new();
 
 
 
@@ -26,10 +25,14 @@ public class EnemyManage : MonoBehaviour
         // initialize initial enemies
         // enemyList.Add(/*TODO*/);
 
-        enemy = Resources.Load("Prefabs/Enemy") as GameObject;
+        // enemy = Resources.Load("Prefabs/Enemy") as GameObject;
 
-        enemy_speed = Resources.Load("Prefabs/EnemySpeed") as GameObject;
-        enemy_hp = Resources.Load("Prefabs/EnemyHP") as GameObject;
+        // enemy_speed = Resources.Load("Prefabs/EnemySpeed") as GameObject;
+        // enemy_hp = Resources.Load("Prefabs/EnemyHP") as GameObject;
+
+        _ratioTable.Add("Prefabs/Enemy", 3);
+        _ratioTable.Add("Prefabs/EnemySpeed", 2);
+        _ratioTable.Add("Prefabs/EnemyHP", 1);
     }
 
     // Update is called once per frame
@@ -48,17 +51,18 @@ public class EnemyManage : MonoBehaviour
 
             for (int i = 0; i < _generateUnitNumber; i++)
             {
-                int unitIdx = GetUnitID(_enemyProbability);
-                GameObject instance;
-                if (unitIdx == 0)
-                    instance = Instantiate(enemy, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
-                else if (unitIdx == 1)
-                    instance = Instantiate(enemy_speed, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
-                else
-                    instance = Instantiate(enemy_hp, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+                // int unitIdx = GetUnitID(_enemyProbability);
+                // GameObject instance;
+                // if (unitIdx == 0)
+                //     instance = Instantiate(enemy, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+                // else if (unitIdx == 1)
+                //     instance = Instantiate(enemy_speed, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+                // else
+                //     instance = Instantiate(enemy_hp, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+
+                GameObject enemy = _ratioTable.GetRandomGameobject();
+                GameObject instance = Instantiate(enemy, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
             }
-
-
         }
     }
     int GetUnitID(Vector3 probVec)
