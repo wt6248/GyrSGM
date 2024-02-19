@@ -1165,7 +1165,8 @@ MonoBehaviour:
   _enemyGenerateCoolTime: 3
   _enemySpawnRadious: 5
   _enemyGenerateCooldown: 0
-  _enemySpawnSize: {x: 0, y: 0, z: 0}
+  _enemySpawnSizeOuter: {x: 36, y: 78, z: 0}
+  _enemySpawnSizeInner: {x: 5, y: 5, z: 0}
   _enemyProbability: {x: 1, y: 2, z: 0.5}
 --- !u!114 &861298603
 MonoBehaviour:
