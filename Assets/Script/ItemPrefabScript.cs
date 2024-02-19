@@ -11,7 +11,7 @@ public class ItemPrefabScript : MonoBehaviour
     public SpriteRenderer itemSpriteRenderer;
     public PlayerController playerController;
     public ItemManage itemManage;
-    public int itemType;
+    public int _itemType;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +25,13 @@ public class ItemPrefabScript : MonoBehaviour
         SetItemType();        
     }
 
-    public void SetItemType(int givenItemType = 0)
+    public void SetItemType()
     {
-        itemType = givenItemType;
-        itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("item_" + itemType.ToString());
+        _itemType = Random.Range(0, 6);
+
+        // 선택된 아이템 종류의 스프라이트 가져오기
+        itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("item_" + _itemType.ToString());        
+        //newItem.GetComponent<SpriteRenderer>().sprite = itemSpriteRenderer.sprite;
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
@@ -37,11 +40,11 @@ public class ItemPrefabScript : MonoBehaviour
         //주인공과 충돌했을 때 주인공의 함수 호출. 
         if(other.gameObject.name == "main character" && playerController != null)
         {
-            if (itemType == 0 || itemType == 1)
+            if (_itemType == 0 || _itemType == 1)
             {
                 playerController.SetAttackDamage();
             }
-            else if(itemType == 2 || itemType == 3)
+            else if(_itemType == 2 || _itemType == 3)
             {
                 playerController.SetAttackSpeed();
             }
@@ -49,8 +52,8 @@ public class ItemPrefabScript : MonoBehaviour
             {
                 playerController.SetHealthPoint();
             }
+            DestroyItem();
         }
-        DestroyItem();
     }
 
     private void DestroyItem()

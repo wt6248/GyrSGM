@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
+using UnityEngine.UIElements;
+
 
 public class ItemManage : MonoBehaviour
 {
@@ -33,18 +36,33 @@ public class ItemManage : MonoBehaviour
             //Random cool time
             _itemGenerateCoolTime = Random.Range(_minItemCooldownTime, _maxItemCooldownTime);
             _itemGenerateCooldown = _itemGenerateCoolTime;
+
+            GenerateItem();
+
+
             //Generate item
-            GameObject instance = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity);
-            /*
-                for debuging(Generate Item)
-            */
-            if(instance!=null)
-            {
-                _countItem++;
-                Debug.Log("아이템이 생성됨 : " + _countItem);            
-            }
+            //GameObject instance = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity);
         }
     }
+
+    void GenerateItem()
+    {
+        if (item == null)
+        {
+            Debug.LogWarning("No item sprite atlas assigned!");
+            return;
+        }
+
+        // 랜덤한 위치에 아이템 생성
+        GameObject newItem = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity);;
+        
+        /*
+            for debuging(Generate Item)
+        */
+        _countItem++;
+        Debug.Log("아이템이 생성됨: " + _countItem);
+    }
+
 
     public void DestroyItem()
     {

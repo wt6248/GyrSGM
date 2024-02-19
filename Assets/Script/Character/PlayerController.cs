@@ -31,6 +31,7 @@ public class PlayerController : Entity
 
     // player collision with the enemy
     private bool isTouchingEnemy = false;
+    private Rigidbody2D rb;
 
     void Start()
     {
@@ -64,6 +65,10 @@ public class PlayerController : Entity
         */
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
         collider.radius = playerRadious;
+        
+        //fixing player's transform
+        rb = GetComponent<Rigidbody2D>();        
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
         /*
             if player has box collider
         */
