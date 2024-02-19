@@ -15,7 +15,7 @@ public abstract class Entity : MonoBehaviour
     public EntityType _type;
     [Header("Entity Stat")]
     public string _name;
-    [SerializeField][Range(0, 5)] public float _maxHP, _attackDamage, _attackSpeed, _speed;
+    [SerializeField][Range(0, 100)] public float _maxHP, _attackDamage, _attackSpeed, _speed;
     public float _hp;
     // ammo inventory
     public int _inventorySize;
