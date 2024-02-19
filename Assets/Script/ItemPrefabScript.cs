@@ -13,7 +13,6 @@ public class ItemPrefabScript : MonoBehaviour
     public ItemManage itemManage;
     public int _itemType;
 
-    // Start is called before the first frame update
     void Start()
     {
         //init
@@ -22,16 +21,15 @@ public class ItemPrefabScript : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         itemManage = FindObjectOfType<ItemManage>();
 
+        //function for retrieving sprites of random item types
         SetItemType();        
     }
 
     public void SetItemType()
     {
-        _itemType = Random.Range(0, 6);
-
-        // 선택된 아이템 종류의 스프라이트 가져오기
-        itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("item_" + _itemType.ToString());        
-        //newItem.GetComponent<SpriteRenderer>().sprite = itemSpriteRenderer.sprite;
+        //retrieve sprites of random item types
+        _itemType = Random.Range(0, 5);
+        itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("item_" + _itemType.ToString());      
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
@@ -48,7 +46,7 @@ public class ItemPrefabScript : MonoBehaviour
             {
                 playerController.SetAttackSpeed();
             }
-            else // item 4, 5 (체력키트, 알약)
+            else // item 4 (체력키트)
             {
                 playerController.SetHealthPoint();
             }
