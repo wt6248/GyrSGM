@@ -8,9 +8,10 @@ using UnityEngine;
         set itemA(30%), itemB(50%), itemC(20%) and get random item
         => Add(itemA, 3), Add(itemB, 5), Add(itemC, 2), GetRandomGameobject()
 */
+[System.Serializable]
 public class RatioTable
 {
-    List<int> _ratioList = new();
+    public List<int> _ratioList = new();
     List<GameObject> _prefabList = new();
     public void Add(string prefab, int ratio)
     {

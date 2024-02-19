@@ -1163,10 +1163,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _generateUnitNumber: 2
   _enemyGenerateCoolTime: 3
-  _enemySpawnRadious: 18
+  _enemySpawnRadious: 5
   _enemyGenerateCooldown: 0
   _enemySpawnSize: {x: 0, y: 0, z: 0}
-  _enemyProbability: {x: 1, y: 2, z: 0.5}
+  _enemyProbability: {x: 3, y: 4, z: 1}
 --- !u!114 &861298603
 MonoBehaviour:
   m_ObjectHideFlags: 0

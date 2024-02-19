@@ -14,7 +14,7 @@ public class EnemyManage : MonoBehaviour
     [SerializeField][Range(0f, 5f)] public float _enemyGenerateCoolTime, _enemySpawnRadious;
     public float _enemyGenerateCooldown = 0;
     public Vector3 _enemySpawnSize;
-    public Vector3 _enemyProbability; // (1, 1, 1)
+    public Vector3Int _enemyProbability; // (1, 1, 1)
     public RatioTable _ratioTable = new();
 
 
@@ -30,9 +30,9 @@ public class EnemyManage : MonoBehaviour
         // enemy_speed = Resources.Load("Prefabs/EnemySpeed") as GameObject;
         // enemy_hp = Resources.Load("Prefabs/EnemyHP") as GameObject;
 
-        _ratioTable.Add("Prefabs/Enemy", 3);
-        _ratioTable.Add("Prefabs/EnemySpeed", 2);
-        _ratioTable.Add("Prefabs/EnemyHP", 1);
+        _ratioTable.Add("Prefabs/Enemy", _enemyProbability.x);
+        _ratioTable.Add("Prefabs/EnemySpeed", _enemyProbability.y);
+        _ratioTable.Add("Prefabs/EnemyHP", _enemyProbability.z);
     }
 
     // Update is called once per frame
