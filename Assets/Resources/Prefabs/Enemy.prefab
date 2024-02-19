@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e93994bee1c262468b500287ac6e00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 1
   _name: 
   _maxHP: 3
   _attackDamage: 1
@@ -146,6 +146,7 @@ MonoBehaviour:
   _deadSoundSource: {fileID: 0}
   _deadSound: {fileID: 0}
   _minPlayerDistance: 0
+  _enemyType: 2
 --- !u!50 &7373365711714288345
 Rigidbody2D:
   serializedVersion: 4
