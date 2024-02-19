@@ -38,7 +38,7 @@ public class ItemPrefabScript : MonoBehaviour
     {
         Debug.Log("collide with " + other.gameObject.name.ToString());
         //주인공과 충돌했을 때 주인공의 함수 호출. 
-        if(other.gameObject.name == "main character" && playerController != null)
+        if(other.gameObject.name == "Main Character" && playerController != null)
         {
             if (_itemType == 0 || _itemType == 1)
             {

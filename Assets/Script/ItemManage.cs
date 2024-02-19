@@ -38,9 +38,6 @@ public class ItemManage : MonoBehaviour
             _itemGenerateCooldown = _itemGenerateCoolTime;
 
             GenerateItem();
-
-
-            //Generate item
             //GameObject instance = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity);
         }
     }
@@ -53,7 +50,7 @@ public class ItemManage : MonoBehaviour
             return;
         }
 
-        // 랜덤한 위치에 아이템 생성
+        // create items at random position
         GameObject newItem = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity);;
         
         /*
