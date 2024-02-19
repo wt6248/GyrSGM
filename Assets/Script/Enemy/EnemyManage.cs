@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyManage : MonoBehaviour
@@ -13,7 +14,7 @@ public class EnemyManage : MonoBehaviour
     public int _generateUnitNumber;
     [SerializeField][Range(0f, 5f)] public float _enemyGenerateCoolTime, _enemySpawnRadious;
     public float _enemyGenerateCooldown = 0;
-    public Vector3 _enemySpawnSize;
+    public Vector3 _enemySpawnSizeOuter, _enemySpawnSizeInner;
     public Vector3Int _enemyProbability; // (1, 1, 1)
     public RatioTable _ratioTable = new();
 
@@ -61,7 +62,10 @@ public class EnemyManage : MonoBehaviour
                 //     instance = Instantiate(enemy_hp, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
 
                 GameObject enemy = _ratioTable.GetRandomGameobject();
-                GameObject instance = Instantiate(enemy, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
+                Vector3 spawnRange = new(Random.Range(_enemySpawnSizeInner.x, _enemySpawnSizeOuter.x),
+                                           Random.Range(_enemySpawnSizeInner.y, _enemySpawnSizeOuter.y),
+                                           0);
+                GameObject instance = Instantiate(enemy, spawnRange / 2, Quaternion.identity);
             }
         }
     }

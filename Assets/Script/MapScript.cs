@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class Map : MonoBehaviour
     void Start()
     {
         // set screen ratio
-        Screen.SetResolution(1920, 1080, true);
+        // Screen.SetResolution(1920, 1080, true);
+
+        // 30 means m_ReferencePixelsPerUnit in CanvasScale.cs
+        _size = new(Screen.width / 30, Screen.height / 30, 0);
 
         _map = GameObject.Find("Map");
         _map.transform.localScale = _size;
@@ -22,7 +26,7 @@ public class Map : MonoBehaviour
         */
 
         _enemyManage = GameObject.FindObjectOfType<EnemyManage>();
-        _enemyManage._enemySpawnSize = _size;
+        _enemyManage._enemySpawnSizeOuter = _size;
 
     }
 
