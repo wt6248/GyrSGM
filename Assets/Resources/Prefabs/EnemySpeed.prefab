@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8021885994210200317}
-  - component: {fileID: 188338807627059929}
   - component: {fileID: 5192717273841589164}
   - component: {fileID: -2974276390197385294}
   - component: {fileID: 8770251393527390763}
+  - component: {fileID: 188338807627059929}
   m_Layer: 6
   m_Name: EnemySpeed
   m_TagString: Enemy
@@ -30,39 +30,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &188338807627059929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974822950704094434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef0a72bf2d17d574f8040ae9cd791e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: 1
-  _name: 
-  _maxHP: 0.8
-  _hp: 0.8
-  _attackDamage: 0.5
-  _attackSpeed: 0
-  _speed: 2
-  _size: {x: 0, y: 0, z: 0}
-  _radious: 0
-  _inventorySize: 0
-  _knockbackVelocity: {x: 0, y: 0, z: 0}
-  _frictionCoeff: 0.4
-  _hurtSoundSource: {fileID: 0}
-  _hurtSound: {fileID: 0}
-  _deadSoundSource: {fileID: 0}
-  _deadSound: {fileID: 0}
 --- !u!58 &5192717273841589164
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -166,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fc769babcbcf6a44e94a8f11f057f6fb, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -177,3 +149,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &188338807627059929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974822950704094434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0a72bf2d17d574f8040ae9cd791e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  _maxHP: 0.8
+  _hp: 0
+  _name: 
+  _attackDamage: 0
+  _attackSpeed: 0
+  _speed: 10
+  _size: {x: 0, y: 0, z: 0}
+  _radious: 0
+  _inventorySize: 0
+  _hurtSoundSource: {fileID: 0}
+  _hurtSound: {fileID: 0}
+  _deadSoundSource: {fileID: 0}
+  _deadSound: {fileID: 0}
