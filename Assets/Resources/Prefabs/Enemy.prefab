@@ -145,7 +145,7 @@ MonoBehaviour:
   _hurtSound: {fileID: 0}
   _deadSoundSource: {fileID: 0}
   _deadSound: {fileID: 0}
-  _minPlayerDistance: 0
+  _minPlayerDistance: 8
   _enemyType: 2
 --- !u!50 &7373365711714288345
 Rigidbody2D:
