@@ -1611,7 +1611,7 @@ MonoBehaviour:
   _hp: 0
   _inventorySize: 0
   _gyroControl: {fileID: 0}
-  _isInvincible: 1
+  _isInvincible: 0
   _healPerSec: 0.05
   _healPeriod: 1
   _hurtSoundSource: {fileID: 0}
