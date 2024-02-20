@@ -8,7 +8,7 @@ public class BulletScript : MonoBehaviour
 {
     [Header("Status")]
     // damage of bullet
-    public uint _damage;
+    public float _damage;
     // speed of bullet
     public float _speed;
 
