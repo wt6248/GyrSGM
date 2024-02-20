@@ -18,6 +18,9 @@ public class PlayerController : Entity
     public float _healPerSec = 0.05f;
     public float _healPeriod = 1f;
 
+    // 공격 관련 변수
+    public float _speedMod = 0f;
+    public float _attackCooldown = 0f;
 
     // audio instances
     public AudioSource _hurtSoundSource;
@@ -33,6 +36,8 @@ public class PlayerController : Entity
     {
 
         _hp = _maxHP;
+        // 플레이어의 공격 속도 
+        _attackSpeed = 0.66f;
         CreateCursor();
         _cursor = _cursorObject.GetComponent<Cursor>();
         _shotGun = GetComponentInChildren<ShotgunController>();
@@ -241,7 +246,14 @@ public class PlayerController : Entity
 
     public void SetAttackSpeed()
     {
-        _attackSpeed *= 1.1f;
+        _speedMod += 0.1f;
 
+    }
+
+    // 공격 주기 함수
+    public float Cooldown()
+    {
+        _attackCooldown = 1/(0.66f * (1 + _speedMod));
+        return _attackCooldown;
     }
 }

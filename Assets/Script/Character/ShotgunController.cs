@@ -27,6 +27,8 @@ public class ShotgunController : MonoBehaviour
     public GameObject _shotgunShell;
     Vector3 _shellDropPosition = new(0.96f, 0.18f, 0f);
     bool _canShoot = false;
+    public PlayerController playerController;
+
 
     private void Start()
     {
@@ -34,6 +36,7 @@ public class ShotgunController : MonoBehaviour
         GameObject shotgunPrefab = Resources.Load<GameObject>("Prefabs/ShotgunPrefab");
         GameObject shotgunObject = Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
         shotgunObject.transform.parent = transform;
+        playerController = FindObjectOfType<PlayerController>();
 
         // bullet
         // _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
@@ -182,7 +185,7 @@ public class ShotgunController : MonoBehaviour
     {
         while (true)
         {            
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(playerController.Cooldown());
             _canShoot = true;
         }
     }
