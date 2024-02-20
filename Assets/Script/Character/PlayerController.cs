@@ -36,7 +36,7 @@ public class PlayerController : Entity
     {
 
         _hp = _maxHP;
-        // 플레이어의 공격 속도 
+        _name = "Player" + gameObject.GetInstanceID();
         CreateCursor();
         _cursor = _cursorObject.GetComponent<Cursor>();
         _shotGun = GetComponentInChildren<ShotgunController>();
@@ -245,7 +245,6 @@ public class PlayerController : Entity
     public void SetAttackSpeed()
     {
         _speedMod += 0.1f;
-
     }
 
     // 공격 주기 함수
