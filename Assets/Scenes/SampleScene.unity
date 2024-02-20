@@ -1660,7 +1660,7 @@ MonoBehaviour:
   _type: 0
   _name: 
   _maxHP: 5
-  _attackDamage: 0
+  _attackDamage: 1
   _attackSpeed: 0.66
   _speed: 60
   _hp: 0
