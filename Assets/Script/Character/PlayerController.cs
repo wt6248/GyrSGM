@@ -33,6 +33,7 @@ public class PlayerController : Entity
     {
 
         _hp = _maxHP;
+        _name = "Player" + gameObject.GetInstanceID();
         CreateCursor();
         _cursor = _cursorObject.GetComponent<Cursor>();
         _shotGun = GetComponentInChildren<ShotgunController>();

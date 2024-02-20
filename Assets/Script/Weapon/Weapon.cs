@@ -66,6 +66,7 @@ public class Weapon : MonoBehaviour
 
             PlayerController player = GameObject.FindObjectOfType<PlayerController>();
             pellet.GetComponent<BulletScript>()._damage = player._attackDamage;
+            pellet.GetComponent<BulletScript>().RecordPenetration(player);
         }
 
         _remainingAmmo -= 1;
