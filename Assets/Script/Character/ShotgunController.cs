@@ -20,12 +20,13 @@ public class ShotgunController : MonoBehaviour
 
     // Radious of auto-aim
     public float _autoAimRadious = 10f;
-    // 산탄총 발사 각도
+    // shooting angle
     public float _shotgunAngle = 0;
 
 
     public GameObject _shotgunShell;
     Vector3 _shellDropPosition = new(0.96f, 0.18f, 0f);
+    bool _canShoot = false;
 
     private void Start()
     {
@@ -56,19 +57,22 @@ public class ShotgunController : MonoBehaviour
         // subscribe to the onClick event
         _fireButton.onClick.AddListener(FireGun);
 
-        // 자동사격: 적을 찾아서 총을 발사하는 함수를 1초마다 호출
-        InvokeRepeating("AutoShoot", 0f, 1.5f);
-
-
+        // autoshooting function
+        StartCoroutine(AutoShootCooldown());
+        //InvokeRepeating("AutoShoot", 0f, 1.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
         AutoAim();
+        if(_canShoot) 
+        {
+            AutoShoot();
+        }
     }
 
-    // 총 쏘는 함수
+    // shooting function
     public void FireGun()
     {
         // _shotgun.Fire(_shotgunAngle);
@@ -113,10 +117,7 @@ public class ShotgunController : MonoBehaviour
         }
     }
 
-    /*
-        산탄총을 발사하는 데 필요한 함수들
-    */
-    // 가까운 적을 찾는 함수
+    // finding nearest enemy for autoshooting
     GameObject FindNearestEnemy()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _autoAimRadious, LayerMask.GetMask("Enemy"));
@@ -167,13 +168,22 @@ public class ShotgunController : MonoBehaviour
         return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
     }
 
-    // 자동 사격 함수
+    // autoshooting function
     void AutoShoot()
     {
         GameObject nearestEnemy = FindNearestEnemy();
         if (nearestEnemy != null)
         {
             FireGun();
+            _canShoot = false;
+        }
+    }
+    IEnumerator AutoShootCooldown()
+    {
+        while (true)
+        {            
+            yield return new WaitForSeconds(1.5f);
+            _canShoot = true;
         }
     }
 
