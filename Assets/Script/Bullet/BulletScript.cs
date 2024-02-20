@@ -58,7 +58,7 @@ public class BulletScript : MonoBehaviour
         {
             RecordPenetration(entity);
             AttackEntity(other, _dir);
-            if (_maxPenetration < _penetrationList.Count)
+            if (_maxPenetration < _penetrationList.Count - 1) // -1 for shooter itself
             {
                 Destroy(this.gameObject);
             }
