@@ -63,6 +63,9 @@ public class Weapon : MonoBehaviour
             GameObject pellet = Instantiate(bullet._bulletPrefab, transform.position + firePoint, Quaternion.identity);
             pellet.GetComponent<BulletScript>().SetVelocity(bullet._speed, angle + randomErrorAngle);
             pellet.GetComponent<BulletScript>().Activate();
+
+            PlayerController player = GameObject.FindObjectOfType<PlayerController>();
+            pellet.GetComponent<BulletScript>()._damage = player._attackDamage;
         }
 
         _remainingAmmo -= 1;
