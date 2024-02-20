@@ -30,7 +30,7 @@ public class EnemyUnitParent : Entity
     void Start()
     {
         //Todo. 적이 원거리 공격 형식이면, 아래 코드로 원거리 공격 스크립트 추가.
-        gameobject.AddComponent<EnemyRangeAttack>();
+        gameObject.AddComponent<EnemyRangeAttack>();
 
     }
 
