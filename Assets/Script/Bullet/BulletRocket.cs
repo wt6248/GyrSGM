@@ -32,6 +32,9 @@ public class BulletRocket : BulletScript
             AttackEntity(entity, explosionDir);
         }
         // destroy whatever hit something
-        Destroy(this.gameObject);
+        if(other.gameObject.name != "Main Character")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
