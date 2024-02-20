@@ -37,7 +37,6 @@ public class PlayerController : Entity
 
         _hp = _maxHP;
         // 플레이어의 공격 속도 
-        _attackSpeed = 0.66f;
         CreateCursor();
         _cursor = _cursorObject.GetComponent<Cursor>();
         _shotGun = GetComponentInChildren<ShotgunController>();
@@ -253,7 +252,7 @@ public class PlayerController : Entity
     // 공격 주기 함수
     public float Cooldown()
     {
-        _attackCooldown = 1/(0.66f * (1 + _speedMod));
+        _attackCooldown = 1/(_attackSpeed * (1 + _speedMod));
         return _attackCooldown;
     }
 }
