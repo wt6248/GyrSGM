@@ -139,7 +139,8 @@ MonoBehaviour:
   _spreadAngle: 15
   _knockbackDistance: 0
   _duration: 3
-  _maxPenetration: 1
+  _maxPenetration: 0
   _penetrationList: 
   _dir: {x: 0, y: 0, z: 0}
   _bulletPrefab: {fileID: 0}
+  _attackableType: 0
