@@ -62,11 +62,11 @@ public class Weapon : MonoBehaviour
             Vector3 firePoint = Quaternion.AngleAxis(angle, Vector3.forward) * _firePoint;
             GameObject pellet = Instantiate(bullet._bulletPrefab, transform.position + firePoint, Quaternion.identity);
             pellet.GetComponent<BulletScript>().SetVelocity(bullet._speed, angle + randomErrorAngle);
-            pellet.GetComponent<BulletScript>().Activate();
+            pellet.GetComponent<BulletScript>().Activate(Entity.EntityType.Enemy);
 
             PlayerController player = GameObject.FindObjectOfType<PlayerController>();
             pellet.GetComponent<BulletScript>()._damage = player._attackDamage;
-            pellet.GetComponent<BulletScript>().RecordPenetration(player);
+            // pellet.GetComponent<BulletScript>().RecordPenetration(player);
         }
 
         _remainingAmmo -= 1;

@@ -8,6 +8,7 @@ public class EnemyUnitBase : EnemyUnitParent
     {
         _hp = _maxHP;
         _name = "Enemy" + gameObject.GetInstanceID();
+        if (_enemyType == EnemyType.Patrolling) gameObject.AddComponent<EnemyRangeAttack>();
 
         // init audio
         _hurtSoundSource = gameObject.AddComponent<AudioSource>();

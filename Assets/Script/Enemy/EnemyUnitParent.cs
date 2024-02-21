@@ -25,6 +25,8 @@ public class EnemyUnitParent : Entity
 
     // enemy type
     [SerializeField] protected EnemyType _enemyType;
+    // enemy attack type
+
     void Start()
     {
 

@@ -250,7 +250,7 @@ public class PlayerController : Entity
     // 공격 주기 함수
     public float Cooldown()
     {
-        _attackCooldown = 1/(_attackSpeed * (1 + _speedMod));
+        _attackCooldown = 1 / (_attackSpeed * (1 + _speedMod));
         return _attackCooldown;
     }
 }
