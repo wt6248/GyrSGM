@@ -1606,7 +1606,6 @@ GameObject:
   - component: {fileID: 1310912406}
   - component: {fileID: 1310912409}
   - component: {fileID: 1310912404}
-  - component: {fileID: 1310912409}
   m_Layer: 0
   m_Name: Main Character
   m_TagString: Untagged
@@ -1659,7 +1658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2889927a4a5ee1e499e0f67aba6b7dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 2
   _name: 
   _maxHP: 5
   _attackDamage: 1
@@ -1668,7 +1667,7 @@ MonoBehaviour:
   _hp: 0
   _inventorySize: 0
   _gyroControl: {fileID: 0}
-  _isInvincible: 1
+  _isInvincible: 0
   _healPerSec: 0.05
   _healPeriod: 1
   _speedMod: 0
@@ -1823,7 +1822,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!1 &1489622255
 GameObject:
   m_ObjectHideFlags: 0
