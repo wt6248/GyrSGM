@@ -48,9 +48,9 @@ public class EnemyRangeAttack : MonoBehaviour
         BulletScript bullet = instance.GetComponent<BulletScript>();
         //총알 방향 지정.
         bullet._dir = displacement.normalized;
-        bullet.Activate();
+        bullet.Activate(Entity.EntityType.Player);
         EnemyUnitParent enemy = GetComponentInParent<EnemyUnitParent>();
-        bullet.RecordPenetration(enemy);
+        // bullet.RecordPenetration(enemy);
         //발사하면 _canShoot false로 수정.
         _canShoot = false;
     }

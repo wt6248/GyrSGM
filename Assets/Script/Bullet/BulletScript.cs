@@ -33,6 +33,7 @@ public class BulletScript : MonoBehaviour
         Scatter, // shotgun
         Rocket // rocket luncher
     }
+    public Entity.EntityType _attackableType;
 
     // Start is called before the first frame update
     void Start()
@@ -54,11 +55,12 @@ public class BulletScript : MonoBehaviour
     virtual public void OnTriggerEnter2D(Collider2D other)
     {
         Entity entity = other.gameObject.GetComponent<Entity>();
+        if (entity._type != _attackableType) { return; }
         if (!CheckPenetration(entity) && !entity.IsDead())
         {
             RecordPenetration(entity);
             AttackEntity(other, _dir);
-            if (_maxPenetration < _penetrationList.Count - 1) // -1 for shooter itself
+            if (_maxPenetration < _penetrationList.Count) // -1 for shooter itself
             {
                 Destroy(this.gameObject);
             }
@@ -103,12 +105,13 @@ public class BulletScript : MonoBehaviour
         _dir = new(directionX, directionY, 0);
     }
 
-    public void Activate()
+    public void Activate(Entity.EntityType type)
     {
         if (_duration <= 0)
         {
             _duration = 3f;
         }
+        _attackableType = type;
         Destroy(this.gameObject, _duration);
     }
 }
