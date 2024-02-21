@@ -56,6 +56,7 @@ public class BulletScript : MonoBehaviour
     {
         Entity entity = other.gameObject.GetComponent<Entity>();
         if (entity._type != _attackableType) { return; }
+        if (entity._type == Entity.EntityType.Player && entity.GetComponent<PlayerController>()._isInvincible) { return; }
         if (!CheckPenetration(entity) && !entity.IsDead())
         {
             RecordPenetration(entity);
