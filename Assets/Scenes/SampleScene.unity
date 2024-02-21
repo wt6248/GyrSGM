@@ -1064,6 +1064,56 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 2105977745}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &858092988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 858092990}
+  - component: {fileID: 858092989}
+  m_Layer: 0
+  m_Name: ItemGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &858092989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858092988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18eb5a4d7ba516d488d6ab1d610c921f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minItemCooldownTime: 2
+  _maxItemCooldownTime: 4
+  _itemGenerateCoolTime: 0
+  _itemGenerateCooldown: 0
+  _itemSpawnRadius: 4
+  _countItem: 0
+--- !u!4 &858092990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858092988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.1539092, y: 2.9503508, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &861298599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,6 +1606,7 @@ GameObject:
   - component: {fileID: 1310912406}
   - component: {fileID: 1310912409}
   - component: {fileID: 1310912404}
+  - component: {fileID: 1310912409}
   m_Layer: 0
   m_Name: Main Character
   m_TagString: Untagged
@@ -1595,6 +1646,7 @@ MonoBehaviour:
   _autoAimRadious: 10
   _shotgunAngle: 0
   _shotgunShell: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!114 &1310912402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1607,18 +1659,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2889927a4a5ee1e499e0f67aba6b7dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 2
+  _type: 0
   _name: 
   _maxHP: 5
-  _attackDamage: 3
-  _attackSpeed: 0
+  _attackDamage: 1
+  _attackSpeed: 0.66
   _speed: 60
   _hp: 0
   _inventorySize: 0
   _gyroControl: {fileID: 0}
-  _isInvincible: 0
+  _isInvincible: 1
   _healPerSec: 0.05
   _healPeriod: 1
+  _speedMod: 0
+  _attackCooldown: 0
   _hurtSoundSource: {fileID: 0}
   _hurtSound: {fileID: 0}
   _deadSoundSource: {fileID: 0}
@@ -1769,7 +1823,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 4
 --- !u!1 &1489622255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2503,3 +2557,4 @@ SceneRoots:
   - {fileID: 861298601}
   - {fileID: 279674479}
   - {fileID: 1139136529}
+  - {fileID: 858092990}

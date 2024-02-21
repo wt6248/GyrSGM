@@ -18,6 +18,9 @@ public class PlayerController : Entity
     public float _healPerSec = 0.05f;
     public float _healPeriod = 1f;
 
+    // 공격 관련 변수
+    public float _speedMod = 0f;
+    public float _attackCooldown = 0f;
 
     // audio instances
     public AudioSource _hurtSoundSource;
@@ -236,13 +239,18 @@ public class PlayerController : Entity
 
     public void SetAttackDamage()
     {
-
-        _attackDamage *= 1.1f;
+        _attackDamage += 0.1f;
     }
 
     public void SetAttackSpeed()
     {
-        _attackSpeed *= 1.1f;
+        _speedMod += 0.1f;
+    }
 
+    // 공격 주기 함수
+    public float Cooldown()
+    {
+        _attackCooldown = 1/(_attackSpeed * (1 + _speedMod));
+        return _attackCooldown;
     }
 }
