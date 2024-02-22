@@ -245,7 +245,7 @@ public class ShotgunController : MonoBehaviour
         
         if (Input.touchCount > 0) {
             Vector3 pos = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0);
-            Debug.Log(pos - transform.position);
+            RotateShotgun(pos - transform.position);
             return true;
         }
         return false;
