@@ -244,7 +244,7 @@ public class ShotgunController : MonoBehaviour
     public bool ManualAim() {
         
         if (Input.touchCount > 0) {
-            Vector3 pos = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0);
+            Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0));
             RotateShotgun(pos - transform.position);
             return true;
         }
