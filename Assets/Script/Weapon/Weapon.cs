@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -72,6 +73,23 @@ public class Weapon : MonoBehaviour
         _remainingAmmo -= 1;
         PlayFireSound();
     }
+
+    public void Fire(float eulerAngle, Catrige catrige, Entity.EntityType attackableEntityType = Entity.EntityType.Enemy)
+    {
+        if (!IsReadyToFire())
+        {
+            return;
+        }
+        float directionX = Mathf.Cos(eulerAngle * Mathf.Deg2Rad);
+        float directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
+        Vector3 FireLine = new(directionX,directionY,0f);
+
+        catrige.FireCatrige(FireLine,attackableEntityType);
+        _remainingAmmo -= 1;
+        PlayFireSound();
+    }
+
+
     private void PlayFireSound()
     {
         if (_gunshotSound != null)

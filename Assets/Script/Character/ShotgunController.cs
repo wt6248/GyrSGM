@@ -9,6 +9,11 @@ public class ShotgunController : MonoBehaviour
 {
     ShotgunScript _shotgun;
     BulletScript _bullet;
+
+    [SerializeField]
+    public Catrige[] _catrigeList;
+    public Catrige _currentCatrige;
+    public uint _currentCatrigeNumber = 0;
     /*
         bulletType for player speeds each respects to weight of weapon
     */
@@ -63,6 +68,8 @@ public class ShotgunController : MonoBehaviour
         // autoshooting function
         StartCoroutine(AutoShootCooldown());
         //InvokeRepeating("AutoShoot", 0f, 1.5f);
+
+        _currentCatrige = _catrigeList[0];
     }
 
     // Update is called once per frame
@@ -80,6 +87,14 @@ public class ShotgunController : MonoBehaviour
     {
         // _shotgun.Fire(_shotgunAngle);
         _shotgun.Fire(_shotgunAngle, _bullet);
+        GenerateShotgunShell(_shotgunAngle + 180.0f);
+        ShakeCamera();
+    }
+
+    public void FireGun_Catrige()
+    {
+        // _shotgun.Fire(_shotgunAngle);
+        _shotgun.Fire(_shotgunAngle, _currentCatrige);
         GenerateShotgunShell(_shotgunAngle + 180.0f);
         ShakeCamera();
     }
@@ -228,5 +243,12 @@ public class ShotgunController : MonoBehaviour
                 break;
         }
         ChangeBulletType(_bulletType);
+    }
+
+    public void changeCatrigeType()
+    {
+        _currentCatrigeNumber += 1;
+        _currentCatrigeNumber %= 3;
+        _currentCatrige = _catrigeList[_currentCatrigeNumber];
     }
 }
