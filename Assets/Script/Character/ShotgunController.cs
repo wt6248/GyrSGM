@@ -29,7 +29,7 @@ public class ShotgunController : MonoBehaviour
     bool _canShoot = false;
     public PlayerController playerController;
 
-
+    int _aimType = 0; // 0: auto, 1: maunal
     private void Start()
     {
         // TODO? : instantiate prefab at the start()
@@ -63,15 +63,23 @@ public class ShotgunController : MonoBehaviour
         // autoshooting function
         StartCoroutine(AutoShootCooldown());
         //InvokeRepeating("AutoShoot", 0f, 1.5f);
+        _aimType = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        AutoAim();
-        if(_canShoot) 
+        bool isAimed = false;
+        if (_aimType == 0) {
+            isAimed = AutoAim();
+        }
+            
+            
+        else if (_aimType == 1)
+            isAimed = ManualAim();
+        if(_canShoot && isAimed) 
         {
-            AutoShoot();
+            Shoot(isAimed);
         }
     }
 
@@ -103,7 +111,7 @@ public class ShotgunController : MonoBehaviour
         shotgunShell.GetComponent<ShellScript>().SetDirection(shellEulerAngle);
     }
 
-    void AutoAim()
+    bool AutoAim()
     {
         // Not holding joystick
         if (_fixedJoystick.Direction == Vector2.zero)
@@ -112,11 +120,14 @@ public class ShotgunController : MonoBehaviour
             if (nearestEnemy != null)
             {
                 RotateShotgun(nearestEnemy.transform.position - transform.position);
+                return true;
             }
+            return false;
         }
         else
         {
             RotateShotgun(_fixedJoystick.Direction);
+            return true;
         }
     }
 
@@ -171,14 +182,14 @@ public class ShotgunController : MonoBehaviour
         return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
     }
 
-    // autoshooting function
-    void AutoShoot()
+    // shooting function
+    void Shoot(bool isAimed)
     {
         GameObject nearestEnemy = FindNearestEnemy();
-        if (nearestEnemy != null)
+        if (isAimed)
         {
             FireGun();
-            _canShoot = false;
+            _canShoot = false; 
         }
     }
     IEnumerator AutoShootCooldown()
@@ -228,5 +239,15 @@ public class ShotgunController : MonoBehaviour
                 break;
         }
         ChangeBulletType(_bulletType);
+    }
+
+    public bool ManualAim() {
+        
+        if (Input.touchCount > 0) {
+            Vector3 pos = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0);
+            Debug.Log(pos - transform.position);
+            return true;
+        }
+        return false;
     }
 }
