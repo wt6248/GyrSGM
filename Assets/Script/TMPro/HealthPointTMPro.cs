@@ -10,7 +10,7 @@ public class HealthPointTMPro : MonoBehaviour
     // Hp를 참조할 오브젝트
     public PlayerController playerController;
     // 현재 Hp를 나타내는 변수
-    float _currentHealth;
+    float _currentHealthPoint;
 
     void Start()
     {
@@ -29,13 +29,17 @@ public class HealthPointTMPro : MonoBehaviour
         // PlayerController.cs에서 hp 값을 가져와서 텍스트로 표시
         if (playerController != null && HpTMPro != null)
         {
-            _currentHealth = playerController.HealthPointManager();
-            HpTMPro.text = "HP: " + _currentHealth.ToString();
+            _currentHealthPoint = playerController.HealthPointManager();
+            HpTMPro.text = "HP: " + _currentHealthPoint.ToString("F2");
+        }
+        else if(playerController == null)
+        {
+            HpTMPro.text = "HP: 0.00";
         }
         else
         {
             // 디버깅 오류처리
-            Debug.LogWarning("PlayeController 또는 HpTMPro가 설정되지 않았습니다.");
+            Debug.LogWarning("HpTMPro가 설정되지 않았습니다.");
         }
     }
 }
