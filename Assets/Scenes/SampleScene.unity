@@ -301,10 +301,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034e998b7b92a8b459bd618597f02e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletType: 0
-  _bulletDamage: 0
-  _bulletSpeed: 0
-  _bulletPelletCount: 0
+  _bulletType: 1
+  _bulletDamage: 1
+  _bulletSpeed: 33
+  _spreadAngle: 15
+  _bulletPelletCount: 8
+  _knockbackDistance: 3
+  _duration: 0.3
+  _maxPenetration: 1
 --- !u!1 &71471360
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,10 +421,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fad0f4dbe0127148b2333f34cc16bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletType: 0
-  _bulletDamage: 0
-  _bulletSpeed: 0
-  _bulletPelletCount: 0
+  _bulletType: 3
+  _bulletDamage: 1
+  _bulletSpeed: 20
+  _spreadAngle: 0
+  _bulletPelletCount: 1
+  _knockbackDistance: 0
+  _duration: 3
+  _maxPenetration: 1
 --- !u!1 &271827746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,10 +1212,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21995a5d6cc9a3245a85d93cd8b0da91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletType: 0
-  _bulletDamage: 0
-  _bulletSpeed: 0
-  _bulletPelletCount: 0
+  _bulletType: 3
+  _bulletDamage: 1
+  _bulletSpeed: 10
+  _spreadAngle: 20
+  _bulletPelletCount: 10
+  _knockbackDistance: 0
+  _duration: 0.5
+  _maxPenetration: 1
 --- !u!1 &858092988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1253,7 @@ MonoBehaviour:
   _maxItemCooldownTime: 4
   _itemGenerateCoolTime: 0
   _itemGenerateCooldown: 0
-  _itemSpawnRadius: 4
+  _itemSpawnRadius: 12
   _countItem: 0
 --- !u!4 &858092990
 Transform:
@@ -1463,7 +1475,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1310912401}
         m_TargetAssemblyTypeName: ShotgunController, Assembly-CSharp
-        m_MethodName: ChangeBulletTypeByButton
+        m_MethodName: changeCatrigeType
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1556,9 +1568,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletType: 0
-  _bulletDamage: 0
-  _bulletSpeed: 0
-  _bulletPelletCount: 0
+  _bulletDamage: 5
+  _bulletSpeed: 33
+  _spreadAngle: 1
+  _bulletPelletCount: 1
+  _knockbackDistance: 40
+  _duration: 3
+  _maxPenetration: 1
 --- !u!1 &950730228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,11 +1848,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b679440dbc26cae40ae218d76a2438b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _catrige:
+  _catrigeList:
   - {fileID: 58199808}
   - {fileID: 939302472}
   - {fileID: 2005574905}
-  _bulletType: 0
+  _currentCatrige: {fileID: 0}
+  _currentCatrigeNumber: 0
   _fixedJoystick: {fileID: 0}
   _fireButton: {fileID: 0}
   _autoAimRadious: 10
@@ -2719,10 +2736,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03db5cae11e5e954a837428b319fc204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletType: 0
-  _bulletDamage: 0
-  _bulletSpeed: 0
-  _bulletPelletCount: 0
+  _bulletType: 2
+  _bulletDamage: 4
+  _bulletSpeed: 15
+  _spreadAngle: 1
+  _bulletPelletCount: 1
+  _knockbackDistance: 40
+  _duration: 2
+  _maxPenetration: 1
+  _explosionRadious: 2
 --- !u!1001 &2105977745
 PrefabInstance:
   m_ObjectHideFlags: 0

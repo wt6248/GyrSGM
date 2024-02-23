@@ -87,14 +87,14 @@ public class ShotgunController : MonoBehaviour
     {
         // _shotgun.Fire(_shotgunAngle);
         _shotgun.Fire(_shotgunAngle, _bullet);
+        
         GenerateShotgunShell(_shotgunAngle + 180.0f);
         ShakeCamera();
     }
 
     public void FireGun_Catrige()
     {
-        // _shotgun.Fire(_shotgunAngle);
-        _shotgun.Fire(_shotgunAngle, _currentCatrige);
+        _shotgun.Fire(_currentCatrige);
         GenerateShotgunShell(_shotgunAngle + 180.0f);
         ShakeCamera();
     }
@@ -192,7 +192,8 @@ public class ShotgunController : MonoBehaviour
         GameObject nearestEnemy = FindNearestEnemy();
         if (nearestEnemy != null)
         {
-            FireGun();
+            //FireGun();
+            FireGun_Catrige();
             _canShoot = false;
         }
     }

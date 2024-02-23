@@ -116,4 +116,15 @@ public class BulletScript : MonoBehaviour
         _attackableType = type;
         Destroy(this.gameObject, _duration);
     }
+
+    public void Activate(float speed, Vector3 direction, float damage, float knockbackDistance, float duration, uint maxPenetration , Entity.EntityType attackableType)
+    {
+        _damage = damage;
+        SetVelocity(speed, direction);
+        _knockbackDistance = knockbackDistance;
+        _duration = duration;
+        _maxPenetration = maxPenetration;
+        _attackableType = attackableType;
+        Destroy(this.gameObject, _duration);
+    }
 }

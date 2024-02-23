@@ -74,17 +74,48 @@ public class Weapon : MonoBehaviour
         PlayFireSound();
     }
 
-    public void Fire(float eulerAngle, Catrige catrige, Entity.EntityType attackableEntityType = Entity.EntityType.Enemy)
+    // public void Fire(float eulerAngle, Catrige catrige, Entity.EntityType attackableEntityType = Entity.EntityType.Enemy)
+    // {
+    //     if (!IsReadyToFire())
+    //     {
+    //         return;
+    //     }
+    //     float directionX = Mathf.Cos(eulerAngle * Mathf.Deg2Rad);
+    //     float directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
+    //     Vector3 FireLine = new(directionX, directionY, 0f);
+    //     Vector3 firePoint = Quaternion.AngleAxis(eulerAngle, Vector3.forward) * _firePoint;
+    //     Vector3 bulletGenerationWorldPosition = transform.position + firePoint;
+
+    //     catrige.FireCatrige(FireLine, attackableEntityType, bulletGenerationWorldPosition);
+
+    //     _remainingAmmo -= 1;
+    //     PlayFireSound();
+    // }
+
+    // public void Fire(Vector3 FireLine, Catrige catrige, Entity.EntityType attackableEntityType = Entity.EntityType.Enemy)
+    // {
+    //     if (!IsReadyToFire())
+    //     {
+    //         return;
+    //     }
+    //     Vector3 firePoint = Quaternion.AngleAxis(transform.rotation.eulerAngles.z, Vector3.forward) * _firePoint;
+    //     Vector3 bulletGenerationPosition = transform.position + firePoint;
+    //     catrige.FireCatrige(FireLine.normalized, attackableEntityType, bulletGenerationPosition);
+    //     _remainingAmmo -= 1;
+    //     PlayFireSound();
+    // }
+
+    public void Fire(Catrige catrige, Entity.EntityType attackableEntityType = Entity.EntityType.Enemy)
     {
         if (!IsReadyToFire())
         {
             return;
         }
-        float directionX = Mathf.Cos(eulerAngle * Mathf.Deg2Rad);
-        float directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
-        Vector3 FireLine = new(directionX, directionY, 0f);
-
-        catrige.FireCatrige(FireLine, attackableEntityType, _firePoint);
+        float eulerAngle = transform.rotation.eulerAngles.z;
+        Quaternion eulerAngleRotation = Quaternion.AngleAxis(eulerAngle, Vector3.forward);
+        Vector3 FireLine =  eulerAngleRotation * Vector3.right;
+        Vector3 bulletGenerationPosition = transform.position + eulerAngleRotation * _firePoint;
+        catrige.FireCatrige(FireLine, attackableEntityType, bulletGenerationPosition);
         _remainingAmmo -= 1;
         PlayFireSound();
     }
