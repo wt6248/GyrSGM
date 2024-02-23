@@ -253,4 +253,10 @@ public class PlayerController : Entity
         _attackCooldown = 1 / (_attackSpeed * (1 + _speedMod));
         return _attackCooldown;
     }
+
+    //Hp 반환 함수
+    public float HealthPointManager()
+    {
+        return _hp;
+    }
 }
