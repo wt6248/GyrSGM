@@ -254,9 +254,23 @@ public class PlayerController : Entity
         return _attackCooldown;
     }
 
-    //Hp 반환 함수
+    /*
+        UI를 위한 반환 함수들
+    */
+    // Hp 반환 함수
     public float HealthPointManager()
     {
         return _hp;
+    }
+    // 공격력 반환 함수
+    public float AttackDamageManager()
+    {
+        return _attackDamage;
+    }
+    // 공격속도 반환 함수
+    public float AttackSpeedManager()
+    {
+        float _speed = _attackSpeed * (1 + _speedMod);
+        return _speed;
     }
 }
