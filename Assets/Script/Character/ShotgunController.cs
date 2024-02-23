@@ -94,7 +94,7 @@ public class ShotgunController : MonoBehaviour
 
     public void FireGun_Catrige()
     {
-        _shotgun.Fire(_currentCatrige);
+        _shotgun.Fire(_currentCatrige, playerController._attackDamage);
         GenerateShotgunShell(_shotgunAngle + 180.0f);
         ShakeCamera();
     }

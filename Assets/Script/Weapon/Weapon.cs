@@ -105,7 +105,7 @@ public class Weapon : MonoBehaviour
     //     PlayFireSound();
     // }
 
-    public void Fire(Catrige catrige, Entity.EntityType attackableEntityType = Entity.EntityType.Enemy)
+    public void Fire(Catrige catrige, float damageMultiplier = 1.0f, Entity.EntityType attackableEntityType = Entity.EntityType.Enemy)
     {
         if (!IsReadyToFire())
         {
@@ -115,7 +115,7 @@ public class Weapon : MonoBehaviour
         Quaternion eulerAngleRotation = Quaternion.AngleAxis(eulerAngle, Vector3.forward);
         Vector3 FireLine =  eulerAngleRotation * Vector3.right;
         Vector3 bulletGenerationPosition = transform.position + eulerAngleRotation * _firePoint;
-        catrige.FireCatrige(FireLine, attackableEntityType, bulletGenerationPosition);
+        catrige.FireCatrige(FireLine, damageMultiplier, attackableEntityType, bulletGenerationPosition);
         _remainingAmmo -= 1;
         PlayFireSound();
     }
