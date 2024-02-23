@@ -108,10 +108,7 @@ public class BulletScript : MonoBehaviour
 
     public void Activate(Entity.EntityType type)
     {
-        if (_duration <= 0)
-        {
-            _duration = 3f;
-        }
+        
         _attackableType = type;
         Destroy(this.gameObject, _duration);
     }

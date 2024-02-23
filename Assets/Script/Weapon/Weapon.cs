@@ -51,6 +51,7 @@ public class Weapon : MonoBehaviour
     }
     public void Fire(float angle, BulletScript bullet)
     {
+        Debug.Log("aaa");
         if (!IsReadyToFire())
         {
             return;
@@ -61,11 +62,17 @@ public class Weapon : MonoBehaviour
             float randomErrorAngle = Random.Range(-bullet._spreadAngle / 2, bullet._spreadAngle / 2);
             Vector3 firePoint = Quaternion.AngleAxis(angle, Vector3.forward) * _firePoint;
             GameObject pellet = Instantiate(bullet._bulletPrefab, transform.position + firePoint, Quaternion.identity);
+            
+            PlayerController player = GameObject.FindObjectOfType<PlayerController>();
+            pellet.GetComponent<BulletScript>()._damage = bullet._damage;
+            pellet.GetComponent<BulletScript>()._duration = bullet._duration;
+            pellet.GetComponent<BulletScript>()._maxPenetration = bullet._maxPenetration;
+            pellet.GetComponent<BulletScript>()._knockbackDistance = bullet._knockbackDistance;
+            Debug.Log(pellet.GetComponent<BulletScript>()._knockbackDistance);
+
             pellet.GetComponent<BulletScript>().SetVelocity(bullet._speed, angle + randomErrorAngle);
             pellet.GetComponent<BulletScript>().Activate(Entity.EntityType.Enemy);
 
-            PlayerController player = GameObject.FindObjectOfType<PlayerController>();
-            pellet.GetComponent<BulletScript>()._damage = player._attackDamage;
             // pellet.GetComponent<BulletScript>().RecordPenetration(player);
         }
 
