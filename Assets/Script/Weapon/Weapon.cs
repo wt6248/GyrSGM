@@ -82,9 +82,9 @@ public class Weapon : MonoBehaviour
         }
         float directionX = Mathf.Cos(eulerAngle * Mathf.Deg2Rad);
         float directionY = Mathf.Sin(eulerAngle * Mathf.Deg2Rad);
-        Vector3 FireLine = new(directionX,directionY,0f);
+        Vector3 FireLine = new(directionX, directionY, 0f);
 
-        catrige.FireCatrige(FireLine,attackableEntityType);
+        catrige.FireCatrige(FireLine, attackableEntityType, _firePoint);
         _remainingAmmo -= 1;
         PlayFireSound();
     }

@@ -49,7 +49,7 @@ public class ShotgunController : MonoBehaviour
         // set bullet type and change bullet
         //ChangeBulletType(BulletScript.BulletType.Rocket);
         //ChangeBulletType(BulletScript.BulletType.Scatter);
-        ChangeBulletType(BulletScript.BulletType.Slug);
+        ChangeBulletType(BulletScript.BulletType.PlayerSlug);
 
         // create shotgun member variable
         _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
@@ -76,7 +76,7 @@ public class ShotgunController : MonoBehaviour
     void Update()
     {
         AutoAim();
-        if(_canShoot) 
+        if (_canShoot)
         {
             AutoShoot();
         }
@@ -199,7 +199,7 @@ public class ShotgunController : MonoBehaviour
     IEnumerator AutoShootCooldown()
     {
         while (true)
-        {            
+        {
             yield return new WaitForSeconds(playerController.Cooldown());
             _canShoot = true;
         }
@@ -210,13 +210,13 @@ public class ShotgunController : MonoBehaviour
         _bulletType = bulletType;
         switch (bulletType)
         {
-            case BulletScript.BulletType.Slug:
+            case BulletScript.BulletType.PlayerSlug:
                 _bullet = GameObject.FindObjectOfType<BulletSlug>();
                 break;
-            case BulletScript.BulletType.Scatter:
+            case BulletScript.BulletType.PlayerScatter:
                 _bullet = GameObject.FindObjectOfType<BulletScatter>();
                 break;
-            case BulletScript.BulletType.Rocket:
+            case BulletScript.BulletType.PlayerRocket:
                 _bullet = GameObject.FindObjectOfType<BulletRocket>();
                 break;
             default:
@@ -229,17 +229,17 @@ public class ShotgunController : MonoBehaviour
     {
         switch (_bulletType)
         {
-            case BulletScript.BulletType.Scatter:
-                _bulletType = BulletScript.BulletType.Slug;
+            case BulletScript.BulletType.PlayerScatter:
+                _bulletType = BulletScript.BulletType.PlayerSlug;
                 break;
-            case BulletScript.BulletType.Slug:
-                _bulletType = BulletScript.BulletType.Rocket;
+            case BulletScript.BulletType.PlayerSlug:
+                _bulletType = BulletScript.BulletType.PlayerRocket;
                 break;
-            case BulletScript.BulletType.Rocket:
-                _bulletType = BulletScript.BulletType.Scatter;
+            case BulletScript.BulletType.PlayerRocket:
+                _bulletType = BulletScript.BulletType.PlayerScatter;
                 break;
             default:
-                _bulletType = BulletScript.BulletType.Scatter;
+                _bulletType = BulletScript.BulletType.PlayerScatter;
                 break;
         }
         ChangeBulletType(_bulletType);

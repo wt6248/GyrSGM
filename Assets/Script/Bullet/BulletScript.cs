@@ -29,9 +29,10 @@ public class BulletScript : MonoBehaviour
     public GameObject _bulletPrefab;
     public enum BulletType
     {
-        Slug, // sniper
-        Scatter, // shotgun
-        Rocket // rocket luncher
+        PlayerSlug, // sniper
+        PlayerScatter, // shotgun
+        PlayerRocket, // rocket luncher
+        EnemyScatter
     }
     public Entity.EntityType _attackableType;
 
