@@ -453,7 +453,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 274280795}
   m_OnClick:
     m_PersistentCalls:
@@ -1595,7 +1595,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 872071133}
   m_OnClick:
     m_PersistentCalls:
@@ -2482,7 +2482,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1489622258}
   m_OnClick:
     m_PersistentCalls:
@@ -3140,6 +3140,7 @@ GameObject:
   - component: {fileID: 2131802179}
   - component: {fileID: 2131802178}
   - component: {fileID: 2131802177}
+  - component: {fileID: 2131802180}
   m_Layer: 5
   m_Name: GyroResetButton
   m_TagString: Untagged
@@ -3211,16 +3212,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: a3979bf5ba4aa354e8788b4c6535bd36, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 2131802180}
+        m_TargetAssemblyTypeName: GyroResetButton, Assembly-CSharp
+        m_MethodName: ResetGyroscope
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ResetGyroscope
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2131802178
@@ -3261,6 +3262,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131802175}
   m_CullTransparentMesh: 1
+--- !u!114 &2131802180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131802175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3979bf5ba4aa354e8788b4c6535bd36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
