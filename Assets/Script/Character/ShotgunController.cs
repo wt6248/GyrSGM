@@ -38,7 +38,8 @@ public class ShotgunController : MonoBehaviour
 
     public GameObject _shotgunShell;
     Vector3 _shellDropPosition = new(0.96f, 0.18f, 0f);
-    bool _canShoot = false;
+    bool _canShoot = true;
+    bool isAimed = false;
     public PlayerController playerController;
 
     AimType _aimType; // 0: auto, 1: maunal
@@ -84,7 +85,6 @@ public class ShotgunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isAimed = false;
         if (_aimType == AimType.Auto) {
             isAimed = AutoAim();
         } else if (_aimType == AimType.Touch)
