@@ -56,6 +56,7 @@ public class EnemyUnitParent : Entity
 
         // get displacement from the charactor
         Vector3 displacement = GetPlayerReletivePosition();
+        displacement.z = 0;
 
         if (_enemyType == EnemyType.Charging)
         {

@@ -64,7 +64,7 @@ public class EnemyManage : MonoBehaviour
                 GameObject enemy = _ratioTable.GetRandomGameobject();
                 Vector3 spawnRange = new(Random.Range(_enemySpawnSizeInner.x, _enemySpawnSizeOuter.x),
                                            Random.Range(_enemySpawnSizeInner.y, _enemySpawnSizeOuter.y),
-                                           0);
+                                           -0.1f);
                 GameObject instance = Instantiate(enemy, spawnRange / 2, Quaternion.identity);
             }
         }
