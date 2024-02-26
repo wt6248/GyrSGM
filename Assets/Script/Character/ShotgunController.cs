@@ -75,8 +75,7 @@ public class ShotgunController : MonoBehaviour
         // subscribe to the onClick event
         //_fireButton.onClick.AddListener(FireGun);
 
-        // autoshooting function
-        StartCoroutine(AutoShootCooldown());
+       
         //InvokeRepeating("AutoShoot", 0f, 1.5f);
 
         _currentCatrige = _catrigeList[0];
@@ -212,18 +211,17 @@ public class ShotgunController : MonoBehaviour
         GameObject nearestEnemy = FindNearestEnemy();
         if (isAimed)
         {
-            //FireGun();
+            // FireGun();
             FireGun_Catrige();
+            // cooltime...
             _canShoot = false;
+            Invoke("ActiveShoot", playerController.Cooldown());
+            
         }
     }
-    IEnumerator AutoShootCooldown()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(playerController.Cooldown());
-            _canShoot = true;
-        }
+    
+    public void ActiveShoot() {
+        _canShoot = true;
     }
 
     public void ChangeBulletType(BulletScript.BulletType bulletType)
