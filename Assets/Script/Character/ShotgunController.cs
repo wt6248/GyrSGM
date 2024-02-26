@@ -63,9 +63,9 @@ public class ShotgunController : MonoBehaviour
         _fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
 
         // fire button manage
-        _fireButton = GameObject.Find("Fire Button").GetComponent<Button>();
+        //_fireButton = GameObject.Find("Fire Button").GetComponent<Button>();
         // subscribe to the onClick event
-        _fireButton.onClick.AddListener(FireGun);
+        //_fireButton.onClick.AddListener(FireGun);
 
         // autoshooting function
         StartCoroutine(AutoShootCooldown());
