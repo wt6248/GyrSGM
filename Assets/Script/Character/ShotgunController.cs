@@ -281,7 +281,7 @@ public class ShotgunController : MonoBehaviour
         return false;
     }
     public bool MouseAim() {
-        Debug.Log(Input.GetMouseButton(0));
+        
         if (Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject() == false) {
             Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
             RotateShotgun(pos - transform.position);
