@@ -12,7 +12,7 @@ public class Catrige : MonoBehaviour
     public uint _bulletPelletCount; //1회 공격에 해당 타입의 총알 갯수
     public float _knockbackDistance; //적이 이 총알을 맞았을 때 밀려나는 거리
     public float _duration = 0.2f; //탄의 지속시간
-    
+
     public uint _maxPenetration = 1; //최대 관통 인원
     protected GameObject _bulletGameObject;
 
@@ -27,8 +27,8 @@ public class Catrige : MonoBehaviour
     {
 
     }
-    //주어진 총알 발사함수를 따라 총알을 발사하는 함수이다. 
-    //현재는 확산 각도를 바탕으로 산탄 공격만 정의되고 있다. for문과 spreadvector 부분 
+    //주어진 총알 발사함수를 따라 총알을 발사하는 함수이다.
+    //현재는 확산 각도를 바탕으로 산탄 공격만 정의되고 있다. for문과 spreadvector 부분
     //차후 다양한 형태의 공격에 따라 공격방법에 대한 스크립트나 함수, 클래스가 추가될 수 있다.
     public void FireCatrige(Vector3 lineOfFire, float damageMultiplier, Entity.EntityType attackableEntityType, Vector3 generationPosition)
     {
@@ -47,8 +47,9 @@ public class Catrige : MonoBehaviour
     {
         //총알 프리팹을 생성한다. instantiate
         GameObject instance = Instantiate(_bulletGameObject, generationPosition, Quaternion.identity);
+        instance.GetComponent<BulletScript>().transform.Translate(new(0, 0, -0.1f));
         //총알을 초기화하고 파괴 시간을 지정한다. activate
-        instance.GetComponent<BulletScript>().Activate(_bulletSpeed, bulletDirection, _bulletDamage*damageMultiplier, _knockbackDistance, _duration, _maxPenetration, attackableEntityType);
+        instance.GetComponent<BulletScript>().Activate(_bulletSpeed, bulletDirection, _bulletDamage * damageMultiplier, _knockbackDistance, _duration, _maxPenetration, attackableEntityType);
     }
 
     float Vec2Angle(Vector3 v) { return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg; }
