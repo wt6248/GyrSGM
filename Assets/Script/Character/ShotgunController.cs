@@ -9,6 +9,11 @@ using UnityEngine.EventSystems;    //UI 클릭시 터치 이벤트 발생 방지
 // Control shotgun and apply item effect
 public class ShotgunController : MonoBehaviour
 {
+    enum AimType {
+        Auto,
+        Touch,
+        Mouse
+    }
     ShotgunScript _shotgun;
     BulletScript _bullet;
 
@@ -36,7 +41,8 @@ public class ShotgunController : MonoBehaviour
     bool _canShoot = false;
     public PlayerController playerController;
 
-    int _aimType = 0; // 0: auto, 1: maunal
+    AimType _aimType; // 0: auto, 1: maunal
+    
     private void Start()
     {
         // TODO? : instantiate prefab at the start()
@@ -63,29 +69,29 @@ public class ShotgunController : MonoBehaviour
         _fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
 
         // fire button manage
-        _fireButton = GameObject.Find("Fire Button").GetComponent<Button>();
+        //_fireButton = GameObject.Find("Fire Button").GetComponent<Button>();
         // subscribe to the onClick event
-        _fireButton.onClick.AddListener(FireGun);
+        //_fireButton.onClick.AddListener(FireGun);
 
         // autoshooting function
         StartCoroutine(AutoShootCooldown());
         //InvokeRepeating("AutoShoot", 0f, 1.5f);
 
         _currentCatrige = _catrigeList[0];
-        _aimType = 1;
+        _aimType = AimType.Mouse;
     }
 
     // Update is called once per frame
     void Update()
     {
         bool isAimed = false;
-        if (_aimType == 0) {
+        if (_aimType == AimType.Auto) {
             isAimed = AutoAim();
-        }
-            
-            
-        else if (_aimType == 1)
+        } else if (_aimType == AimType.Touch)
             isAimed = ManualAim();
+        else if (_aimType == AimType.Mouse) {
+            isAimed = MouseAim();
+        }
         if(_canShoot && isAimed) 
         {
             Shoot(isAimed);
@@ -269,6 +275,15 @@ public class ShotgunController : MonoBehaviour
         
         if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject() == false) {
             Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0));
+            RotateShotgun(pos - transform.position);
+            return true;
+        }
+        return false;
+    }
+    public bool MouseAim() {
+        Debug.Log(Input.GetMouseButton(0));
+        if (Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject() == false) {
+            Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
             RotateShotgun(pos - transform.position);
             return true;
         }
