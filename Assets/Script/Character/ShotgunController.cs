@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;    //UI 클릭시 터치 이벤트 발생 방지.
+
 
 // Control shotgun and apply item effect
 public class ShotgunController : MonoBehaviour
@@ -265,7 +267,7 @@ public class ShotgunController : MonoBehaviour
     }
     public bool ManualAim() {
         
-        if (Input.touchCount > 0) {
+        if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject() == false) {
             Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0));
             RotateShotgun(pos - transform.position);
             return true;
