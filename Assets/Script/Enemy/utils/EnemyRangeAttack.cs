@@ -45,6 +45,7 @@ public class EnemyRangeAttack : MonoBehaviour
         //총알 instantiate
         GameObject prefab = Resources.Load("Prefabs/BulletEnemyScatter") as GameObject;
         GameObject instance = Instantiate(prefab, transform.position, Quaternion.identity);
+        instance.GetComponent<BulletScript>().transform.Translate(new(0, 0, -0.1f));
         BulletScript bullet = instance.GetComponent<BulletScript>();
         //총알 방향 지정.
         bullet._dir = displacement.normalized;

@@ -163,8 +163,8 @@ public class PlayerController : Entity
             */
             CancelInvoke("AutoShoot");
             Time.timeScale = 0;
-            Button FireButton = GameObject.Find("Fire Button").GetComponent<Button>();
-            FireButton.onClick.RemoveAllListeners();
+            //Button FireButton = GameObject.Find("Fire Button").GetComponent<Button>();
+            //FireButton.onClick.RemoveAllListeners();
             // Destroy(this.gameObject);
             return;
         }
