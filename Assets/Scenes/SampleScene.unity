@@ -2205,7 +2205,7 @@ MonoBehaviour:
   _hp: 0
   _inventorySize: 0
   _gyroControl: {fileID: 0}
-  _isInvincible: 1
+  _isInvincible: 0
   _healPerSec: 0.05
   _healPeriod: 1
   _speedMod: 0
@@ -2973,11 +2973,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7079846942674216866, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 377
+      value: 305
       objectReference: {fileID: 0}
     - target: {fileID: 7079846942674216866, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 267
+      value: 322
       objectReference: {fileID: 0}
     - target: {fileID: 7079846942674216866, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
