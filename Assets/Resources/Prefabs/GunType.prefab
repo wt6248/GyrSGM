@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7490690768634074566}
   - component: {fileID: 4386246758599088895}
-  - component: {fileID: 6361755796545742357}
+  - component: {fileID: -5293098986794715735}
   m_Layer: 0
   m_Name: GunType
   m_TagString: Untagged
@@ -46,7 +46,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12093394892134381}
   m_CullTransparentMesh: 1
---- !u!114 &6361755796545742357
+--- !u!114 &-5293098986794715735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3270668149863482123
 MonoBehaviour:
   m_ObjectHideFlags: 0
