@@ -36,7 +36,6 @@ public abstract class Entity : MonoBehaviour
 
     protected void _DecreaseHP(float delta)
     {
-
         if (0 < delta)
         {
             _hp -= delta;

@@ -63,8 +63,6 @@ public class EnemyUnitParent : Entity
                 transform.Translate(velocity * Time.deltaTime);
             }
         }
-
-
     }
     override public void DecreaseHP(float delta)
     {

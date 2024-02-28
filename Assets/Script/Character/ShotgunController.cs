@@ -16,16 +16,11 @@ public class ShotgunController : MonoBehaviour
         Mouse
     }
     ShotgunScript _shotgun;
-    BulletScript _bullet;
 
     [SerializeField]
     public Catrige[] _catrigeList;
     public Catrige _currentCatrige;
     public uint _currentCatrigeNumber = 0;
-    /*
-        bulletType for player speeds each respects to weight of weapon
-    */
-    BulletScript.BulletType _bulletType;
 
     public FixedJoystick _fixedJoystick;
     public Button _fireButton;
@@ -51,8 +46,6 @@ public class ShotgunController : MonoBehaviour
         shotgunObject.transform.parent = transform;
         shotgunObject.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
         playerController = FindObjectOfType<PlayerController>();
-
-        ChangeBulletType(BulletScript.BulletType.PlayerSlug);
 
         // create shotgun member variable
         _shotgun = GameObject.FindObjectOfType<ShotgunScript>();
@@ -196,26 +189,6 @@ public class ShotgunController : MonoBehaviour
         _canShoot = true;
     }
 
-    public void ChangeBulletType(BulletScript.BulletType bulletType)
-    {
-        _bulletType = bulletType;
-        switch (bulletType)
-        {
-            case BulletScript.BulletType.PlayerSlug:
-                _bullet = GameObject.FindObjectOfType<BulletSlug>();
-                break;
-            case BulletScript.BulletType.PlayerScatter:
-                _bullet = GameObject.FindObjectOfType<BulletScatter>();
-                break;
-            case BulletScript.BulletType.PlayerRocket:
-                _bullet = GameObject.FindObjectOfType<BulletRocket>();
-                break;
-            default:
-                _bullet = GameObject.FindObjectOfType<BulletRocket>();
-                break;
-        }
-    }
-
     public void changeCatrigeType()
     {
         _currentCatrigeNumber += 1;
@@ -224,7 +197,6 @@ public class ShotgunController : MonoBehaviour
     }
     public bool ManualAim()
     {
-
         if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject() == false)
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0));
@@ -235,7 +207,6 @@ public class ShotgunController : MonoBehaviour
     }
     public bool MouseAim()
     {
-
         if (Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));

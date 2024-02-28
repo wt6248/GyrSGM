@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PlayerController : Entity
 {
     private Cursor _cursor;
-    private ShotgunController _shotGun;
     private GameObject _cursorObject;
     private SpriteRenderer _spriteRenderer;
     public GyroGameObj _gyroControl;
@@ -34,12 +33,10 @@ public class PlayerController : Entity
 
     void Start()
     {
-
         _hp = _maxHP;
         _name = "Player" + gameObject.GetInstanceID();
         CreateCursor();
         _cursor = _cursorObject.GetComponent<Cursor>();
-        _shotGun = GetComponentInChildren<ShotgunController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         // init audio

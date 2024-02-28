@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyRangeAttack : MonoBehaviour
 {
-    private float speed;
-    private float damage;
     public bool _canShoot = false;
 
     // Start is called before the first frame update
@@ -27,7 +25,6 @@ public class EnemyRangeAttack : MonoBehaviour
     // autoshooting function
     void AutoShoot()
     {
-        //TODO
         //플레이어와 적의 상대 위치 체크.
         Entity player = GameObject.FindObjectOfType<PlayerController>();
         Vector3 displacement = player.transform.position - transform.position;

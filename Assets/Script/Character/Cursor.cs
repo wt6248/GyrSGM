@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Cursor : MonoBehaviour
 {
-    private static Cursor instance;
-    private GameObject cursorObject;
     private GyroGameObj gyroGameObj;
     public StopButton stopButton;
 
     private void Start()
     {
         gyroGameObj = FindObjectOfType<GyroGameObj>();
-
 
         // hold button to stop
         stopButton = FindObjectOfType<StopButton>();
