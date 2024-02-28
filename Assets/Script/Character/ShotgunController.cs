@@ -270,6 +270,14 @@ public class ShotgunController : MonoBehaviour
         _currentCatrigeNumber %= 3;
         _currentCatrige = _catrigeList[_currentCatrigeNumber];
     }
+    public void changeCatrigeTypeReverse()
+    {
+        _currentCatrigeNumber += 2;
+        _currentCatrigeNumber %= 3;
+        _currentCatrige = _catrigeList[_currentCatrigeNumber];
+    }
+
+
     public bool ManualAim() {
         
         if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject() == false) {
