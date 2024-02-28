@@ -22,7 +22,7 @@ public class GaugeManager : MonoBehaviour
     {
         rate = currentValue / maxValue;
         gauge.sizeDelta = new Vector2(gaugeWidth, gaugeHeight * rate);
-        gauge.anchoredPosition= new Vector2(0, zeroPoint * (1-rate));
+        gauge.anchoredPosition = new Vector2(0, zeroPoint * (1 - rate));
     }
 
     public void SetMaxValue(float _floatValue)

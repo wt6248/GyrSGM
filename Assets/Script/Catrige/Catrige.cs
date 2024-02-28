@@ -52,7 +52,6 @@ public class Catrige : MonoBehaviour
         instance.GetComponent<BulletScript>().Activate(_bulletSpeed, bulletDirection, _bulletDamage * damageMultiplier, _knockbackDistance, _duration, _maxPenetration, attackableEntityType);
     }
 
-    float Vec2Angle(Vector3 v) { return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg; }
     protected void GetBulletPrefab(BulletScript.BulletType bulletType)
     {
         //start에서 호출하는 함수이다.

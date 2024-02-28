@@ -22,7 +22,7 @@ public class ItemPrefabScript : MonoBehaviour
         itemManage = FindObjectOfType<ItemManage>();
 
         //function for retrieving sprites of random item types
-        SetItemType();        
+        SetItemType();
     }
 
     public void SetItemType()
@@ -31,31 +31,30 @@ public class ItemPrefabScript : MonoBehaviour
         _itemType = Random.Range(0, 5);
         if (_itemType == 0 || _itemType == 1)
         {
-           _itemType = 0;
+            _itemType = 0;
         }
-        else if(_itemType == 2 || _itemType == 3)
+        else if (_itemType == 2 || _itemType == 3)
         {
-            _itemType = 2;            
+            _itemType = 2;
         }
         else // item 4 (체력키트)
         {
             _itemType = 4;
         }
-        itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("item_" + _itemType.ToString());      
+        itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("item_" + _itemType.ToString());
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("collide with " + other.gameObject.name.ToString());
-        //주인공과 충돌했을 때 주인공의 함수 호출. 
-        if(other.gameObject.name == "Main Character" && playerController != null)
+        //주인공과 충돌했을 때 주인공의 함수 호출.
+        if (other.gameObject.name == "Main Character" && playerController != null)
         {
             if (_itemType == 0 || _itemType == 1)
             {
                 //Debug.Log("damage");
                 playerController.SetAttackDamage();
             }
-            else if(_itemType == 2 || _itemType == 3)
+            else if (_itemType == 2 || _itemType == 3)
             {
                 //Debug.Log("attack speed");
                 playerController.SetAttackSpeed();

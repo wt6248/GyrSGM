@@ -53,13 +53,11 @@ public class Cursor : MonoBehaviour
     // 커서 위치 반환 함수
     public Vector3 CursorPosition()
     {
-        //Debug.Log("Cursor Position return: " + transform.position);
         return transform.position;
     }
 
     public Vector3 CursorLocalPosition()
     {
-        //Debug.Log("Cursor Position return: " + transform.position);
         return transform.localPosition;
     }
 

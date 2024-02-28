@@ -28,16 +28,16 @@ public class TextDisplayScript : MonoBehaviour
 
     public void displayByType(displaytype _type)
     {
-        switch(_type)
+        switch (_type)
         {
             case displaytype.AttackSpeed:
                 thisTMPro.text = "Speed: " + _value.ToString("F2");
                 break;
             case displaytype.DamageMultiplier:
-                thisTMPro.text =  "Damage: " + _value.ToString("F1");
+                thisTMPro.text = "Damage: " + _value.ToString("F1");
                 break;
             default:
-                thisTMPro.text =  "Something: " + _value.ToString();
+                thisTMPro.text = "Something: " + _value.ToString();
                 break;
         }
     }

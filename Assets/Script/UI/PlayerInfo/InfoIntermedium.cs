@@ -12,16 +12,15 @@ public class InfoIntermedium : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(playerScript == null)
+        if (playerScript == null)
             playerScript = GameObject.Find("Main Character").GetComponent<PlayerController>();
 
-        if(gaugeScript == null)
+        if (gaugeScript == null)
             gaugeScript = gameObject.GetComponent<GaugeManager>();
         gaugeScript.SetMaxValue(playerScript._maxHP);
 
         attackspeedScript._displayType = TextDisplayScript.displaytype.AttackSpeed;
         damageMultiplierScript._displayType = TextDisplayScript.displaytype.DamageMultiplier;
-
     }
 
     // Update is called once per frame

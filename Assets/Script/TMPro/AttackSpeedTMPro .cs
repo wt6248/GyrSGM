@@ -17,7 +17,7 @@ public class AttackSpeedTMPro : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         SpeedTMPro = GetComponent<TextMeshProUGUI>();
         GetAttackSpeed();
-    }   
+    }
 
     void Update()
     {
@@ -32,7 +32,7 @@ public class AttackSpeedTMPro : MonoBehaviour
             _currentAttackSpeed = playerController.AttackSpeedManager();
             SpeedTMPro.text = "Speed: " + _currentAttackSpeed.ToString("F2");
         }
-        else if(playerController == null)
+        else if (playerController == null)
         {
             SpeedTMPro.text = "Speed: 0.00";
         }

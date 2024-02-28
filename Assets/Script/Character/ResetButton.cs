@@ -21,7 +21,7 @@ public class ResetButton : MonoBehaviour
         {
             // 커서 위치를 초기화함
             cursor.ResetCursorPosition();
-            Debug.Log("커서 위치 초기화");            
+            Debug.Log("커서 위치 초기화");
         }
     }
 

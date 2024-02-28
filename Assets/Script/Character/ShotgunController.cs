@@ -9,7 +9,8 @@ using UnityEngine.EventSystems;    //UI 클릭시 터치 이벤트 발생 방지
 // Control shotgun and apply item effect
 public class ShotgunController : MonoBehaviour
 {
-    enum AimType {
+    enum AimType
+    {
         Auto,
         Touch,
         Mouse
@@ -25,7 +26,6 @@ public class ShotgunController : MonoBehaviour
         bulletType for player speeds each respects to weight of weapon
     */
     BulletScript.BulletType _bulletType;
-    // GameObject _bulletPrefab;
 
     public FixedJoystick _fixedJoystick;
     public Button _fireButton;
@@ -43,22 +43,15 @@ public class ShotgunController : MonoBehaviour
     public PlayerController playerController;
 
     AimType _aimType; // 0: auto, 1: maunal
-    
+
     private void Start()
     {
-        // TODO? : instantiate prefab at the start()
         GameObject shotgunPrefab = Resources.Load<GameObject>("Prefabs/ShotgunPrefab");
         GameObject shotgunObject = Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
         shotgunObject.transform.parent = transform;
         shotgunObject.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
         playerController = FindObjectOfType<PlayerController>();
 
-        // bullet
-        // _bulletPrefab = Resources.Load("Prefabs/bullet") as GameObject;
-
-        // set bullet type and change bullet
-        //ChangeBulletType(BulletScript.BulletType.Rocket);
-        //ChangeBulletType(BulletScript.BulletType.Scatter);
         ChangeBulletType(BulletScript.BulletType.PlayerSlug);
 
         // create shotgun member variable
@@ -70,14 +63,6 @@ public class ShotgunController : MonoBehaviour
         // joystick
         _fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
 
-        // fire button manage
-        //_fireButton = GameObject.Find("Fire Button").GetComponent<Button>();
-        // subscribe to the onClick event
-        //_fireButton.onClick.AddListener(FireGun);
-
-       
-        //InvokeRepeating("AutoShoot", 0f, 1.5f);
-
         _currentCatrige = _catrigeList[0];
         _aimType = AimType.Mouse;
     }
@@ -85,27 +70,20 @@ public class ShotgunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_aimType == AimType.Auto) {
+        if (_aimType == AimType.Auto)
+        {
             isAimed = AutoAim();
-        } else if (_aimType == AimType.Touch)
+        }
+        else if (_aimType == AimType.Touch)
             isAimed = ManualAim();
-        else if (_aimType == AimType.Mouse) {
+        else if (_aimType == AimType.Mouse)
+        {
             isAimed = MouseAim();
         }
-        if(_canShoot && isAimed) 
+        if (_canShoot && isAimed)
         {
             Shoot(isAimed);
         }
-    }
-
-    // shooting function
-    public void FireGun()
-    {
-        // _shotgun.Fire(_shotgunAngle);
-        _shotgun.Fire(_shotgunAngle, _bullet);
-        
-        GenerateShotgunShell(_shotgunAngle + 180.0f);
-        ShakeCamera();
     }
 
     public void FireGun_Catrige()
@@ -120,12 +98,6 @@ public class ShotgunController : MonoBehaviour
         cameraShake.Shake(Quaternion.Euler(0, 0, _shotgunAngle) * Vector3.left);
     }
 
-    public void GenerateShotgunShell()
-    {
-        GameObject shotgunShell = Instantiate(_shotgunShell, _shotgun.transform, true);
-        shotgunShell.transform.localPosition = _shellDropPosition;
-        shotgunShell.transform.SetParent(null);
-    }
     public void GenerateShotgunShell(float shellEulerAngle)
     {
         GameObject shotgunShell = Instantiate(_shotgunShell, _shotgun.transform, true);
@@ -216,11 +188,11 @@ public class ShotgunController : MonoBehaviour
             // cooltime...
             _canShoot = false;
             Invoke("ActiveShoot", playerController.Cooldown());
-            
         }
     }
-    
-    public void ActiveShoot() {
+
+    public void ActiveShoot()
+    {
         _canShoot = true;
     }
 
@@ -244,44 +216,28 @@ public class ShotgunController : MonoBehaviour
         }
     }
 
-    public void ChangeBulletTypeByButton()
-    {
-        switch (_bulletType)
-        {
-            case BulletScript.BulletType.PlayerScatter:
-                _bulletType = BulletScript.BulletType.PlayerSlug;
-                break;
-            case BulletScript.BulletType.PlayerSlug:
-                _bulletType = BulletScript.BulletType.PlayerRocket;
-                break;
-            case BulletScript.BulletType.PlayerRocket:
-                _bulletType = BulletScript.BulletType.PlayerScatter;
-                break;
-            default:
-                _bulletType = BulletScript.BulletType.PlayerScatter;
-                break;
-        }
-        ChangeBulletType(_bulletType);
-    }
-
     public void changeCatrigeType()
     {
         _currentCatrigeNumber += 1;
         _currentCatrigeNumber %= 3;
         _currentCatrige = _catrigeList[_currentCatrigeNumber];
     }
-    public bool ManualAim() {
-        
-        if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject() == false) {
+    public bool ManualAim()
+    {
+
+        if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject() == false)
+        {
             Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0));
             RotateShotgun(pos - transform.position);
             return true;
         }
         return false;
     }
-    public bool MouseAim() {
-        
-        if (Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject() == false) {
+    public bool MouseAim()
+    {
+
+        if (Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject() == false)
+        {
             Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
             RotateShotgun(pos - transform.position);
             return true;
