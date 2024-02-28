@@ -10,6 +10,7 @@ public class EnemyManage : MonoBehaviour
     // GameObject enemy_speed;
     // GameObject enemy_hp;
 
+    public GameObject player;
     [Header("Generate Policy")]
     public int _generateUnitNumber;
     [SerializeField][Range(0f, 5f)] public float _enemyGenerateCoolTime, _enemySpawnRadious;
@@ -17,6 +18,10 @@ public class EnemyManage : MonoBehaviour
     public Vector3 _enemySpawnSizeOuter, _enemySpawnSizeInner;
     public Vector3Int _enemyProbability; // (1, 1, 1)
     public RatioTable _ratioTable = new();
+
+    public float elapsedTime = 0f;
+    public bool increasedSpawnRate = false;
+    public float minimumDistance = 50f;
 
 
 
@@ -31,6 +36,7 @@ public class EnemyManage : MonoBehaviour
         // enemy_speed = Resources.Load("Prefabs/EnemySpeed") as GameObject;
         // enemy_hp = Resources.Load("Prefabs/EnemyHP") as GameObject;
 
+        player = GameObject.Find("Main Character");
         _ratioTable.Add("Prefabs/Enemy", _enemyProbability.x);
         _ratioTable.Add("Prefabs/EnemySpeed", _enemyProbability.y);
         _ratioTable.Add("Prefabs/EnemyHP", _enemyProbability.z);
@@ -38,6 +44,22 @@ public class EnemyManage : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        elapsedTime += Time.deltaTime;
+
+        // 1분 30초가 지난 후에 적 생성량 증가
+        if (elapsedTime >= 90f && !increasedSpawnRate)
+        {
+            _generateUnitNumber *= 5; // 적 생성량을 5배로 증가시킴
+            increasedSpawnRate = true; // 증가 상태를 true로 변경하여 중복 증가 방지
+
+            Debug.Log("Spawn rate increased!"); // 증가 확인을 위한 디버그 메시지
+        }
+
+        SpawnEnemies();       
+    }
+
+    void SpawnEnemies()
     {
         if (0 < _enemyGenerateCooldown)
         {
@@ -62,13 +84,32 @@ public class EnemyManage : MonoBehaviour
                 //     instance = Instantiate(enemy_hp, _enemySpawnRadious * Random.insideUnitCircle.normalized, Quaternion.identity);
 
                 GameObject enemy = _ratioTable.GetRandomGameobject();
-                Vector3 spawnRange = new(Random.Range(_enemySpawnSizeInner.x, _enemySpawnSizeOuter.x),
-                                           Random.Range(_enemySpawnSizeInner.y, _enemySpawnSizeOuter.y),
-                                           -0.1f);
-                GameObject instance = Instantiate(enemy, spawnRange / 2, Quaternion.identity);
+                Vector3 spawnRange = GetRandomSpawnPosition();                
+                GameObject instance = Instantiate(enemy, spawnRange/2, Quaternion.identity);
             }
         }
     }
+
+    Vector3 GetRandomSpawnPosition()
+    {
+        // 적이 생성될 위치를 무작위로 결정하여 반환
+        Vector3 spawnRange = new(Random.Range(_enemySpawnSizeInner.x, _enemySpawnSizeOuter.x),
+                                           Random.Range(_enemySpawnSizeInner.y, _enemySpawnSizeOuter.y),
+                                           0);
+        
+        float distance = Vector3.Distance(spawnRange, player.transform.position);
+        
+        if(distance >= minimumDistance)
+        {
+            return spawnRange;
+        }
+        else
+        {
+            spawnRange += new Vector3(50f,50f,50f);
+            return spawnRange;
+        }        
+    }
+
     int GetUnitID(Vector3 probVec)
     { // TODO: change to array
         int selectedIndex;
@@ -103,3 +144,4 @@ public class EnemyManage : MonoBehaviour
     }
 
 }
+
