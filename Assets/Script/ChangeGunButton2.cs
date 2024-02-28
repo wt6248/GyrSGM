@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeGunButton : MonoBehaviour
-{
+public class ChangeGunButton2: MonoBehaviour
+{ 
     public GameObject gunType1;
     public GameObject gunType2;
     public GameObject gunType3;
@@ -38,8 +38,8 @@ public class ChangeGunButton : MonoBehaviour
         Image imageComponent3 = gunType3.GetComponent<Image>();
         Sprite temp = imageComponent1.sprite;
 
-        imageComponent1.sprite = imageComponent2.sprite;
-        imageComponent2.sprite = imageComponent3.sprite; 
-        imageComponent3.sprite = temp;
+        imageComponent1.sprite = imageComponent3.sprite;
+        imageComponent3.sprite = imageComponent2.sprite;
+        imageComponent2.sprite = temp;        
     }
 }
