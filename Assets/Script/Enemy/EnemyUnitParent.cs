@@ -23,6 +23,7 @@ public class EnemyUnitParent : Entity
     public AudioClip _deadSound;
     public float _minPlayerDistance; // 원거리 유닛에만 해당
     public float _maxPlayerDistance; // 원거리 유닛에만 해당
+    Camera mainCamera;
 
     // enemy type
     [SerializeField] protected EnemyType _enemyType;
@@ -30,7 +31,7 @@ public class EnemyUnitParent : Entity
 
     void Start()
     {
-
+        mainCamera = Camera.main;
     }
 
     void Update()
@@ -67,6 +68,23 @@ public class EnemyUnitParent : Entity
                     moveDir = -1;
                 Vector3 velocity = _speed * displacement.normalized * moveDir;
                 transform.Translate(velocity * Time.deltaTime);
+            }
+        }
+        else
+        {
+            Vector3 objectViewportPoint = mainCamera.WorldToViewportPoint(transform.position);
+
+            // 객체가 화면 안에 있는지 확인
+            if (objectViewportPoint.x >= 0 && objectViewportPoint.x <= 1 && objectViewportPoint.y >= 0 && objectViewportPoint.y <= 1)
+            {
+                // 화면 안에 있으면 정지
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+            else
+            {
+                // 화면 바깥에 있으면 화면 중앙으로 이동
+                Vector3 targetPosition = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, Mathf.Abs(mainCamera.transform.position.z - transform.position.z)));
+                transform.position = targetPosition;
             }
         }
     }
