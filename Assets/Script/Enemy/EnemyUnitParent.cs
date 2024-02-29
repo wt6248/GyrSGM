@@ -76,14 +76,12 @@ public class EnemyUnitParent : Entity
             // 객체가 화면 안에 있는지 확인
             if (objectViewportPoint.x >= 0 && objectViewportPoint.x <= 1 && objectViewportPoint.y >= 0 && objectViewportPoint.y <= 1)
             {
-                // 화면 안에 있으면 정지
-                transform.position += Vector3.zero;
+
             }
             else
             {
                 // 화면 바깥에 있으면 화면 중앙으로 이동
-                Vector3 targetPosition = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, Mathf.Abs(Camera.main.transform.position.z - transform.position.z)));
-                transform.position = targetPosition;
+                Vector3 targetPosition = Vector3.zero;
 
                 Vector3 moveDir = targetPosition - transform.position;
                 Vector3 velocity = _speed * moveDir.normalized;
