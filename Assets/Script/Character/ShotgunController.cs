@@ -54,7 +54,7 @@ public class ShotgunController : MonoBehaviour
         _shotgunShell = Resources.Load("Prefabs/shotgun_Shell") as GameObject;
 
         // joystick
-        _fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
+        //_fixedJoystick = GameObject.FindWithTag("GameController").GetComponent<FixedJoystick>();
 
         _currentCatrige = _catrigeList[0];
         _aimType = AimType.Mouse;
@@ -65,7 +65,7 @@ public class ShotgunController : MonoBehaviour
     {
         if (_aimType == AimType.Auto)
         {
-            isAimed = AutoAim();
+            isAimed = AutoAimWithoutJoyStick();
         }
         else if (_aimType == AimType.Touch)
             isAimed = ManualAim();
@@ -99,11 +99,28 @@ public class ShotgunController : MonoBehaviour
         shotgunShell.GetComponent<ShellScript>().SetDirection(shellEulerAngle);
     }
 
-    bool AutoAim()
+    // bool AutoAim()
+    // {
+    //     // Not holding joystick
+    //     if (_fixedJoystick.Direction == Vector2.zero)
+    //     {
+    //         GameObject nearestEnemy = FindNearestEnemy();
+    //         if (nearestEnemy != null)
+    //         {
+    //             RotateShotgun(nearestEnemy.transform.position - transform.position);
+    //             return true;
+    //         }
+    //         return false;
+    //     }
+    //     else
+    //     {
+    //         RotateShotgun(_fixedJoystick.Direction);
+    //         return true;
+    //     }
+    // }
+
+    bool AutoAimWithoutJoyStick()
     {
-        // Not holding joystick
-        if (_fixedJoystick.Direction == Vector2.zero)
-        {
             GameObject nearestEnemy = FindNearestEnemy();
             if (nearestEnemy != null)
             {
@@ -111,12 +128,6 @@ public class ShotgunController : MonoBehaviour
                 return true;
             }
             return false;
-        }
-        else
-        {
-            RotateShotgun(_fixedJoystick.Direction);
-            return true;
-        }
     }
 
     // finding nearest enemy for autoshooting
