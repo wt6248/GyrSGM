@@ -13,9 +13,12 @@ public class ItemManage : MonoBehaviour
     public float _itemGenerateCooldown = 0;
     //public float _itemSpawnRadius = 4f;
     public int _countItem = 0; // for debuging
-    public float _xposition = 16f;
-    public float _yposition = 36f;
+    public float _viewportWidth;
+    public float _viewportHeight;
+    public float _screenWidth;
+    public float _screenHeight;
     GameObject item;
+    Camera mainCamera;
 
 
     // Start is called before the first frame update
@@ -23,6 +26,12 @@ public class ItemManage : MonoBehaviour
     {
         //Initializing
         item = Resources.Load("Prefabs/Item") as GameObject;
+        mainCamera = Camera.main;
+        _viewportWidth = mainCamera.rect.width;
+        _viewportHeight = mainCamera.rect.height;
+        _screenWidth = Screen.width * _viewportWidth * 3/200;
+        _screenHeight = Screen.height * _viewportHeight * 3/200;
+        Debug.Log("스크린 크기:"+_screenWidth+","+_screenHeight);
     }
 
     // Update is called once per frame
@@ -51,7 +60,7 @@ public class ItemManage : MonoBehaviour
         }
         
         // 랜덤한 위치에 아이템 생성
-        Vector3 randomPosition = new(Random.Range(-_xposition, _xposition), Random.Range(-_yposition, _yposition), 0);
+        Vector3 randomPosition = new(Random.Range(-_screenWidth, _screenWidth), Random.Range(-_screenHeight, _screenHeight), 0);
         GameObject newItem = Instantiate(item, randomPosition, Quaternion.identity); 
         Debug.Log("아이템 생성 위치" + randomPosition);
         /*
