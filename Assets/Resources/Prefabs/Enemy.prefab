@@ -136,7 +136,7 @@ MonoBehaviour:
   _maxHP: 3
   _attackDamage: 1
   _attackSpeed: 0
-  _speed: 5
+  _speed: 4
   _hp: 0
   _inventorySize: 0
   _knockbackVelocity: {x: 0, y: 0, z: 0}
@@ -145,7 +145,8 @@ MonoBehaviour:
   _hurtSound: {fileID: 0}
   _deadSoundSource: {fileID: 0}
   _deadSound: {fileID: 0}
-  _minPlayerDistance: 12
+  _minPlayerDistance: 15
+  _maxPlayerDistance: 25
   _enemyType: 2
 --- !u!50 &7373365711714288345
 Rigidbody2D:

@@ -166,7 +166,7 @@ MonoBehaviour:
   _maxHP: 0.8
   _attackDamage: 0.8
   _attackSpeed: 0
-  _speed: 10
+  _speed: 8
   _hp: 0
   _inventorySize: 0
   _knockbackVelocity: {x: 0, y: 0, z: 0}

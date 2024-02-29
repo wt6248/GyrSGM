@@ -39,7 +39,7 @@ public class EnemyRangeAttack : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(4.5f);
             _canShoot = true;
         }
     }
