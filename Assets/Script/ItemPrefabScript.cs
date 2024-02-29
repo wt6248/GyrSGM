@@ -16,13 +16,12 @@ public class ItemPrefabScript : MonoBehaviour
     void Start()
     {
         //init
-        itemSpriteAtlas = Resources.Load<SpriteAtlas>("Sprites/ItemSpriteAtlas2");
+        itemSpriteAtlas = Resources.Load<SpriteAtlas>("Sprites/ItemSpriteAtlas");
         itemSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerController = FindObjectOfType<PlayerController>();
         itemManage = FindObjectOfType<ItemManage>();
 
         //function for retrieving sprites of random item types
-        //SetItemType();
         SetItemType();
     }
 
