@@ -82,8 +82,6 @@ public class BulletScript : MonoBehaviour
 
     public void AttackEntity(Collider2D other, Vector3 knockbackDir)
     {
-        // TODO : item과 머지 이후 PlayerController의 데미지 배율 값을 가져온
-        // TODO : DecreaseHp로 피해를 줄때 damage*PlayerController의 데미지 배율을 준다.
         Entity entity = other.gameObject.GetComponent<Entity>();
         entity.DecreaseHP(_damage);
         if (other.gameObject.CompareTag("Enemy"))
@@ -117,7 +115,7 @@ public class BulletScript : MonoBehaviour
         Destroy(this.gameObject, _duration);
     }
 
-    public void Activate(float speed, Vector3 direction, float damage, float knockbackDistance, float duration, uint maxPenetration , Entity.EntityType attackableType)
+    public void Activate(float speed, Vector3 direction, float damage, float knockbackDistance, float duration, uint maxPenetration, Entity.EntityType attackableType)
     {
         _damage = damage;
         SetVelocity(speed, direction);

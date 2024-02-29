@@ -23,8 +23,8 @@ public class BulletRocket : BulletScript
     override public void OnTriggerEnter2D(Collider2D other)
     {
         Collider2D[] entities = Physics2D.OverlapCircleAll(transform.position, _explosionRadious, LayerMask.GetMask("Enemy"));
-        
-        if(other.gameObject.name != "Main Character")
+
+        if (other.gameObject.name != "Main Character")
         {
             foreach (Collider2D entity in entities)
             {

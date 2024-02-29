@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class EnemyRangeAttack : MonoBehaviour
 {
-    private float speed;
-    private float damage;
-    //private float attackCooltime;
-    //private float current_cooltime;
-
     public bool _canShoot = false;
-
-
-    //InvokeRepeating("AutoShoot", 0f, 1.5f);
 
     // Start is called before the first frame update
     void Start()
@@ -30,15 +22,9 @@ public class EnemyRangeAttack : MonoBehaviour
         }
     }
 
-    void SetRangeComponent(float _speed, float _damage, float _attackCooltime)
-    {
-        //TODO 각 변수에 넣기.
-    }
-
     // autoshooting function
     void AutoShoot()
     {
-        //TODO
         //플레이어와 적의 상대 위치 체크.
         Entity player = GameObject.FindObjectOfType<PlayerController>();
         Vector3 displacement = player.transform.position - transform.position;
@@ -51,7 +37,6 @@ public class EnemyRangeAttack : MonoBehaviour
         bullet._dir = displacement.normalized;
         bullet.Activate(Entity.EntityType.Player);
         EnemyUnitParent enemy = GetComponentInParent<EnemyUnitParent>();
-        // bullet.RecordPenetration(enemy);
         //발사하면 _canShoot false로 수정.
         _canShoot = false;
     }

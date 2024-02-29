@@ -17,7 +17,7 @@ public class HealthPointTMPro : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         HpTMPro = GetComponent<TextMeshProUGUI>();
         GetHealthPoint();
-    }   
+    }
 
     void Update()
     {
@@ -32,7 +32,7 @@ public class HealthPointTMPro : MonoBehaviour
             _currentHealthPoint = playerController.HealthPointManager();
             HpTMPro.text = "HP: " + _currentHealthPoint.ToString("F2");
         }
-        else if(playerController == null)
+        else if (playerController == null)
         {
             HpTMPro.text = "HP: 0.00";
         }

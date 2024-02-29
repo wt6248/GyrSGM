@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class ItemManage : MonoBehaviour
 {
-    public float _minItemCooldownTime= 2f;
+    public float _minItemCooldownTime = 2f;
     public float _maxItemCooldownTime = 4f;
     public float _itemGenerateCoolTime;
     public float _itemGenerateCooldown = 0;
@@ -18,9 +18,9 @@ public class ItemManage : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {    
+    {
         //Initializing
-        item = Resources.Load("Prefabs/Item") as GameObject;  
+        item = Resources.Load("Prefabs/Item") as GameObject;
     }
 
     // Update is called once per frame
@@ -38,7 +38,6 @@ public class ItemManage : MonoBehaviour
             _itemGenerateCooldown = _itemGenerateCoolTime;
 
             GenerateItem();
-            //GameObject instance = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity);
         }
     }
 
@@ -46,24 +45,21 @@ public class ItemManage : MonoBehaviour
     {
         if (item == null)
         {
-            //Debug.LogWarning("No item sprite atlas assigned!");
             return;
         }
 
         // create items at random position
-        GameObject newItem = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity);;
-        
+        GameObject newItem = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity); ;
+
         /*
             for debuging(Generate Item)
         */
         _countItem++;
-        //Debug.Log("아이템이 생성됨: " + _countItem);
     }
 
 
     public void DestroyItem()
     {
         _countItem--;
-        //Debug.Log("아이템이 사라짐 : " + _countItem);            
-    }   
+    }
 }

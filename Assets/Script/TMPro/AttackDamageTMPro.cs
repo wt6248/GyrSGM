@@ -17,7 +17,7 @@ public class AttackDamageTMPro : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         DamageTMPro = GetComponent<TextMeshProUGUI>();
         GetDamagePoint();
-    }   
+    }
 
     void Update()
     {
@@ -32,7 +32,7 @@ public class AttackDamageTMPro : MonoBehaviour
             _currentDamage = playerController.AttackDamageManager();
             DamageTMPro.text = "Damage: " + _currentDamage.ToString("F1");
         }
-        else if(playerController == null)
+        else if (playerController == null)
         {
             DamageTMPro.text = "Damage: 0.0";
         }

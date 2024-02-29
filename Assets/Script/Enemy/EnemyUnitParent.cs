@@ -36,18 +36,6 @@ public class EnemyUnitParent : Entity
     {
 
     }
-    protected void PastMove() // Move function used before 2/16: Only implemented Charging enemy
-    {
-        UpdateKnockbackVelocity();
-        transform.Translate(_knockbackVelocity * Time.deltaTime);
-
-        Vector3 displacement = GetPlayerReletivePosition();
-        if (displacement.magnitude > 1)
-        {
-            Vector3 velocity = _speed * displacement.normalized;
-            transform.Translate(velocity * Time.deltaTime);
-        }
-    }
     protected void Move()
     {
         // Konckback policy
@@ -75,17 +63,6 @@ public class EnemyUnitParent : Entity
                 transform.Translate(velocity * Time.deltaTime);
             }
         }
-
-
-    }
-
-    protected void MoveToMaintainDistance() // 원거리 유닛의 이동 정책
-    {
-        UpdateKnockbackVelocity();
-        transform.Translate(_knockbackVelocity * Time.deltaTime);
-        Vector3 displacement = GetPlayerReletivePosition();
-
-
     }
     override public void DecreaseHP(float delta)
     {

@@ -14,7 +14,7 @@ public class TestPPUScript : MonoBehaviour
     void OnGUI()
     {
         Vector3 point = new Vector3();
-        Event   currentEvent = Event.current;
+        Event currentEvent = Event.current;
         Vector2 mousePos = new Vector2();
 
         // Get the mouse position from Event.

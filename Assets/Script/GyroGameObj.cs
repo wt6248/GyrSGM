@@ -37,8 +37,6 @@ public class GyroGameObj : MonoBehaviour
             _rotList.Add(_gyroController.rotationRateUnbiased);
         }
         _velocity = GyroMove();
-        // For test
-        transform.Translate(_velocity.x, _velocity.y, _velocity.z);
     }
 
     // return gyro-based velocity vector
@@ -65,35 +63,6 @@ public class GyroGameObj : MonoBehaviour
             avr = avr.normalized * _maxSpeedRadious;
         }
         return avr;
-    }
-
-    // return the direction where bottom facing now
-    Vector3 BottomFacing()
-    {
-        // TODO: check on andriod
-        Vector3 dir = new(0, 0, 0);
-        switch (Input.deviceOrientation)
-        {
-            case DeviceOrientation.Portrait:
-                dir = new(0, -1, 0);
-                // print("P");
-                break;
-            case DeviceOrientation.PortraitUpsideDown:
-                dir = new(0, 1, 0);
-                // print("PU");
-                break;
-            case DeviceOrientation.LandscapeLeft:
-                dir = new(-1, 0, 0);
-                // print("LL");
-                break;
-            case DeviceOrientation.LandscapeRight:
-                dir = new(1, 0, 0);
-                // print("LR");
-                break;
-            default:
-                break;
-        }
-        return dir;
     }
 
     public Vector3 GetGyroValue()
