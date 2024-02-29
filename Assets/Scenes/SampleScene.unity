@@ -864,11 +864,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18eb5a4d7ba516d488d6ab1d610c921f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minItemCooldownTime: 2
-  _maxItemCooldownTime: 4
+  _minItemCooldownTime: 3
+  _maxItemCooldownTime: 5
   _itemGenerateCoolTime: 0
   _itemGenerateCooldown: 0
-  _itemSpawnRadius: 4
+  _itemSpawnRadius: 18
   _countItem: 0
 --- !u!4 &858092990
 Transform:
@@ -985,16 +985,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   _generateUnitNumber: 2
-  _enemyGenerateCoolTime: 3
+  _enemyGenerateCoolTime: 5
   _enemySpawnRadious: 5
   _enemyGenerateCooldown: 0
-  _enemySpawnSizeOuter: {x: 36, y: 78, z: 0}
+  _enemySpawnSizeOuter: {x: 18, y: 39, z: 0}
   _enemySpawnSizeInner: {x: 5, y: 5, z: 0}
-  _enemyProbability: {x: 3, y: 4, z: 1}
+  _enemyProbability: {x: 8, y: 5, z: 1}
   _ratioTable:
     _ratioList: 
-  elapsedTime: 0
-  increasedSpawnRate: 0
+  _elapsedTime: 0
+  _increaseRate: 0.02
+  _initialGenerateUnitNumber: 0
   minimumDistance: 50
 --- !u!114 &861298603
 MonoBehaviour:
@@ -1242,11 +1243,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1167272094065129757, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
       propertyPath: _duration
-      value: 0.4
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167272094065129757, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
+      propertyPath: _bulletSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1167272094065129757, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
       propertyPath: _spreadAngle
-      value: 22
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2654220376430513689, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1295,6 +1300,14 @@ PrefabInstance:
     - target: {fileID: 6553438567197844392, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
       propertyPath: _duration
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553438567197844392, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
+      propertyPath: _spreadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553438567197844392, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
+      propertyPath: _bulletPelletCount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1377,9 +1390,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 2
   _name: 
-  _maxHP: 5
+  _maxHP: 50
   _attackDamage: 1
-  _attackSpeed: 0.66
+  _attackSpeed: 1
   _speed: 60
   _hp: 0
   _inventorySize: 0
