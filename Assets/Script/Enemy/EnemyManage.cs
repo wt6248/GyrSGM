@@ -34,7 +34,7 @@ public class EnemyManage : MonoBehaviour
        
         _initialGenerateUnitNumber = _generateUnitNumber;
         
-        _worldHeight = 2 * Camera.main.orthographicSize;
+        _worldHeight = Camera.main.orthographicSize;
         _worldWidth = _worldHeight * Camera.main.aspect;
     }
 
@@ -44,8 +44,6 @@ public class EnemyManage : MonoBehaviour
         //초기 생성량에 _increaseRate만큼 더하는 형태로 증가
         _elapsedTime += Time.deltaTime;
         _generateUnitNumber = _initialGenerateUnitNumber + Mathf.FloorToInt(_increaseRate * _elapsedTime);
-        //Debug.Log("적 생성량 증가: " +_generateUnitNumber);
-
         SpawnEnemies();       
     }
 
@@ -64,7 +62,7 @@ public class EnemyManage : MonoBehaviour
             {
                 GameObject enemy = _ratioTable.GetRandomGameobject();
                 Vector3 spawnRange = GetRandomSpawnPosition();                
-                GameObject instance = Instantiate(enemy, spawnRange/2, Quaternion.identity);
+                GameObject instance = Instantiate(enemy, spawnRange, Quaternion.identity);
             }
         }
     }
@@ -73,17 +71,14 @@ public class EnemyManage : MonoBehaviour
     {
         // 적이 생성될 위치를 무작위로 결정하여 반환
         Vector3 spawnRange = new(Random.Range(-_worldWidth, _worldWidth), Random.Range(-_worldHeight, _worldHeight), 0);
+        
         float distance = Vector3.Distance(spawnRange, player.transform.position);
         
-        if(distance >= minimumDistance)
-        {
-            return spawnRange;
-        }
-        else
+        if(distance < minimumDistance)
         {
             spawnRange += (spawnRange - player.transform.position).normalized * minimumDistance;
-            return spawnRange;
-        }        
+        }
+        return spawnRange;
     }
 
     int GetUnitID(Vector3 probVec)

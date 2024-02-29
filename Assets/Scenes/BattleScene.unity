@@ -837,7 +837,7 @@ MonoBehaviour:
   _elapsedTime: 0
   _increaseRate: 0.02
   _initialGenerateUnitNumber: 0
-  minimumDistance: 50
+  minimumDistance: 20
 --- !u!1 &950730228
 GameObject:
   m_ObjectHideFlags: 0

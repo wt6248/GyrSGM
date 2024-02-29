@@ -9,11 +9,14 @@ public class ItemManage : MonoBehaviour
 {
     public float _minItemCooldownTime = 2f;
     public float _maxItemCooldownTime = 4f;
+    
+    public float _itemInboundRate;
     float _itemGenerateCoolTime;
     float _itemGenerateCooldown = 0;
     //public float _itemSpawnRadius = 4f;
     float _viewportWidth;
     float _viewportHeight;
+
     GameObject item;
 
 
@@ -22,7 +25,7 @@ public class ItemManage : MonoBehaviour
     {
         //Initializing
         item = Resources.Load("Prefabs/Item") as GameObject;
-        _viewportHeight = 2 * Camera.main.orthographicSize;
+        _viewportHeight = Camera.main.orthographicSize * (1 - _itemInboundRate);
         _viewportWidth = _viewportHeight * Camera.main.aspect;
         
     }
@@ -53,7 +56,7 @@ public class ItemManage : MonoBehaviour
         }
         
         // 랜덤한 위치에 아이템 생성
-        Vector3 randomPosition = new(Random.Range(-_viewportWidth/2, _viewportWidth/2), Random.Range(-_viewportHeight/2, _viewportHeight/2), 0);
+        Vector3 randomPosition = new(Random.Range(-_viewportWidth, _viewportWidth), Random.Range(-_viewportHeight, _viewportHeight), 0);
         GameObject newItem = Instantiate(item, randomPosition, Quaternion.identity); 
         
     }
