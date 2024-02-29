@@ -10,7 +10,7 @@ public class ItemPrefabScript : MonoBehaviour
     public SpriteAtlas itemSpriteAtlas;
     public SpriteRenderer itemSpriteRenderer;
     public PlayerController playerController;
-    public ItemManage itemManage;
+    //public ItemManage itemManage;
     public int _itemType;
 
     void Start()
@@ -19,7 +19,7 @@ public class ItemPrefabScript : MonoBehaviour
         itemSpriteAtlas = Resources.Load<SpriteAtlas>("Sprites/ItemSpriteAtlas");
         itemSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerController = FindObjectOfType<PlayerController>();
-        itemManage = FindObjectOfType<ItemManage>();
+        //itemManage = FindObjectOfType<ItemManage>();
 
         //function for retrieving sprites of random item types
         SetItemType();
@@ -75,10 +75,6 @@ public class ItemPrefabScript : MonoBehaviour
     private void DestroyItem()
     {
         Destroy(gameObject);
-        if (itemManage != null)
-        {
-            itemManage.DestroyItem(); // 아이템 개수 줄이기
-        }
     }
 }
 

@@ -11,7 +11,7 @@ public class EnemyManage : MonoBehaviour
     public int _generateUnitNumber;
     [SerializeField][Range(0f, 5f)] public float _enemyGenerateCoolTime, _enemySpawnRadious;
     public float _enemyGenerateCooldown = 0;
-    public Vector3 _enemySpawnSizeOuter, _enemySpawnSizeInner;
+    //public Vector3 _enemySpawnSizeOuter, _enemySpawnSizeInner;
     public Vector3Int _enemyProbability; // (1, 1, 1)
     public RatioTable _ratioTable = new();
 
@@ -19,6 +19,8 @@ public class EnemyManage : MonoBehaviour
     public float _increaseRate = 0.55f;
     public int _initialGenerateUnitNumber;
     public float minimumDistance = 2f;
+
+    float _worldHeight, _worldWidth;
 
 
 
@@ -31,6 +33,9 @@ public class EnemyManage : MonoBehaviour
         _ratioTable.Add("Prefabs/EnemyHP", _enemyProbability.z);
        
         _initialGenerateUnitNumber = _generateUnitNumber;
+        
+        _worldHeight = 2 * Camera.main.orthographicSize;
+        _worldWidth = _worldHeight * Camera.main.aspect;
     }
 
     // Update is called once per frame
@@ -67,13 +72,7 @@ public class EnemyManage : MonoBehaviour
     Vector3 GetRandomSpawnPosition()
     {
         // 적이 생성될 위치를 무작위로 결정하여 반환
-        // Vector3 spawnRange = new(Random.Range(_enemySpawnSizeInner.x, _enemySpawnSizeOuter.x),
-        //                                    Random.Range(_enemySpawnSizeInner.y, _enemySpawnSizeOuter.y),
-        //                                    0);
-        Vector3 spawnRange = new(Random.Range(-_enemySpawnSizeOuter.x, _enemySpawnSizeOuter.x),
-                                           Random.Range(-_enemySpawnSizeOuter.y, _enemySpawnSizeOuter.y),
-                                           0);
-
+        Vector3 spawnRange = new(Random.Range(-_worldWidth, _worldWidth), Random.Range(-_worldHeight, _worldHeight), 0);
         float distance = Vector3.Distance(spawnRange, player.transform.position);
         
         if(distance >= minimumDistance)
@@ -91,7 +90,6 @@ public class EnemyManage : MonoBehaviour
     { // TODO: change to array
         int selectedIndex;
         Vector3 normalizedProb = ToRatio(_enemyProbability);
-        //Debug.Log(normalizedProb);
         float randomValue = Random.Range(0f, 1f);
         if (randomValue < normalizedProb.x)
         {
@@ -105,8 +103,6 @@ public class EnemyManage : MonoBehaviour
         {
             selectedIndex = 2;
         }
-        //Debug.Log(randomValue);
-        //Debug.Log(selectedIndex);
 
         return selectedIndex;
     }

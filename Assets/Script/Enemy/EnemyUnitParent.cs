@@ -74,7 +74,7 @@ public class EnemyUnitParent : Entity
             Vector3 objectViewportPoint = Camera.main.WorldToViewportPoint(transform.position);
 
             // 객체가 화면 안에 있는지 확인
-            if (objectViewportPoint.x >= 0 && objectViewportPoint.x <= 1 && objectViewportPoint.y >= 0 && objectViewportPoint.y <= 1)
+            if (objectViewportPoint.x >= 0.1f && objectViewportPoint.x <= 0.9f && objectViewportPoint.y >= 0.1f && objectViewportPoint.y <= 0.9f)
             {
 
             }

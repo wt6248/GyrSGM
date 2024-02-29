@@ -6,10 +6,10 @@ using UnityEngine;
 public class ShellScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Vector3 _startSpeed = new(-0.5f, 0.5f, 0f);
+    Vector3 _startSpeed = new(-0.5f, 0.5f, 0f);
 
-    readonly public float _shellSpeed = 5.0f;
-    readonly public float _acceleration = 8.0f;
+    public float _shellSpeed = 10.0f;
+    readonly public float _acceleration = 16.0f;
     readonly public float _duration = 0.5f;
 
     void Start()
