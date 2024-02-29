@@ -983,6 +983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f9837632f292f9c8f84d1ec7559c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   _generateUnitNumber: 2
   _enemyGenerateCoolTime: 3
   _enemySpawnRadious: 5
@@ -992,6 +993,9 @@ MonoBehaviour:
   _enemyProbability: {x: 3, y: 4, z: 1}
   _ratioTable:
     _ratioList: 
+  elapsedTime: 0
+  increasedSpawnRate: 0
+  minimumDistance: 50
 --- !u!114 &861298603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,7 +1167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139136527}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ee015c2d43207740bfe2a8b4dbee4dc, type: 3}
   m_Name: 
@@ -1236,6 +1240,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1167272094065129757, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
+      propertyPath: _duration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167272094065129757, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
+      propertyPath: _spreadAngle
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 2654220376430513689, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.91165113
@@ -1279,6 +1291,10 @@ PrefabInstance:
     - target: {fileID: 3748560778206351358, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
       propertyPath: m_Name
       value: Catrige
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553438567197844392, guid: 19fa33ccf7978de4ab1f0ca7c1125c55, type: 3}
+      propertyPath: _duration
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1368,7 +1384,7 @@ MonoBehaviour:
   _hp: 0
   _inventorySize: 0
   _gyroControl: {fileID: 0}
-  _isInvincible: 0
+  _isInvincible: 1
   _healPerSec: 0.05
   _healPeriod: 1
   _speedMod: 0

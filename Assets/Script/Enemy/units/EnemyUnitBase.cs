@@ -10,6 +10,8 @@ public class EnemyUnitBase : EnemyUnitParent
         _name = "Enemy" + gameObject.GetInstanceID();
         if (_enemyType == EnemyType.Patrolling) gameObject.AddComponent<EnemyRangeAttack>();
 
+        gameObject.GetComponent<EnemyRangeAttack>().setCatrige("EnemySingle");
+
         // init audio
         _hurtSoundSource = gameObject.AddComponent<AudioSource>();
         _hurtSound = Resources.Load<AudioClip>("Audio/dspunch");

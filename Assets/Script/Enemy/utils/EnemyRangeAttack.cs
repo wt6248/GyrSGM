@@ -5,10 +5,13 @@ using UnityEngine;
 public class EnemyRangeAttack : MonoBehaviour
 {
     public bool _canShoot = false;
+    public Catrige enemyCartrige;
+    Entity player;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindObjectOfType<PlayerController>();
         // autoshooting function
         StartCoroutine(AutoShootCooldown());
     }
@@ -25,18 +28,10 @@ public class EnemyRangeAttack : MonoBehaviour
     // autoshooting function
     void AutoShoot()
     {
-        //플레이어와 적의 상대 위치 체크.
-        Entity player = GameObject.FindObjectOfType<PlayerController>();
-        Vector3 displacement = player.transform.position - transform.position;
-        //총알 instantiate
-        GameObject prefab = Resources.Load("Prefabs/BulletEnemyScatter") as GameObject;
-        GameObject instance = Instantiate(prefab, transform.position, Quaternion.identity);
-        instance.GetComponent<BulletScript>().transform.Translate(new(0, 0, -0.1f));
-        BulletScript bullet = instance.GetComponent<BulletScript>();
-        //총알 방향 지정.
-        bullet._dir = displacement.normalized;
-        bullet.Activate(Entity.EntityType.Player);
-        EnemyUnitParent enemy = GetComponentInParent<EnemyUnitParent>();
+        Vector3 fireDirection = (player.transform.position - transform.position).normalized;
+        Vector3 firePosition = transform.position - new Vector3(0, 0, -0.1f);
+        enemyCartrige.FireCatrige(fireDirection,1f,Entity.EntityType.Player,firePosition);
+
         //발사하면 _canShoot false로 수정.
         _canShoot = false;
     }
@@ -47,6 +42,15 @@ public class EnemyRangeAttack : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             _canShoot = true;
         }
+    }
+
+    public void setCatrige(string name = "EnemySingle")
+    {
+        
+        GameObject a = GameObject.Find("/Catrige/" + name);
+        if(a == null)
+            Debug.Log("cannot find enemy catrige");
+        enemyCartrige = a.GetComponent<Catrige>();
     }
 
 }

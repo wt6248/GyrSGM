@@ -9,6 +9,9 @@ public class EnemyUnitHP : EnemyUnitParent
         _hp = _maxHP;
         _name = "Enemy" + gameObject.GetInstanceID();
 
+        gameObject.AddComponent<EnemyRangeAttack>();
+        gameObject.GetComponent<EnemyRangeAttack>().setCatrige("EnemyScatter");
+
         // init audio
         _hurtSoundSource = gameObject.AddComponent<AudioSource>();
         _hurtSound = Resources.Load<AudioClip>("Audio/dspunch");
