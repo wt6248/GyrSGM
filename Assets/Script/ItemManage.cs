@@ -11,8 +11,10 @@ public class ItemManage : MonoBehaviour
     public float _maxItemCooldownTime = 4f;
     public float _itemGenerateCoolTime;
     public float _itemGenerateCooldown = 0;
-    public float _itemSpawnRadius = 4f;
+    //public float _itemSpawnRadius = 4f;
     public int _countItem = 0; // for debuging
+    public float _xposition = 16f;
+    public float _yposition = 36f;
     GameObject item;
 
 
@@ -47,10 +49,11 @@ public class ItemManage : MonoBehaviour
         {
             return;
         }
-
-        // create items at random position
-        GameObject newItem = Instantiate(item, _itemSpawnRadius * Random.insideUnitCircle.normalized, Quaternion.identity); ;
-
+        
+        // 랜덤한 위치에 아이템 생성
+        Vector3 randomPosition = new(Random.Range(-_xposition, _xposition), Random.Range(-_yposition, _yposition), 0);
+        GameObject newItem = Instantiate(item, randomPosition, Quaternion.identity); 
+        Debug.Log("아이템 생성 위치" + randomPosition);
         /*
             for debuging(Generate Item)
         */
