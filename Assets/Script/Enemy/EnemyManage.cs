@@ -15,8 +15,9 @@ public class EnemyManage : MonoBehaviour
     public Vector3Int _enemyProbability; // (1, 1, 1)
     public RatioTable _ratioTable = new();
 
-    public float elapsedTime = 0f;
-    public bool increasedSpawnRate = false;
+    public float _elapsedTime = 0f;
+    public float _increaseRate = 0.55f;
+    public int _initialGenerateUnitNumber;
     public float minimumDistance = 2f;
 
 
@@ -28,21 +29,17 @@ public class EnemyManage : MonoBehaviour
         _ratioTable.Add("Prefabs/Enemy", _enemyProbability.x);
         _ratioTable.Add("Prefabs/EnemySpeed", _enemyProbability.y);
         _ratioTable.Add("Prefabs/EnemyHP", _enemyProbability.z);
+       
+        _initialGenerateUnitNumber = _generateUnitNumber;
     }
 
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime;
-
-        // 1분 30초가 지난 후에 적 생성량 증가
-        if (elapsedTime >= 90f && !increasedSpawnRate)
-        {
-            _generateUnitNumber *= 5; // 적 생성량을 5배로 증가시킴
-            increasedSpawnRate = true; // 증가 상태를 true로 변경하여 중복 증가 방지
-
-            Debug.Log("Spawn rate increased!"); // 증가 확인을 위한 디버그 메시지
-        }
+        //초기 생성량에 _increaseRate만큼 더하는 형태로 증가
+        _elapsedTime += Time.deltaTime;
+        _generateUnitNumber = _initialGenerateUnitNumber + Mathf.FloorToInt(_increaseRate * _elapsedTime);
+        Debug.Log("적 생성량 증가: " +_generateUnitNumber);
 
         SpawnEnemies();       
     }
