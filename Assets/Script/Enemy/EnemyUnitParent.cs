@@ -22,6 +22,7 @@ public class EnemyUnitParent : Entity
     public AudioSource _deadSoundSource;
     public AudioClip _deadSound;
     public float _minPlayerDistance; // 원거리 유닛에만 해당
+    public float _maxPlayerDistance; // 원거리 유닛에만 해당
 
     // enemy type
     [SerializeField] protected EnemyType _enemyType;
@@ -58,7 +59,12 @@ public class EnemyUnitParent : Entity
         {
             if (displacement.magnitude > 1)
             {
-                int moveDir = (displacement.magnitude - _minPlayerDistance) >= 0f ? 1 : -1;
+
+                int moveDir = 0;
+                if(displacement.magnitude >= _maxPlayerDistance)
+                    moveDir = 1;
+                else if(displacement.magnitude <= _minPlayerDistance)
+                    moveDir = -1;
                 Vector3 velocity = _speed * displacement.normalized * moveDir;
                 transform.Translate(velocity * Time.deltaTime);
             }
