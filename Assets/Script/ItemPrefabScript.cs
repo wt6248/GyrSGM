@@ -16,32 +16,32 @@ public class ItemPrefabScript : MonoBehaviour
     void Start()
     {
         //init
-        itemSpriteAtlas = Resources.Load<SpriteAtlas>("Sprites/ItemSpriteAtlas");
+        itemSpriteAtlas = Resources.Load<SpriteAtlas>("Sprites/ItemSpriteAtlas2");
         itemSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerController = FindObjectOfType<PlayerController>();
         itemManage = FindObjectOfType<ItemManage>();
 
         //function for retrieving sprites of random item types
+        //SetItemType();
         SetItemType();
     }
 
     public void SetItemType()
     {
         //retrieve sprites of random item types
-        _itemType = Random.Range(0, 5);
-        if (_itemType == 0 || _itemType == 1)
+        _itemType = Random.Range(0, 3);
+        switch(_itemType)
         {
-            _itemType = 0;
+            case 0: //damage
+                itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("D_Img");
+                break;
+            case 1: //attackspeed
+                itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("SP_Img");
+                break;
+            default:    //health
+                itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("HP_Img");
+                break;
         }
-        else if (_itemType == 2 || _itemType == 3)
-        {
-            _itemType = 2;
-        }
-        else // item 4 (체력키트)
-        {
-            _itemType = 4;
-        }
-        itemSpriteRenderer.sprite = itemSpriteAtlas.GetSprite("item_" + _itemType.ToString());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -49,24 +49,29 @@ public class ItemPrefabScript : MonoBehaviour
         //주인공과 충돌했을 때 주인공의 함수 호출.
         if (other.gameObject.name == "Main Character" && playerController != null)
         {
-            if (_itemType == 0 || _itemType == 1)
-            {
-                //Debug.Log("damage");
-                playerController.SetAttackDamage();
-            }
-            else if (_itemType == 2 || _itemType == 3)
-            {
-                //Debug.Log("attack speed");
-                playerController.SetAttackSpeed();
-            }
-            else // item 4 (체력키트)
-            {
-                //Debug.Log("Health");
-                playerController.SetHealthPoint();
-            }
-            DestroyItem();
+            // envokePlayerEnhance();
+            EnvokePlayerEnhance();
         }
     }
+
+
+    private void EnvokePlayerEnhance()
+    {
+        switch(_itemType)
+        {
+            case 0: //damage
+                playerController.SetAttackDamage();
+                break;
+            case 1: //attackspeed
+                playerController.SetAttackSpeed();
+                break;
+            default:    //health
+                playerController.SetHealthPoint();
+                break;
+        }
+        DestroyItem();
+    }
+
 
     private void DestroyItem()
     {

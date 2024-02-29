@@ -868,8 +868,9 @@ MonoBehaviour:
   _maxItemCooldownTime: 5
   _itemGenerateCoolTime: 0
   _itemGenerateCooldown: 0
-  _itemSpawnRadius: 18
   _countItem: 0
+  _xposition: 16
+  _yposition: 36
 --- !u!4 &858092990
 Transform:
   m_ObjectHideFlags: 0
@@ -1397,7 +1398,7 @@ MonoBehaviour:
   _hp: 0
   _inventorySize: 0
   _gyroControl: {fileID: 0}
-  _isInvincible: 1
+  _isInvincible: 0
   _healPerSec: 0.05
   _healPeriod: 1
   _speedMod: 0

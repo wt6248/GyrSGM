@@ -39,7 +39,7 @@ public class EnemyManage : MonoBehaviour
         //초기 생성량에 _increaseRate만큼 더하는 형태로 증가
         _elapsedTime += Time.deltaTime;
         _generateUnitNumber = _initialGenerateUnitNumber + Mathf.FloorToInt(_increaseRate * _elapsedTime);
-        Debug.Log("적 생성량 증가: " +_generateUnitNumber);
+        //Debug.Log("적 생성량 증가: " +_generateUnitNumber);
 
         SpawnEnemies();       
     }
