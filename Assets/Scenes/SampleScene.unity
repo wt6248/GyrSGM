@@ -142,10 +142,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2002664771}
     m_Modifications:
+    - target: {fileID: 1311964333516038370, guid: af4b51466de74ab408797388c5b0456d, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3598099852219036191, guid: af4b51466de74ab408797388c5b0456d, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3661350779213601783, guid: af4b51466de74ab408797388c5b0456d, type: 3}
       propertyPath: CatrigeChangeScript
       value: 
       objectReference: {fileID: 1310912401}
+    - target: {fileID: 7639632795278475451, guid: af4b51466de74ab408797388c5b0456d, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8660235033566178172, guid: af4b51466de74ab408797388c5b0456d, type: 3}
       propertyPath: m_Name
       value: GunTypeChangeButtonUI
@@ -1428,6 +1440,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2002664771}
     m_Modifications:
+    - target: {fileID: 115963331695101327, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1187323807105328301, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1245800427501260758, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
       propertyPath: gaugeScript
       value: 
@@ -1436,6 +1456,14 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1310912402}
+    - target: {fileID: 5404676981631569309, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6705056444500953341, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7079846942674216866, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1519,6 +1547,10 @@ PrefabInstance:
     - target: {fileID: 8033401717837216045, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
       propertyPath: m_Name
       value: PlayerInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549469334879415638, guid: 603c13c287adab648abcb5a5cec8498e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
